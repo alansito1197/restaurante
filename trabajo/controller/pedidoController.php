@@ -47,7 +47,7 @@
         
                     // Verifica si se obtuvo un precio y almacena la cookie
                     if ($precioUltimoPedido !== null) {
-                        setcookie('UltimoPedido', $precioUltimoPedido, time() + 3600);  // La cookie expirará en 1 hora
+                        setcookie('CookieUltimoPedido', $precioUltimoPedido, time() + 3600); 
                     }
 
         
