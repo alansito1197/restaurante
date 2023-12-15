@@ -18,23 +18,31 @@
           <div class="row">
             <h3 class="pregunta_login">¡Modifica el producto!</h3>
             <p class="beneficios_login mt-3">Siéntete libre de modificar el producto a tu gusto.</p>
-            <a class="enlace_registro pb-3" href="<?=url.'?controller=admin&action=solicitudGestionarProducto'?>"> Volver al panel de productos</a>
+            <a class="enlace_registro pb-3 mb-3" href="<?=url.'?controller=admin&action=solicitudGestionarProductos'?>"> Volver al panel de productos</a>
             <div class="row">
               <div class="col-md-6 text-center">
                 <form action="<?= url.'?controller=admin&action=actualizarProductoSeleccionado'?>" method="POST">
-                  <input type="text" class="contenedor_informacion_login" required name="nombre" value="<?=$productoActual['nombre']?>">
-                  <input type="text" class="contenedor_informacion_login" required name="sabor" value="<?=$productoActual['sabor']?>" >
-                  <input type="text" class="contenedor_informacion_login"  required name="valor_energetico" value="<?=$productoActual['valor_energetico']?>">
-                  <input type="number" class="contenedor_informacion_login" required name="precio" value="<?=$productoActual['precio']?>">
-                  <input type="text" class="contenedor_informacion_login" required name="disponibilidad" value="<?=$productoActual['disponibilidad']?>">
-                  <input type="number" class="contenedor_informacion_login" required name="stock" value="<?=$productoActual['stock']?>">
-                  <input type="file" class="contenedor_informacion_login"  name="imagen" value="<?=$productoActual['imagen']?>">
-                  <input type="text" class="contenedor_informacion_login" required name="ingredientes" value="<?=$productoActual['ingredientes']?>">
-                  <input type="number" class="contenedor_informacion_login" required name="producto_destacado" value="<?=$productoActual['producto_destacado']?>">
+                  <input type="text" class="contenedor_informacion_login" required name="nombre" value="<?=$productoActual->getNombre() ?>">
+                  <input type="text" class="contenedor_informacion_login" required name="sabor" value="<?=$productoActual->getSabor() ?>">
+                  <input type="text" class="contenedor_informacion_login"  required name="valor_energetico" value="<?=$productoActual->getValorEnergetico() ?>">
+                  <input type="number" class="contenedor_informacion_login" required name="precio" value="<?=$productoActual->getPrecio() ?>">
+                  <input type="text" class="contenedor_informacion_login" required name="disponibilidad" value="<?=$productoActual->getDisponibilidad() ?>">
+                  <input type="number" class="contenedor_informacion_login" required name="stock" value="<?=$productoActual->getStock() ?>">
+                  <input type="file" class="contenedor_informacion_login"  name="imagen" >
+                  <input type="text" class="contenedor_informacion_login" required name="ingredientes" value="<?=$productoActual->getIngredientes() ?>">
+                  <input type="number" class="contenedor_informacion_login" required name="producto_destacado" value="<?=$productoActual->getProductoDestacado() ?>">
                   <input type="password" class="contenedor_informacion_login" required placeholder="Contraseña para confirmar cambios" name="password">              
                   <button type="submit" class="iniciar_sesion mb-4" name="modificar_producto">Modificar producto</button>
                 </form>
               </div>
+              <?php if (isset($_SESSION['mensaje_acierto']) && !empty($_SESSION['mensaje_acierto'])): ?>
+                <p class="mensaje_exito"><?php echo $_SESSION['mensaje_acierto']; ?></p>
+                <?php unset($_SESSION['mensaje_acierto']); ?>
+              <?php endif; ?>
+              <?php if (isset($_SESSION['mensaje_error']) && !empty($_SESSION['mensaje_error'])): ?>
+                <p class="mensaje_error"><?php echo $_SESSION['mensaje_error']; ?></p>
+                <?php unset($_SESSION['mensaje_error']); ?>
+              <?php endif; ?>
             </div>
           </div>
         </div>

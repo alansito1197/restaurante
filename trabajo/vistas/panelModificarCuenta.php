@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -16,25 +17,27 @@
       <section class="container mt-4">
         <div class="container col-12 col-sm-4">
           <div class="row">
-          <?php if (isset($mensaje_error)){ ?>
-                <h3 class="pregunta_login"><?php echo $mensaje_error; ?></h3>
-          <?php }else { ?>
-            <h3 class="pregunta_login">¿Ya has iniciado sesión?</h3>
-            <?php } ?>
+            <h3 class="pregunta_login">¡Modifica tu cuenta!</h3>
             <p class="beneficios_login mt-3">Siéntete libre de modificar tus datos a tu gusto.</p>
-            <a class="enlace_registro pb-3" href=<?=url.'?controller=user&action=comprobarUsuario'?>> Volver a mi panel de usuario</a>
+            <a class="enlace_registro pb-3" href=<?=url.'?controller=user&action=comprobarUsuario'?>> Volver al panel principal</a>
             <div class="row">
               <div class="col-md-6 text-center">
                 <form action="<?= url.'?controller=cliente&action=modificacionCuenta'?>" method="POST">
-                  <input type="text" class="contenedor_informacion_login" name="nombre" value="<?=$clienteActual['nombre']?>">
-                  <input type="text" class="contenedor_informacion_login" name="apellidos" value="<?=$clienteActual['apellidos']?>">
-                  <input type="text" class="contenedor_informacion_login" name="direccion" value="<?=$clienteActual['direccion']?>">
-                  <input type="email" class="contenedor_informacion_login" name="email" value="<?=$clienteActual['email']?>">
-                  <input type="number" class="contenedor_informacion_login" name="telefono" value="<?=$clienteActual['telefono']?>">
+                  <input type="text" class="contenedor_informacion_login" name="nombre" value="<?=$cliente->getNombre() ?>">
+                  <input type="text" class="contenedor_informacion_login" name="apellidos" value="<?=$cliente->getApellidos() ?>">
+                  <input type="text" class="contenedor_informacion_login" name="direccion" value="<?=$cliente->getDireccion() ?>">
+                  <input type="email" class="contenedor_informacion_login" name="email" value="<?=$cliente->getEmail() ?>">
+                  <input type="number" class="contenedor_informacion_login" name="telefono" value="<?=$cliente->getTelefono() ?>">
                   <input type="password" class="contenedor_informacion_login" required placeholder="Contraseña para confirmar cambios" name="password">              
                   <button type="submit" class="iniciar_sesion mb-4" name="modificar_cliente">¡Modifícame!</button>
                 </form>
               </div>
+              <?php if (isset($mensaje_acierto) && !empty($mensaje_acierto)): ?>
+                <p class="mensaje_exito"><?php echo $mensaje_acierto; ?></p>
+              <?php endif; ?>
+              <?php if (isset($mensaje_error) && !empty($mensaje_error)): ?>
+                <p class="mensaje_error"><?php echo $mensaje_error; ?></p>
+              <?php endif; ?>
             </div>
           </div>
         </div>

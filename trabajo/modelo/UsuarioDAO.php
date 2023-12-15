@@ -1,7 +1,6 @@
 <?php
 
     include_once 'config/dataBase.php';
-    include_once 'modelo/Usuario.php';
 
     class UsuarioDAO {
 
@@ -40,73 +39,6 @@
 
                 return null;
             }
-        }
-
-        public function registrarCliente($nombre, $apellidos, $direccion, $email, $telefono, $password) {
-            $conexion = self::conectarBaseDeDatos();
-    
-            // Verificamos si el correo electrónico ya está registrado
-            $consulta_email = "SELECT * FROM CLIENTE WHERE email = ?";
-            $stmt = $conexion->prepare($consulta_email);
-            $stmt->bind_param("s", $email);
-            $stmt->execute();
-            $resultado_email = $stmt->get_result();
-    
-            if ($resultado_email->num_rows == 0) {
-                // Insertamos al nuevo cliente en la tabla CLIENTE
-                $consulta_insertar_cliente = "INSERT INTO CLIENTE (nombre, apellidos, direccion, email, telefono) VALUES (?, ?, ?, ?, ?)";
-                $stmt = $conexion->prepare($consulta_insertar_cliente);
-                $stmt->bind_param("sssss", $nombre, $apellidos, $direccion, $email, $telefono);
-                $stmt->execute();
-    
-                // Obtenemos el ID del nuevo cliente
-                $id_cliente = $conexion->insert_id;
-    
-                // Insertamos las credenciales en la tabla CREDENCIAL
-                $consulta_insertar_credencial = "INSERT INTO CREDENCIAL (id_cliente, tipo_usuario, password) VALUES (?, 'cliente', ?)";
-                $stmt = $conexion->prepare($consulta_insertar_credencial);
-                $stmt->bind_param("is", $id_cliente, $password);
-                $stmt->execute();
-    
-                // Devolvemos el ID del nuevo cliente
-                return $id_cliente;
-    
-            } else {
-                // El correo electrónico ya está registrado
-                return null;
-            }
-        }
-
-        // Crearemos una función que nos devuelva la información de un usuario por su ID:
-        public static function getUsuarioByID($usuario_id) {
-
-            // Nos conectaremos en nuestra base de datos a través de la llamada al método encargado de ello:
-            $conexion = self::conectarBaseDeDatos();
-        
-            // Crearemos una consulta a la base de datos para extraer todos los datos del cliente de la sesión:
-            $usuario = "SELECT * FROM CLIENTE WHERE id_cliente = ?";
-
-            // Preparamos la consulta:
-            $consulta = $conexion->prepare($usuario);
-
-            // Vincularemos el parámetro de la anterior consulta al valor del ID indicado:
-            $consulta->bind_param("i", $usuario_id);
-
-            // Ejecutaremos la consulta:
-            $consulta->execute();
-        
-            // Obtendremos el resultado de la ejecución de la consulta y la guardaremos en una variable:
-            $result = $consulta->get_result();
-            
-            // Asignamos el resultado a la variable datos:
-            $datos = $result->fetch_assoc();
-        
-            // Cerramos la consulta preparada y la conexión a la base de datos:
-            $consulta->close();
-            $conexion->close();
-        
-            // Finalmente, devolvemos la información del usuario:
-            return $datos;
         }
     }
 ?>

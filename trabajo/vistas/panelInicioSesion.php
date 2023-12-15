@@ -14,23 +14,21 @@
   <body>
     <main class="d-flex justify-content-center">
       <section class="container mt-4">
-        <div class="container col-12 col-sm-5">
+        <div class="container col-12 col-sm-4">
           <div class="row">
-          <?php if (isset($mensaje_error)){ ?>
-                <h3 class="pregunta_login"><?php echo $mensaje_error; ?></h3>
-          <?php }else { ?>
             <h3 class="pregunta_login">¿Ya has iniciado sesión?</h3>
-            <?php } ?>
           <p class="beneficios_login mt-3 pb-3">Inicia sesión para aprovecharte de todos los beneficios de la cuenta de cliente de MediaMarkt. ¿Nuevo cliente? <a class="enlace_registro" href=<?=url.'?controller=cliente&action=solicitudRegistro'?>> Al registro</a></p>
           <div class="row">
-            <div class="col-md-8 text-center justify-content-center">
+            <div class="col-md-8">
               <form action=<?=url.'?controller=user&action=comprobarUsuario'?> method="POST">
                 <input type="email" class="contenedor_informacion_login" required placeholder="Correo electrónico" name="usuario">
                 <input type="password" class="contenedor_informacion_login" required placeholder="Contraseña" name="password">
-                <p class="olvidar_contraseña pb-3 pt-1">¿Olvidaste tu contraseña?</p>
-                <button type="submit" class="iniciar_sesion mb-5">Iniciar sesión</button>
+                <p class="olvidar_contraseña pb-2 pt-1">¿Olvidaste tu contraseña?</p>
+                <button type="submit" class="iniciar_sesion">Iniciar sesión</button>
               </form>
-              
+              <?php if (isset($mensaje_error) && !empty($mensaje_error)): ?>
+                <p class="mensaje_error"><?php echo $mensaje_error; ?></p>
+              <?php endif; ?>
             </div>
           </div>
         </div>

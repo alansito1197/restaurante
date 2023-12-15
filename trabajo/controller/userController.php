@@ -64,8 +64,8 @@
                     $email = $_POST['usuario'];
                     $password = $_POST['password'];
         
-                    $usuarioDAO = new UsuarioDAO();
-                    $credencial = $usuarioDAO->getUsuarioPorEmail($email, UsuarioDAO::conectarBaseDeDatos());
+                    $clienteDAO = new ClienteDAO();
+                    $credencial = $clienteDAO->getUsuarioPorEmail($email);
         
                     if ($credencial !== null) {
         

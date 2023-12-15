@@ -11,6 +11,7 @@
         protected $stock;
         protected $imagen;
         protected $ingredientes;
+        protected $producto_destacado;
         protected $valoracion;
         public function __construct (){
                 
@@ -112,6 +113,15 @@
 
         public function setValoracion($valoracion): self{
                 $this->valoracion = $valoracion;
+                return $this;
+        }
+
+        public function getProductoDestacado(){
+                return $this->producto_destacado;
+        }
+
+        public function setProductoDestacado($producto_destacado): self{
+                $this->producto_destacado = $producto_destacado;
                 return $this;
         }
 

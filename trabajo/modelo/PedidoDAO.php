@@ -2,6 +2,7 @@
 
     include_once 'config/dataBase.php';
     include_once 'modelo/Pedido.php';
+    include_once 'modelo/AllPedidos.php';
 
     class PedidoDAO {
 
@@ -52,27 +53,27 @@
             return $pedidos;
         }
 
-        public function obtenerTodosLosPedidos() {
+        public static function getAllPedidos() {
 
             $conexion = self::conectarBaseDeDatos();
             $sql = "SELECT * FROM PEDIDO";
             $resultado = $conexion->query($sql);
-    
+
             $pedidos = array();
-    
-            while ($fila = $resultado->fetch_assoc()) {
+
+            while ($fila = $resultado->fetch_object('AllPedidos')) {
                 $pedidos[] = $fila;
             }
 
             // Almacena los productos en una variable de sesión
             $_SESSION['pedidos'] = $pedidos;
-            
+
             $conexion->close();
-                
+
             return $pedidos;
         }
 
-        public static function obtenerPrecioUltimoPedido($usuario_id) {
+        public static function precioUltimoPedido($usuario_id) {
             $conexion = self::conectarBaseDeDatos();
             $query = "SELECT precio_total FROM PEDIDO WHERE id_cliente = ? AND tipo_usuario = ? ORDER BY id_pedido DESC LIMIT 1";
             
@@ -83,16 +84,19 @@
             $result = $stmt->get_result();
         
             if ($result->num_rows > 0) {
-                $row = $result->fetch_assoc();
-                $precio = $row['precio_total'];
-                $stmt->close();
-                $conexion->close();
-                return $precio;
+                $row = $result->fetch_object();
+                $precio_total = $row->precio_total;
+                echo $precio_total;
+                return $precio_total;
             } else {
-                $stmt->close();
-                $conexion->close();
+                echo "No se encontraron pedidos.";
                 return null;
             }
+
+            
         }
+
+
+        
     }
 ?>

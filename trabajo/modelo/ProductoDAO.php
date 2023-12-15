@@ -81,28 +81,71 @@
             $añadir_carrito = $resultado->fetch_object('Producto');
             return $añadir_carrito;
         }
-        
-        public function obtenerTodosLosProductos() {
 
-            try {
-                $conexion = self::conectarBaseDeDatos();
+        public static function getModificarProductoByID($id_producto) {
+            $conexion = self::conectarBaseDeDatos();
+        
+            // Preparamos la consulta para obtener el producto por ID:
+            $stmt = $conexion->prepare("SELECT * FROM producto WHERE id_producto=?");
+            $stmt->bind_param("i", $id_producto);
+        
+            // Ejecutamos la consulta:
+            $stmt->execute();
+            $resultado = $stmt->get_result();
+        
+            // Obtenemos el objeto Producto utilizando fetch_object:
+            $producto = $resultado->fetch_object('Producto');
+        
+            // Cerramos la conexión a la base de datos:
+            $conexion->close();
+        
+            // Almacenamos el objeto Producto en una variable de sesión:
+            $_SESSION['productoActual'] = $producto;
+            // Devolvemos el objeto Producto:
+            return $producto;
+        }
+        
+        
+        public static function actualizarProducto($idProducto, $nombre, $sabor, $valor_energetico, $precio, $disponibilidad, $stock, $imagen, $ingredientes, $producto_destacado) {
+            $conexion = self::conectarBaseDeDatos();
+            
+            // La consulta UPDATE para actualizar el producto
+            $producto = "UPDATE PRODUCTO SET nombre=?, sabor=?, valor_energetico=?, precio=?, disponibilidad=?, stock=?, imagen=?, ingredientes=?, producto_destacado=? WHERE id_producto=?";
+            
+            // Preparamos la consulta
+            $consulta = $conexion->prepare($producto);
+            
+            // Vinculamos los parámetros
+            $consulta->bind_param("ssiiisisii", $nombre, $sabor, $valor_energetico, $precio, $disponibilidad, $stock, $imagen, $ingredientes, $producto_destacado, $idProducto);
+            
+            // Ejecutamos la consulta
+            $consulta->execute();
+
+            $consulta->close();
+            $conexion->close();
+            
+            return $consulta;
+            
+        }
+
+        public function agregarProducto($usuario_id, $categoria_producto, $nombre, $sabor, $calorias, $precio, $disponibilidad, $stock, $ingredientes, $destacado, $imagen, $valoracion) {
+            
+            $conexion = self::conectarBaseDeDatos();
     
-                $sql = "SELECT * FROM PRODUCTO";
-                $resultado = $conexion->query($sql);
+            $sql = "INSERT INTO PRODUCTO (id_administrador, id_categoria_producto, nombre, sabor, valor_energetico, precio, disponibilidad, stock, ingredientes, producto_destacado, imagen, valoracion) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+            $stmt = $conexion->prepare($sql);
+            $stmt->bind_param("iisssdssssss", $usuario_id, $categoria_producto, $nombre, $sabor, $calorias, $precio, $disponibilidad, $stock, $ingredientes, $destacado, $imagen, $valoracion);
+        
+            $resultado = $stmt->execute();
+        
+            $stmt->close();
+            
+            $conexion->close();
     
-                $productos = array();
-    
-                while ($fila = $resultado->fetch_assoc()) {
-                    $productos[] = $fila;
-                }
-    
-                $conexion->close();
-    
-                return $productos;
-            } catch (Exception $e) {
-                
-                throw $e;
-            }
+            return $resultado;
+
         }
     }
 ?>

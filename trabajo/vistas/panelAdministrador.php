@@ -15,7 +15,7 @@
     <?php
       include_once 'modelo/PedidoDAO.php';
       $usuario_id = $_SESSION['usuario_id'];
-      $precioUltimoPedido = PedidoDAO::obtenerPrecioUltimoPedido($usuario_id);
+      $precioUltimoPedido = PedidoDAO::precioUltimoPedido($usuario_id);
       $mensajeUltimoPedido = $precioUltimoPedido ? "Tu último pedido fue de " . number_format($precioUltimoPedido, 2) . "€" : "Todavía no has realizado ningún pedido.";
     ?>
     <main class="d-flex justify-content-center">

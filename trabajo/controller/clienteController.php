@@ -6,71 +6,53 @@
     class clienteController{
 
         // Crearemos una función cuyo objetivo sea solicitar la autorización para modificar los datos de la cuenta del usuario:
-        public function solicitudModificacionCuenta() {
-            
-            // Guardaremos el ID del usuario actual en una variabble:
-            $usuario_id = $_SESSION['usuario_id'];
-
-            /* Recuperaremos todos los datos del actual usuario gracias a la llamada de una función que se encarga de ello
-            con el objetivo de rellenar los placeholders del formulario de modificación de cuenta: */
-
-            $clienteActual = UsuarioDAO::getUsuarioByID($usuario_id);
+            public function solicitudModificacionCuenta() {
+                $usuario_id = $_SESSION['usuario_id'];
+                $cliente = ClienteDAO::getUsuarioByID($usuario_id);
         
-            include 'vistas/header.php';
-            include 'vistas/panelModificarCuenta.php';
-            include 'vistas/footer.php';       
-        }
+                include 'vistas/header.php';
+                include 'vistas/panelModificarCuenta.php';
+                include 'vistas/footer.php';
+            }
 
-        // Crearemos una función que modifique los valores de la cuenta del cliente:
-        public function modificacionCuenta() {
-
-            // Guardaremos el ID del usuario actual en una variable:
-            $usuario_id = $_SESSION['usuario_id'];
-
-            // Cargaremos la información del cliente actual llamándo al método que se encarga de recuperar dichos datos:
-            $clienteActual = UsuarioDAO::getUsuarioByID($usuario_id);
+            public function modificacionCuenta() {
+                $usuario_id = $_SESSION['usuario_id'];
+                $clienteActual = ClienteDAO::getUsuarioByID($usuario_id);
             
-            if ($clienteActual) {
-
-                // Si se obtuvieron los datos del cliente actual correctamente, entonces:
-                if (isset($_POST['modificar_cliente'])) {
-
-                    // Si el cliente pulso el botón de modificar, guardaremos la información aportada en una variable:
-                    $nombre = $_POST['nombre'];
-                    $apellidos = $_POST['apellidos'];
-                    $direccion = $_POST['direccion'];
-                    $email = $_POST['email'];
-                    $telefono = $_POST['telefono'];
-                    $password = $_POST['password'];
-
-                    // Obtendremos la contraseña del cliente en la base de datos mediante la llamada del método que se encarga de recuperarla:
-                    $contrasena_almacenada = ClienteDAO::obtenerPasswordCliente($usuario_id);
+                $mensaje_acierto = "";
+                $mensaje_error = "";
             
-                    if ($contrasena_almacenada !== null && $password == $contrasena_almacenada) {
+                if ($clienteActual) {
 
-                        // Si la contraseña en la base de datos no es nula y coincide con la aportada por el cliente en el formulario:
-                        if (ClienteDAO::actualizarDatosCliente($usuario_id, $nombre, $apellidos, $direccion, $email, $telefono)) {
-
-                            /* Modificamos al usuario gracias a la llamada a la función que se encarga de ello enviándole por parámetro la información
-                            aportada por el cliente, y lo redirigiremos a la misma página por si quisiera volver a modificar otra vez: */
+                    if (isset($_POST['modificar_cliente'])) {
+                        $nombre = $_POST['nombre'];
+                        $apellidos = $_POST['apellidos'];
+                        $direccion = $_POST['direccion'];
+                        $email = $_POST['email'];
+                        $telefono = $_POST['telefono'];
+                        $password = $_POST['password'];
+            
+                        $contrasena_almacenada = ClienteDAO::obtenerPasswordCliente($usuario_id);
+            
+                        if ($password == $contrasena_almacenada) {
                             
-                            header('Location:'.url.'?controller=cliente&action=solicitudModificacionCuenta');
-                            exit();
-
-                        } 
-
-                    } else {
-                        
-                        // Mostrar mensaje de contraseña incorrecta
-                        $mensaje_error = "Contraseña incorrecta.";
-                        include 'vistas/header.php';
-                        include 'vistas/panelModificarCuenta.php';
-                        include 'vistas/footer.php';
-
+                            ClienteDAO::actualizarDatosCliente($usuario_id, $nombre, $apellidos, $direccion, $email, $telefono);
+                            
+                            // Modificación exitosa
+                            $mensaje_acierto = "¡Los datos se han modificado correctamente!";
+                                
+                             
+                        } else {
+                            // Contraseña incorrecta
+                            $mensaje_error = "Contraseña incorrecta.";
+                        }
+                    
+                        // Redirigir y salir del script
+                        header('Location: ' . url . '?controller=cliente&action=solicitudModificacionCuenta');
+                        exit();
                     }
                 }
             }
-        }
             
         // Crearemos una función cuyo objetivo será mostrar la vista del panel para la eliminación de la cuenta:
         public function solicitudEliminacionCuenta() {
@@ -109,12 +91,9 @@
 
                 } 
 
-            
-
-            // Redirigimos en caso de error o si no hay sesión iniciada:
-            header('Location:'.url.'?controller=user&action=login');
-            exit();
-
+                // Redirigimos en caso de error o si no hay sesión iniciada:
+                header('Location:'.url.'?controller=user&action=login');
+                exit();
             }
         }
 
@@ -122,7 +101,7 @@
         public function solicitudRegistro(){
 
             include 'vistas/header.php';
-            include_once 'vistas/panelRegistro.php';
+            include 'vistas/panelRegistro.php';
             include 'vistas/footer.php';
         }
 
@@ -143,29 +122,33 @@
                 if ($password === $confirmacion_password) {
 
                     // Crearemos una nueva instancia:
-                    $nuevo_cliente = new UsuarioDAO();
+                    $nuevo_cliente = new ClienteDAO();
         
                     // Verificaremos si el email introducido ya se encuentra registrado previamente gracias a la llamada del método que nos obtiene todos los correos:
-                    $usuario_existente = $nuevo_cliente->getUsuarioPorEmail($email, UsuarioDAO::conectarBaseDeDatos());
+                    $usuario_existente = $nuevo_cliente->getUsuarioPorEmail($email);
 
                     if ($usuario_existente) {
 
-                        // Si el usuario ya se encuentra registrado previamente, daremos un mensaje por pantalla y redirigiremos a la acción que muestra la vista de la solicitud de registro:
-                        
+                        // Si el usuario ya se encuentra registrado previamente, daremos un mensaje por pantalla y redirigiremos a:
                         $mensaje_error = "El usuario introducido ya existe.";
+                        include 'vistas/header.php';
+                        include 'vistas/panelRegistro.php';
+                        include 'vistas/footer.php';
+
+                    }else{
+        
+                        // Registraremos al nuevo cliente gracias a la llamada del uso de la función que se encarga de ello, pasándole por parámetro la información aportada por él:
+                        $id_cliente = $nuevo_cliente->registrarCliente($nombre, $apellidos, $direccion, $email, $telefono, $password);
+            
+                        // Además, guardaremos la información que nos interesa del cliente en variables de sesión:
+                        $_SESSION['usuario_id'] = $id_cliente;
+                        $_SESSION['tipo_usuario'] = 'cliente';
+                        $_SESSION['usuario_nombre'] = $email;
+                        $_SESSION['password'] = $password;
+            
+                        // Para finalizar, redirigiremos a la función que te comprueba si hay sesión activa:
+                        header('Location:'.url.'?controller=user&action=login');
                     }
-        
-                    // Registraremos al nuevo cliente gracias a la llamada del uso de la función que se encarga de ello, pasándole por parámetro la información aportada por él:
-                    $id_cliente = $nuevo_cliente->registrarCliente($nombre, $apellidos, $direccion, $email, $telefono, $password);
-        
-                    // Además, guardaremos la información que nos interesa del cliente en variables de sesión:
-                    $_SESSION['usuario_id'] = $id_cliente;
-                    $_SESSION['tipo_usuario'] = 'cliente';
-                    $_SESSION['usuario_nombre'] = $email;
-                    $_SESSION['password'] = $password;
-        
-                    // Para finalizar, mostraremos un mensaje de registro exitoso y redirigiremos a la función que te comprueba si hay sesión activa:
-                    header('Location:'.url.'?controller=user&action=login');
 
                 } else {
 
@@ -173,9 +156,11 @@
                     la vista que te permite registrarte */
 
                     // Mostrar mensaje de contraseña incorrecta
-                    $mensaje_error = "Contraseña incorrecta.";
-                    
-                }
+                    $mensaje_error = "Las contraseñas no coinciden.";
+                    include 'vistas/header.php';
+                    include 'vistas/panelRegistro.php';
+                    include 'vistas/footer.php';
+                } 
             }
         }
         
@@ -192,22 +177,9 @@
                 $clienteDAO = new ClienteDAO();
 
                 // Guardaremos en una variable el resultado de la llamada a la función que comprueba si el intento de registro es exitoso:
-                $resultado = $clienteDAO->comprobarSuscripcionNewsletter($nombre, $email);
-        
-                if ($resultado === "success") {
+                $clienteDAO->comprobarSuscripcionNewsletter($nombre, $email);
 
-                    /* Si el valor de la variable resultado es exactamente success, imprimiremos un mensaje por pantalla dándole
-                    la bienvenida al usuario y lo redireccionaremos a la página principal */
-
-                    echo '<script>alert("¡Se ha dado de alta al usuario ' . $nombre . '! ¡Bienvenido!");';
-                    echo 'window.location.href="'.url.'?controller=producto&action=index";</script>';
-
-                } else {
-
-                    // Si el valor de la variable resultado no es exactamente success, mostraremos el valor de la variable resultado:
-                    echo '<script>alert("' . $resultado . '");';
-                    echo 'window.location.href="'.url.'?controller=producto&action=index";</script>';
-                }
+                header('Location:'.url.'?controller=producto&action=index');
             }
         }
     }
