@@ -90,13 +90,14 @@
 
                 $idProducto = $_POST['eliminar'];
                 $this->eliminarProducto($idProducto);
-            }
+                
+            } 
         }
         
         public function modificarProducto($idProducto) {
             
             $productoDAO = new ProductoDAO();
-            $productoActual = $productoDAO::getModificarProductoByID($idProducto);
+            $productoActual = $productoDAO::obtenerProductoByID($idProducto);
         
             include 'vistas/header.php';
             include 'vistas/panelModificarProducto.php';
@@ -106,18 +107,38 @@
         public function eliminarProducto($idProducto) {
 
             $productoDAO = new ProductoDAO();
-            $productoActual = $productoDAO::getModificarProductoByID($idProducto);
-        
+            $productoActual = $productoDAO::obtenerProductoByID($idProducto);
+
             include 'vistas/header.php';
             include 'vistas/panelEliminarProducto.php';
             include 'vistas/footer.php';
+        }
+
+        public function eliminarProductoSeleccionado(){
+
+            $id_producto = $_SESSION ['productoActual']->getIdProducto();
+            $productoActual = ProductoDAO::obtenerProductoByID($id_producto);
+
+            if (isset($_POST['eliminar'])) {
+
+                if ($productoActual) {
+
+                    $idProducto = $_SESSION['productoActual']->getIdProducto();
+                    ProductoDAO::eliminarProducto($id_producto);
+                    header("Location:".url."?controller=admin&action=solicitudGestionarProductos");
+                }
+
+            } else {
+
+                header("Location:".url."?controller=admin&action=solicitudGestionarProductos");
+            }
         }
 
         public function actualizarProductoSeleccionado() {
 
             $id_producto = $_SESSION ['productoActual']->getIdProducto();
             $usuario_id = $_SESSION['usuario_id'];
-            $productoActual = ProductoDAO::getModificarProductoByID($id_producto);
+            $productoActual = ProductoDAO::obtenerProductoByID($id_producto);
 
             if ($productoActual) {
                 
@@ -130,7 +151,6 @@
                     $precio = $_POST['precio'];
                     $disponibilidad = $_POST['disponibilidad'];
                     $stock = $_POST['stock'];
-                    $imagen = $_POST['imagen'];
                     $ingredientes = $_POST['ingredientes'];
                     $producto_destacado = $_POST['producto_destacado'];
                     $password = $_POST['password'];
@@ -138,24 +158,27 @@
                     $contrasena_almacenada = AdministradorDAO::obtenerPasswordAdmin($usuario_id);
             
                     if ($password == $contrasena_almacenada) {
-                        ProductoDAO::actualizarProducto($idProducto, $nombre, $sabor, $valor_energetico, $precio, $disponibilidad, $stock, $imagen, $ingredientes, $producto_destacado);
-                        $_SESSION['mensaje_acierto'] = "¡El producto se ha modificado correctamente!";
+
+                        ProductoDAO::actualizarProducto($idProducto, $nombre, $sabor, $valor_energetico, $precio, $disponibilidad, $stock, $ingredientes, $producto_destacado);
+                        // Volvemos a cargar el producto modificado:
+                        $productoActual = ProductoDAO::obtenerProductoByID($id_producto);
+                        $mensaje_acierto = "¡El producto se ha modificado correctamente!";
+                        include 'vistas/header.php';
+                        include 'vistas/panelModificarProducto.php';
+                        include 'vistas/footer.php';
+
                     } else {
-                        $_SESSION['mensaje_error'] = "Contraseña incorrecta.";
+
+                        $mensaje_error = "Contraseña incorrecta.";
+                        include 'vistas/header.php';
+                        include 'vistas/panelModificarProducto.php';
+                        include 'vistas/footer.php';
                     }
-
-                    $AllProductos = ProductoDAO::getAllProducts();
-
-                    include 'vistas/header.php';
-                    include 'vistas/panelGestionarProductos.php';
-                    include 'vistas/footer.php';
                 }
             }
         }
         
-
         
-
         public function solicitudGestionarPedidos(){
 
             $AllPedidos = PedidoDAO::getAllPedidos();

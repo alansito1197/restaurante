@@ -889,19 +889,26 @@
     margin-bottom: 20px;
   }
 
-  .card-title {
+  .card-title-productos {
     color: #df0000;
     margin-bottom: 20px;
     margin-top: 20px;
   }
 
   .card-text {
-    color: #000;
+    color: #3a3a3a;
+    font-size: 14px;
   }
 
 /* FIN del diseño de la administración de productos */
 
 /* INICIO del diseño de cada pedido */
+
+  .card-title-pedidos {
+    color: #df0000;
+    margin-bottom: 20px;
+    font-size: 20px;
+  }
 
   .pedido_individual {
     background-color: #f8f9fa;

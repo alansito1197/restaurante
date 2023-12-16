@@ -6,7 +6,10 @@
     class CategoriaDAO {
 
         public static function getAllCategorias() {
+
+            // Nos conectamos a la base de datos:
             $conexion = DataBase::connect();
+
             $stmt = $conexion->query("SELECT * FROM categoria_producto");
 
             $categorias = [];

@@ -20,8 +20,13 @@
             include_once 'modelo/Pedido.php';
             // Calculamos la cantidad total de productos que tenemos en el carrito:
             $cantidad_productos = count($_SESSION['productosSeleccionados']);
-            // Mostraremos la cantidad de productos, especificaremos que si es 1, aparezca la palabra "producto" y sino "productos"
-            echo "<p>" . ($cantidad_productos === 1 ? "1 producto" : "$cantidad_productos productos") . "</p>";
+
+            // Mostramos la cantidad de productos, especificamos que si es 1, aparezca la palabra "producto" y sino "productos"
+            if ($cantidad_productos === 1) {
+              echo "<p>1 producto</p>";
+            } else {
+              echo "<p>$cantidad_productos productos</p>";
+            }
           ?>
         </section>
         <section class="row">
@@ -38,14 +43,14 @@
                     <p class="nombre_producto"><?= $pedido->getProducto()->getNombre() ?></p>
                     <p class="precio_producto_carrito"><?=number_format(calculadoraPrecios::precioProductoIndividual($pedido), 2) ?> €</p>
                     <p class="domicilio">Entrega a domicilio</p>
-                    <a class="contenedor_basura" href="<?=url.'?controller=producto&action=eliminarProducto&id=' . $posicionPedido ?>">
+                    <a class="contenedor_basura" href="<?=url.'?controller=producto&action=eliminarProducto&id='.$posicionPedido?>">
                       <img src="assets/imagenes/iconos/basura.svg" alt="Eliminar producto del carrito">
                     </a>
                     <div class="editar_cantidad">
                       <form action="<?=url.'?controller=producto&action=modificarCantidad'?>" method='post'>
-                        <button type="submit" name='restar_cantidad' class="cantidad cantidad_restar" value=<?= $posicionPedido ?>> - </button>
-                        <span><?= $pedido->getCantidad() ?></span>
-                        <button type="submit" name='sumar_cantidad' class="cantidad cantidad_sumar" value=<?= $posicionPedido ?>> + </button>
+                        <button type="submit" name='restar_cantidad' class="cantidad cantidad_restar" value=<?=$posicionPedido?>> - </button>
+                        <span><?= $pedido->getCantidad()?></span>
+                        <button type="submit" name='sumar_cantidad' class="cantidad cantidad_sumar" value=<?=$posicionPedido?>> + </button>
                       </form>
                     </div>
                   </div>
@@ -117,16 +122,24 @@
                   </div>
                   <div class="contenedor_precio_envio">
                     <p class="texto_producto_envio float-start">Coste de envío</p>
-                    <p class="precio_productos_envio"><?=isset($_SESSION['opcionLugarConsumir']) ? $_SESSION['opcionLugarConsumir'] : 'Por definir'?></p>
+                    <?php
+                      if (isset($_SESSION['opcionLugarConsumir'])) {
+                        echo "<p class='precio_productos_envio'>".$_SESSION['opcionLugarConsumir']."</p>";
+                      } else {
+                        echo "<p class='precio_productos_envio'>Por definir</p>";
+                      }
+                    ?>
                   </div>
                   <hr class="col-12 col-sm-12 hr_sin_margin">
                   <div class="contenedor_precio_total mt-2">
                     <p class="texto_resumen_total">Total<p>
-                    <?php if (isset($_SESSION['precioTotalCarrito'])) : ?>
-                      <p class="precio_total"><?=number_format($_SESSION['precioTotalCarrito'], 2)?>€</p>
-                    <?php else : ?>
-                      <p class="precio_total">Por definir</p>
-                    <?php endif; ?>
+                    <?php
+                      if (isset($_SESSION['precioTotalCarrito'])) {
+                        echo "<p class='precio_total'>".number_format($_SESSION['precioTotalCarrito'], 2)."€</p>";
+                      } else {
+                        echo "<p class='precio_total'>Por definir</p>";
+                      }
+                    ?>
                   </div>
                   <p class="IVA">IVA incluido</p>
                   <div class="contenedor_tramitar_pedido">

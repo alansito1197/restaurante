@@ -6,61 +6,67 @@
     class clienteController{
 
         // Crearemos una función cuyo objetivo sea solicitar la autorización para modificar los datos de la cuenta del usuario:
-            public function solicitudModificacionCuenta() {
-                $usuario_id = $_SESSION['usuario_id'];
-                $cliente = ClienteDAO::getUsuarioByID($usuario_id);
+        public function solicitudModificacionCuenta() {
+            $usuario_id = $_SESSION['usuario_id'];
+            $cliente = ClienteDAO::getUsuarioByID($usuario_id);
         
-                include 'vistas/header.php';
-                include 'vistas/panelModificarCuenta.php';
-                include 'vistas/footer.php';
-            }
+            include 'vistas/header.php';
+            include 'vistas/panelModificarCuenta.php';
+            include 'vistas/footer.php';
+        }
 
-            public function modificacionCuenta() {
-                $usuario_id = $_SESSION['usuario_id'];
-                $clienteActual = ClienteDAO::getUsuarioByID($usuario_id);
-            
-                $mensaje_acierto = "";
-                $mensaje_error = "";
-            
-                if ($clienteActual) {
+        public function modificacionCuenta() {
 
-                    if (isset($_POST['modificar_cliente'])) {
-                        $nombre = $_POST['nombre'];
-                        $apellidos = $_POST['apellidos'];
-                        $direccion = $_POST['direccion'];
-                        $email = $_POST['email'];
-                        $telefono = $_POST['telefono'];
-                        $password = $_POST['password'];
+            $usuario_id = $_SESSION['usuario_id'];
+            $clienteActual = ClienteDAO::getUsuarioByID($usuario_id);
             
-                        $contrasena_almacenada = ClienteDAO::obtenerPasswordCliente($usuario_id);
+            $mensaje_acierto = "";
+            $mensaje_error = "";
             
-                        if ($password == $contrasena_almacenada) {
+            if ($clienteActual) {
+
+                if (isset($_POST['modificar_cliente'])) {
+                        
+                    $nombre = $_POST['nombre'];
+                    $apellidos = $_POST['apellidos'];
+                    $direccion = $_POST['direccion'];
+                    $email = $_POST['email'];
+                    $telefono = $_POST['telefono'];
+                    $password = $_POST['password'];
+            
+                    $contrasena_almacenada = ClienteDAO::getPasswordCliente($usuario_id);
+            
+                    if ($password == $contrasena_almacenada) {
                             
-                            ClienteDAO::actualizarDatosCliente($usuario_id, $nombre, $apellidos, $direccion, $email, $telefono);
-                            
-                            // Modificación exitosa
-                            $mensaje_acierto = "¡Los datos se han modificado correctamente!";
+                        ClienteDAO::actualizarDatosCliente($usuario_id, $nombre, $apellidos, $direccion, $email, $telefono);
+                        
+                        // Cargamos nuevamente los datos del cliente:
+                        $cliente = ClienteDAO::getUsuarioByID($usuario_id);    
+                        $mensaje_acierto = "¡Los datos se han modificado correctamente!";
+                        include 'vistas/header.php';
+                        include 'vistas/panelModificarCuenta.php';
+                        include 'vistas/footer.php';
                                 
                              
-                        } else {
-                            // Contraseña incorrecta
-                            $mensaje_error = "Contraseña incorrecta.";
-                        }
-                    
-                        // Redirigir y salir del script
-                        header('Location: ' . url . '?controller=cliente&action=solicitudModificacionCuenta');
-                        exit();
+                    } else {
+
+                        // Cargamos nuevamente los datos del cliente:
+                        $cliente = ClienteDAO::getUsuarioByID($usuario_id);   
+                        $mensaje_error = "Contraseña incorrecta.";
+                        include 'vistas/header.php';
+                        include 'vistas/panelModificarCuenta.php';
+                        include 'vistas/footer.php';
                     }
                 }
             }
+        }
             
         // Crearemos una función cuyo objetivo será mostrar la vista del panel para la eliminación de la cuenta:
         public function solicitudEliminacionCuenta() {
 
             // Guardaremos al usuario actual en una variable:
             $usuario_id = $_SESSION['usuario_id'];
-                
-            // Verificaremos que quien intenta eliminar su cuenta tiene permisos para hacerlo, es decir, si es un cliente:
+            
             include 'vistas/header.php';
             include 'vistas/panelEliminarCuenta.php';
             include 'vistas/footer.php';
@@ -78,19 +84,9 @@
                 $cliente = new ClienteDAO();
         
                 // Guardaremos en una variable si hemos encontrado una cuenta asociada a la del cliente que quiere eliminar su cuenta:
-                $resultado_eliminacion = $cliente->eliminarCuenta($id_cliente);
-        
-                if ($resultado_eliminacion) {
+                $cliente->eliminarCuenta($id_cliente);
 
-                    /* Si conseguimos eliminar la cuenta, destruiremos las variables de sesión y redirigiremos a la función que comprueba si hay sesión activa
-                    con el objetivo que muestre el panel de registro de nuevo. */
-
-                    session_destroy();
-                    header('Location:'.url.'?controller=user&action=login');
-                    exit();
-
-                } 
-
+                session_destroy();
                 // Redirigimos en caso de error o si no hay sesión iniciada:
                 header('Location:'.url.'?controller=user&action=login');
                 exit();

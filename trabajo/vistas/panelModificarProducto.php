@@ -22,26 +22,23 @@
             <div class="row">
               <div class="col-md-6 text-center">
                 <form action="<?= url.'?controller=admin&action=actualizarProductoSeleccionado'?>" method="POST">
-                  <input type="text" class="contenedor_informacion_login" required name="nombre" value="<?=$productoActual->getNombre() ?>">
-                  <input type="text" class="contenedor_informacion_login" required name="sabor" value="<?=$productoActual->getSabor() ?>">
-                  <input type="text" class="contenedor_informacion_login"  required name="valor_energetico" value="<?=$productoActual->getValorEnergetico() ?>">
-                  <input type="number" class="contenedor_informacion_login" required name="precio" value="<?=$productoActual->getPrecio() ?>">
-                  <input type="text" class="contenedor_informacion_login" required name="disponibilidad" value="<?=$productoActual->getDisponibilidad() ?>">
-                  <input type="number" class="contenedor_informacion_login" required name="stock" value="<?=$productoActual->getStock() ?>">
-                  <input type="file" class="contenedor_informacion_login"  name="imagen" >
-                  <input type="text" class="contenedor_informacion_login" required name="ingredientes" value="<?=$productoActual->getIngredientes() ?>">
-                  <input type="number" class="contenedor_informacion_login" required name="producto_destacado" value="<?=$productoActual->getProductoDestacado() ?>">
+                  <input type="text" class="contenedor_informacion_login" name="nombre" value="<?=$productoActual->getNombre() ?>">
+                  <input type="text" class="contenedor_informacion_login" name="sabor" value="<?=$productoActual->getSabor() ?>">
+                  <input type="number" class="contenedor_informacion_login"  name="valor_energetico" value="<?=$productoActual->getValorEnergetico() ?>">
+                  <input type="number" class="contenedor_informacion_login" name="precio" value="<?=$productoActual->getPrecio() ?>">
+                  <input type="text" class="contenedor_informacion_login" name="disponibilidad" value="<?=$productoActual->getDisponibilidad() ?>">
+                  <input type="number" class="contenedor_informacion_login" name="stock" value="<?=$productoActual->getStock() ?>">
+                  <input type="text" class="contenedor_informacion_login" name="ingredientes" value="<?=$productoActual->getIngredientes() ?>">
+                  <input type="text" class="contenedor_informacion_login" name="producto_destacado" value="<?=$productoActual->getProductoDestacado() ?>">
                   <input type="password" class="contenedor_informacion_login" required placeholder="Contraseña para confirmar cambios" name="password">              
                   <button type="submit" class="iniciar_sesion mb-4" name="modificar_producto">Modificar producto</button>
                 </form>
               </div>
-              <?php if (isset($_SESSION['mensaje_acierto']) && !empty($_SESSION['mensaje_acierto'])): ?>
-                <p class="mensaje_exito"><?php echo $_SESSION['mensaje_acierto']; ?></p>
-                <?php unset($_SESSION['mensaje_acierto']); ?>
+              <?php if (isset($mensaje_acierto) && !empty($mensaje_acierto)): ?>
+                <p class="mensaje_acierto"><?php echo $mensaje_acierto; ?></p>
               <?php endif; ?>
-              <?php if (isset($_SESSION['mensaje_error']) && !empty($_SESSION['mensaje_error'])): ?>
-                <p class="mensaje_error"><?php echo $_SESSION['mensaje_error']; ?></p>
-                <?php unset($_SESSION['mensaje_error']); ?>
+              <?php if (isset($mensaje_error) && !empty($mensaje_error)): ?>
+                <p class="mensaje_error"><?php echo $mensaje_error; ?></p>
               <?php endif; ?>
             </div>
           </div>

@@ -25,18 +25,18 @@
                   <div class="col-md-3 contenedor_producto_admin" style="background-image: url('<?=$producto->getImagen()?>');"></div>
                   <div class="col-md-9">
                     <div class="card-body">
-                      <h5 class="card-title"><?=$producto->getNombre()?></h5>
-                      <p class="card-text">Sabor: <?=$producto->getSabor()?></p>
-                      <p class="card-text">Valor Energético: <?=$producto->getValorEnergetico()?></p>
-                      <p class="card-text">Precio: <?=$producto->getPrecio()?>€</p>
-                      <p class="card-text">Disponibilidad: <?=$producto->getDisponibilidad()?></p>
-                      <p class="card-text">Stock: <?=$producto->getStock()?></p>
-                      <p class="card-text">Ingredientes: <?=$producto->getIngredientes()?></p>
-                      <p class="card-text">Producto Destacado: <?=$producto->getProductoDestacado()?></p>
+                      <h5 class="card-title-productos"><?=$producto->getNombre()?></h5>
+                      <p class="card-text info_apartado_producto">Sabor: <?=$producto->getSabor()?></p>
+                      <p class="card-text info_apartado_producto">Valor Energético: <?=$producto->getValorEnergetico()?></p>
+                      <p class="card-text info_apartado_producto">Precio: <?=$producto->getPrecio()?>€</p>
+                      <p class="card-text info_apartado_producto">Disponibilidad: <?=$producto->getDisponibilidad()?></p>
+                      <p class="card-text info_apartado_producto">Stock: <?=$producto->getStock()?></p>
+                      <p class="card-text info_apartado_producto">Ingredientes: <?=$producto->getIngredientes()?></p>
+                      <p class="card-text info_apartado_producto">Producto Destacado: <?=$producto->getProductoDestacado()?></p>
                       <?php
                         if (method_exists($producto, 'getTipoMasa')){
                           ?>
-                            <p class="card-text">Tipo de masa: <?=$producto->getTipoMasa()?></p>
+                            <p class="card-text info_apartado_producto">Tipo de masa: <?=$producto->getTipoMasa()?></p>
                           <?php
                         }
                       ?>

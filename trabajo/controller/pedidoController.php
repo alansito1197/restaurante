@@ -40,16 +40,15 @@
                     unset($_SESSION['precioTotalCarrito']);
                 }
 
-
-                    // Almacena el precio del último pedido en una cookie temporal
-                    $usuario_id = $_SESSION['usuario_id'];
-                    $precioUltimoPedido = PedidoDAO::precioUltimoPedido($usuario_id);
+                // Almacena el precio del último pedido en una cookie temporal
+                $usuario_id = $_SESSION['usuario_id'];
+                $precioUltimoPedido = PedidoDAO::precioUltimoPedido($usuario_id);
         
-                    // Verifica si se obtuvo un precio y almacena la cookie
-                    if ($precioUltimoPedido !== null) {
-                        setcookie('CookieUltimoPedido', $precioUltimoPedido, time() + 3600); 
-                    }
-
+                // Verifica si se obtuvo un precio y almacena la cookie
+                if ($precioUltimoPedido !== null) {
+                    setcookie('CookieUltimoPedido', $precioUltimoPedido, time() + 3600);
+                    
+                }
         
                 include 'vistas/header.php';
                 include 'vistas/panelTramitarPedido.php';

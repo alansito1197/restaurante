@@ -33,7 +33,7 @@
                 </form>
               </div>
               <?php if (isset($mensaje_acierto) && !empty($mensaje_acierto)): ?>
-                <p class="mensaje_exito"><?php echo $mensaje_acierto; ?></p>
+                <p class="mensaje_acierto"><?php echo $mensaje_acierto; ?></p>
               <?php endif; ?>
               <?php if (isset($mensaje_error) && !empty($mensaje_error)): ?>
                 <p class="mensaje_error"><?php echo $mensaje_error; ?></p>

@@ -14,6 +14,7 @@
   <body>
     <main class="d-flex justify-content-center">
       <section class="container mt-4">
+        <h3 class="pb-2">¿Seguro que quieres eliminar <?=$productoActual->getNombre()?>?</h3>
         <a class="enlace_registro mt-4" href=<?=url.'?controller=admin&action=solicitudGestionarProductos'?>> Volver al panel de productos</a>
         <div class="row mt-4">
           <div class="col-md-12">
@@ -21,15 +22,15 @@
               <div class="row">
                 <div class="col-md-3 contenedor_producto_admin" style="background-image: url('<?=$productoActual->getImagen()?>');"></div>
                 <div class="col-md-9">
-                  <div class="card-body">
-                    <h5 class="card-title"><?=$productoActual->getNombre()?></h5>
-                    <p class="card-text">Sabor: <?=$productoActual->getSabor()?></p>
-                    <p class="card-text">Valor Energético: <?=$productoActual->getValorEnergetico()?></p>
-                    <p class="card-text">Precio: <?=$productoActual->getPrecio()?>€</p>
-                    <p class="card-text">Disponibilidad: <?=$productoActual->getDisponibilidad()?></p>
-                    <p class="card-text">Stock: <?=$productoActual->getStock()?></p>
-                    <p class="card-text">Ingredientes: <?=$productoActual->getIngredientes()?></p>
-                    <p class="card-text">Producto Destacado: <?=$productoActual->getProductoDestacado()?></p>
+                  <div class="card-body p-0">
+                    <h5 class="card-title">Ficha técnica del producto</h5>
+                    <p class="card-text info_apartado_producto">Sabor: <?=$productoActual->getSabor()?></p>
+                    <p class="card-text info_apartado_producto">Valor Energético: <?=$productoActual->getValorEnergetico()?> kcal</p>
+                    <p class="card-text info_apartado_producto">Precio: <?=$productoActual->getPrecio()?>€</p>
+                    <p class="card-text info_apartado_producto">Disponibilidad: <?=$productoActual->getDisponibilidad()?></p>
+                    <p class="card-text info_apartado_producto">Stock: <?=$productoActual->getStock()?></p>
+                    <p class="card-text info_apartado_producto">Ingredientes: <?=$productoActual->getIngredientes()?></p>
+                    <p class="card-text info_apartado_producto">Producto Destacado: <?=$productoActual->getProductoDestacado()?></p>
                     <?php
                       if (method_exists($productoActual, 'getTipoMasa')){
                         ?>
@@ -38,11 +39,9 @@
                       }
                     ?>
                     <div class="col-md-12 text-center d-flex justify-content-evenly">
-                      <form action="<?=url.'?controller=admin&action=eliminarProducto'?>" method="POST">
-                        <button class="boton_rojo">Eliminar producto</button>
-                      </form>
-                      <form action="<?=url.'?controller=admin&action=solicitudGestionarProductos'?>" method="POST">
-                        <button class="boton_negro">Cancelar</button>
+                      <form action="<?=url.'?controller=admin&action=eliminarProductoSeleccionado'?>" method="POST">
+                        <button type="submit" class="boton_rojo" name="eliminar" value="<?=$productoActual->getIdProducto()?>">Eliminar producto</button>
+                        <button type="submit" class="boton_negro" name="cancelar">Cancelar</button>
                       </form>
                     </div>
                   </div>

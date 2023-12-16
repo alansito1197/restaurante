@@ -3,7 +3,7 @@
     session_start();
 
     include_once 'config/dataBase.php';
-    include_once 'modelo/UsuarioDAO.php';
+    include_once 'modelo/usuarioDAO.php';
 
     class userController{
         
@@ -64,8 +64,8 @@
                     $email = $_POST['usuario'];
                     $password = $_POST['password'];
         
-                    $clienteDAO = new ClienteDAO();
-                    $credencial = $clienteDAO->getUsuarioPorEmail($email);
+                    $usuarioDAO = new UsuarioDAO();
+                    $credencial = $usuarioDAO->getBuscarUsuario($email);
         
                     if ($credencial !== null) {
         

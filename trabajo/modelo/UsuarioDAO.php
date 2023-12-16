@@ -4,41 +4,57 @@
 
     class UsuarioDAO {
 
-        // Crearemos una función para conectarnos a nuestra base de datos:
-        public static function conectarBaseDeDatos() {
-            $db = new DataBase();
-            return $db->connect();
-        }
-
-        // Crearemos una función para extraer todos los correos de nuestra página web:
-        public function getUsuarioPorEmail($email, $conexion) {
-
+        public function getBuscarUsuario($email) {
+            // Nos conectamos a la base de datos:
+            $conexion = DataBase::connect();
+        
             // Crearemos una variable para comprobar si el email introducido por el usuario es un cliente:
-            $busqueda_credencial_cliente = "SELECT cliente.id_cliente AS ID, cliente.email, credencial.tipo_usuario, credencial.password
-                                            FROM CLIENTE cliente
-                                            JOIN CREDENCIAL credencial ON cliente.id_cliente = credencial.id_cliente
-                                            WHERE credencial.tipo_usuario = 'cliente' AND cliente.email = '$email'";
-            
+            $busquedaCredencialCliente = "SELECT cliente.id_cliente AS ID, cliente.email, credencial.tipo_usuario, credencial.password
+                                          FROM CLIENTE cliente
+                                          JOIN CREDENCIAL credencial ON cliente.id_cliente = credencial.id_cliente
+                                          WHERE credencial.tipo_usuario = 'cliente' AND cliente.email = ?";
+        
             // Crearemos una variable para comprobar si el email introducido por el usuario es un empleado:
-            $busqueda_credencial_administrador = "SELECT administrador.id_administrador AS ID, administrador.email, credencial.tipo_usuario, credencial.password
-                                            FROM ADMINISTRADOR ADMINISTRADOR
-                                            JOIN CREDENCIAL credencial ON administrador.id_administrador = credencial.id_administrador
-                                            WHERE credencial.tipo_usuario = 'administrador' AND administrador.email = '$email'";
-            
-            // Guardaremos en una variable la ejecución de las anteriores consultas a la base de datos tras conectarnos a la base de datos mediante el método encargado de ello:
-            $consulta_cliente = self::conectarBaseDeDatos()->query($busqueda_credencial_cliente);
-            $consulta_administrador = self::conectarBaseDeDatos()->query($busqueda_credencial_administrador);
-
-            if ($consulta_cliente->num_rows > 0 || $consulta_administrador->num_rows > 0) {
-
-                // Si de ambas búsquedas, encontramos algún registro que coincida, guardamos dicho objeto en una variable:
-                $credencial = ($consulta_cliente->num_rows > 0) ? $consulta_cliente->fetch_object() : $consulta_administrador->fetch_object();
-                return $credencial;
-            
+            $busquedaCredencialAdministrador = "SELECT administrador.id_administrador AS ID, administrador.email, credencial.tipo_usuario, credencial.password
+                                                FROM ADMINISTRADOR ADMINISTRADOR
+                                                JOIN CREDENCIAL credencial ON administrador.id_administrador = credencial.id_administrador
+                                                WHERE credencial.tipo_usuario = 'administrador' AND administrador.email = ?";
+        
+            // Preparar y ejecutar consulta para cliente
+            $stmtCliente = $conexion->prepare($busquedaCredencialCliente);
+            $stmtCliente->bind_param("s", $email);
+            $stmtCliente->execute();
+        
+            // Obtener resultados para cliente
+            $resultadoCliente = $stmtCliente->get_result();
+        
+            if ($resultadoCliente->num_rows > 0) {
+                // Si encontramos algún registro que coincida con el cliente, guardamos dicho objeto en una variable:
+                $credencial = $resultadoCliente->fetch_object('Cliente');
+                $stmtCliente->close();
             } else {
-
-                return null;
+                // Cerrar la consulta para cliente
+                $stmtCliente->close();
+        
+                // Preparar y ejecutar consulta para administrador
+                $stmtAdministrador = $conexion->prepare($busquedaCredencialAdministrador);
+                $stmtAdministrador->bind_param("s", $email);
+                $stmtAdministrador->execute();
+        
+                // Obtener resultados para administrador
+                $resultadoAdministrador = $stmtAdministrador->get_result();
+        
+                if ($resultadoAdministrador->num_rows > 0) {
+                    // Si encontramos algún registro que coincida con el administrador, guardamos dicho objeto en una variable:
+                    $credencial = $resultadoAdministrador->fetch_object('Administrador');
+                }
+        
+                // Cerrar la consulta para administrador
+                $stmtAdministrador->close();
             }
+        
+            return $credencial;
         }
+        
     }
 ?>

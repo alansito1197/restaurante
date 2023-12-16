@@ -36,7 +36,7 @@
               </div>
               <div class="col-sm-6 mb-2">
                 <form action="<?=url.'?controller=user&action=comprobarUsuario'?>" method="POST">
-                  <button class="boton_rojo btn-block">Ir a mi panel</button>
+                  <button class="boton_rojo btn-block">Volver a mi panel</button>
                 </form>
               </div>
             </div>

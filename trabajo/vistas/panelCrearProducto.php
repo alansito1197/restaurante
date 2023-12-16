@@ -30,7 +30,7 @@
                   <input type="text" class="contenedor_informacion_login" name="disponibilidad" placeholder="Disponibilidad" required>
                   <input type="number" class="contenedor_informacion_login" name="stock" placeholder="Stock" required>
                   <input type="text" class="contenedor_informacion_login" name="ingredientes" placeholder="Ingredientes" required>
-                  <input type="number" class="contenedor_informacion_login" name="destacado" placeholder="Producto destacado" required>
+                  <input type="text" class="contenedor_informacion_login" name="destacado" placeholder="Producto destacado" required>
                   <input type="file" class="contenedor_informacion_login" name="valoracion" accept="image/*" required>
                   <input type="file" class="contenedor_informacion_login" name="imagen" accept="image/*" required>
                   <input type="password" class="contenedor_informacion_login" required placeholder="Contraseña" name="password">
