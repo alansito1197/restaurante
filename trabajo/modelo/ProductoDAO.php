@@ -10,10 +10,7 @@
         public static function getAllProducts() {
             
             // Nos conectamos a la base de datos:
-            $db = new DataBase();
-            
-            // Obtener la conexión a la base de datos
-            $conexion = $db->connect();
+            $conexion = DataBase::connect();
 
             $stmt = $conexion->query("SELECT id_producto, id_administrador, id_categoria_producto, nombre, sabor, valor_energetico, precio, disponibilidad, stock, imagen, ingredientes, valoracion, producto_destacado FROM producto WHERE tipo_masa IS NULL");
 
@@ -50,10 +47,8 @@
         public static function getAllProductosDestacados() {
 
             // Nos conectamos a la base de datos:
-            $db = new DataBase();
-            
-            // Obtener la conexión a la base de datos
-            $conexion = $db->connect();
+            $conexion = DataBase::connect();
+
             $stmt = $conexion->query("SELECT * FROM producto WHERE producto_destacado='Si'");
 
             $productos_destacados = [];
@@ -69,10 +64,7 @@
         public static function getProductoByID($id_producto) {
             
             // Nos conectamos a la base de datos:
-            $db = new DataBase();
-            
-            // Obtener la conexión a la base de datos
-            $conexion = $db->connect();
+            $conexion = DataBase::connect();
             
             // Preparamos la consulta para obtener el producto por ID:
             $stmt = $conexion->prepare("SELECT * FROM producto WHERE id_producto=?");
@@ -93,10 +85,7 @@
         public static function obtenerProductoByID($id_producto) {
 
             // Nos conectamos a la base de datos:
-            $db = new DataBase();
-            
-            // Obtener la conexión a la base de datos
-            $conexion = $db->connect();
+            $conexion = DataBase::connect();
         
             // Preparamos la consulta para obtener el producto por ID:
             $stmt = $conexion->prepare("SELECT * FROM producto WHERE id_producto=?");
@@ -121,10 +110,7 @@
         public function agregarProducto($usuario_id, $categoria_producto, $nombre, $sabor, $calorias, $precio, $disponibilidad, $stock, $ingredientes, $destacado, $imagen, $valoracion) {
             
             // Nos conectamos a la base de datos:
-            $db = new DataBase();
-            
-            // Obtener la conexión a la base de datos
-            $conexion = $db->connect();
+            $conexion = DataBase::connect();
     
             $sql = "INSERT INTO PRODUCTO (id_administrador, id_categoria_producto, nombre, sabor, valor_energetico, precio, disponibilidad, stock, ingredientes, producto_destacado, imagen, valoracion) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -142,11 +128,10 @@
         }
 
         public static function actualizarProducto($idProducto, $nombre, $sabor, $valor_energetico, $precio, $disponibilidad, $stock, $ingredientes, $producto_destacado) {
-            $db = new DataBase();
             
-            // Obtener la conexión a la base de datos
-            $conexion = $db->connect();
-            
+            // Nos conectamos a la base de datos:
+            $conexion = DataBase::connect();
+
             $producto = "UPDATE PRODUCTO SET nombre=?, sabor=?, valor_energetico=?, precio=?, disponibilidad=?, stock=?, ingredientes=?, producto_destacado=? WHERE id_producto=?";
 
             // Preparamos la consulta
@@ -167,14 +152,10 @@
         }
         
         
-
         public static function eliminarProducto($id_producto){
 
             // Nos conectamos a la base de datos:
-            $db = new DataBase();
-            
-            // Obtener la conexión a la base de datos
-            $conexion = $db->connect();
+            $conexion = DataBase::connect();
         
             // Preparamos la consulta para eliminar el producto por ID:
             $stmt = $conexion->prepare("DELETE FROM producto WHERE id_producto=?");

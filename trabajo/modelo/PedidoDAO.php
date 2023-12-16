@@ -3,6 +3,7 @@
     include_once 'config/dataBase.php';
     include_once 'modelo/Pedido.php';
     include_once 'modelo/AllPedidos.php';
+    include_once 'modelo/PedidoUsuario.php';
 
     class PedidoDAO {
 
@@ -32,10 +33,10 @@
 
         // Crearemos un método para obtener todos los pedidos de cada usuario:
         public static function obtenerPedidosUsuario($usuario_id) {
-            
+
             // Nos conectamos a la base de datos:
             $conexion = DataBase::connect();
-
+        
             $busqueda_pedidos = "SELECT * FROM PEDIDO WHERE id_cliente = ? AND tipo_usuario = ?";
             
             $stmt = $conexion->prepare($busqueda_pedidos);
@@ -46,8 +47,8 @@
         
             $pedidos = array();
         
-            while ($row = $result->fetch_assoc()) {
-                $pedidos[] = $row;
+            while ($obj = $result->fetch_object('PedidoUsuario')) {
+                $pedidos[] = $obj;
             }
         
             $stmt->close();
@@ -55,6 +56,7 @@
         
             return $pedidos;
         }
+        
 
         public static function getAllPedidos() {
 

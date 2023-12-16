@@ -16,14 +16,18 @@
       <section class="container mt-4">
         <div class="container col-12 col-sm-6 medidas_container_pedidos container_pedidos">
           <h3 class="pregunta_login">¡Estos son tus pedidos!</h3>
-          <?php foreach ($pedidos as $pedido): ?>
+          <?php 
+            foreach ($pedidos as $pedido){
+          ?>
             <div class="pedido_individual">
-              <p class="info_pedido">ID Pedido: <?php echo $pedido['id_pedido']; ?></p>
-              <p class="info_pedido">Precio Total: <?php echo $pedido['precio_total']; ?>€</p>
-              <p class="info_pedido">Fecha: <?php echo $pedido['fecha']; ?></p>
-              <p class="info_pedido">Estado: <?php echo $pedido['estado']; ?></p>
+              <p class="info_pedido">ID Pedido: <?=$pedido->getIdPedido()?></p>
+              <p class="info_pedido">Precio Total: <?=$pedido->getPrecioTotal()?>€</p>
+              <p class="info_pedido">Fecha: <?=$pedido->getFecha()?></p>
+              <p class="info_pedido">Estado: <?=$pedido->getEstado()?></p>
             </div>
-          <?php endforeach; ?>
+          <?php 
+            }
+          ?>
           <h1 class="pregunta_user">¿Qué quieres hacer?</h2> 
           <div class="row">
             <div class="col-sm-6">
@@ -38,6 +42,7 @@
             </div>
           </div>
         </div>
+        
       </section>
     </main>
   </body>

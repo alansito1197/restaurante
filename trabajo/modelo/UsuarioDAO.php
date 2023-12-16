@@ -5,6 +5,7 @@
     class UsuarioDAO {
 
         public function getBuscarUsuario($email) {
+
             // Nos conectamos a la base de datos:
             $conexion = DataBase::connect();
         
@@ -55,6 +56,5 @@
         
             return $credencial;
         }
-        
     }
 ?>
