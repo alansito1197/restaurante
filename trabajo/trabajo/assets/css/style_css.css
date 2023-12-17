@@ -1,0 +1,970 @@
+/* INICIO del estilo global que afectan a toda la página web */
+
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;700&display=swap');
+
+  @font-face {
+    font-family: 'Noto Sans';
+    src: url('https://fonts.gstatic.com/s/notosans/v14/NotoSans-Regular-webfont.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Noto Sans';
+    src: url('https://fonts.gstatic.com/s/notosans/v14/NotoSans-Medium-webfont.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Noto Sans';
+    src: url('https://fonts.gstatic.com/s/notosans/v14/NotoSans-Bold-webfont.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  * {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Noto Sans';
+  }
+
+  h2 {
+    margin-top: 15px;
+    padding-top: 20px;
+    padding-bottom: 30px;
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+  a {
+    color: #000;
+    text-decoration: none;
+  }
+
+  .titulo_principal_pagina{
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+/* FIN del estilo global que afectan a toda la página web */
+
+/* INICIO del estilo del Header */
+
+  /* Estilo de la barra de navegación */
+
+  .navbar {
+    height: 60px;
+    background-color: #df0000;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  /*Eliminar el efecto hover al posicionarnos en "Ir a la carta" */
+
+  .nav-link:hover {
+    color: inherit;
+  }
+
+  /*Estilo del botón de "Ir a la carta" */
+
+  .ir_a_la_carta{
+    color: #fff;
+    font-weight: bold;
+    border: 2px solid #CCCCCC; 
+    border-radius: 8px;
+    text-decoration: none;
+  }
+
+  /* Ampliamos el espacio que ocupa el circulo del icono del carrito y de hacer login */
+
+  .contorno_icono {
+    padding: 5px;
+  }
+
+  /* Contenedor del icono del carrito y de hacer login */
+
+  .estilo_carrito_login {
+    border-radius: 50%;
+    border: 1px solid #fff;
+    background-color: #fff;
+    padding: 10px;
+  }
+
+  /* Damos estilo al contenedor negro que contiene información temporal de la página web */
+
+  .contenedor_negro{
+    font-size: 14px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-decoration: underline;
+    padding-top: 10px;
+  }
+
+/* FIN del estilo del Header */
+
+/* INICIO del estilo de la página principal */
+
+  /* INICIO del Estilo de la sección de "Categorías destacadas */
+
+    .contenedor_categoria_destacada{
+      background-repeat: no-repeat;
+      background-position: center; 
+      text-align: center;
+      padding-top: 170px;
+      border-radius: 10px;
+    }
+
+    .nombre_categoria_destacada {
+      font-size: 16px;
+      font-weight: bold;
+      color: #3A3A3A;
+    }
+
+  /* FIN del Estilo de la sección de "Categorías destacadas */
+
+  /* INICIO del Estilo de la sección de "Productos destacados */
+
+    .contenedor_productos_destacados{
+      border-radius: 10px;
+    }
+
+    @media (min-width: 1024px) {
+      .contenedor_productos_destacados.col-lg-2 {
+        width: 19%; 
+      }
+    }
+
+    .imagen_productos_destacados {
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      width: auto;
+      height: 225px;
+      margin-top: 40px;
+      margin-bottom: 10px;
+    }
+
+    .valoracion_producto_destacado {
+      margin-bottom: 14px;
+    }
+
+    .titulo_producto_destacado {
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .precio_producto_destacado{
+      margin-bottom: 0px;
+      margin-top: 10px;
+      font-size: 24px;
+      color: #000;
+      padding-left: 5px;
+      font-weight: bold;
+    }
+
+    .iva_producto_destacado {
+      margin-top: 0px;
+      font-size: 12px;
+      text-decoration: underline;
+    }
+
+  /* FIN del Estilo de la sección de "Productos destacados */
+
+  /* INICIO del Estilo global del contenedor de las dos próximas secciones */ 
+
+    .separacion_contenedores_individuales{
+      width: 630px;
+    }
+
+  /* FIN del Estilo global del contenedor de las dos próximas secciones */ 
+
+  /* INICIO del Estilo de la sección de "Marcas con las que trabajamos */
+
+    .imagen_marcas { 
+      background-repeat: no-repeat;
+      background-position: center;
+      width: 100%;
+      height: 113px;
+      border: 1px solid #CCCCCC; 
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+
+  /* FIN del Estilo de la sección de "Marcas con las que trabajamos */
+
+  /* INICIO del Estilo de la sección de "Únete a nuestra newsletter */
+
+    .contenedor_informacion_personal{
+      border: 1px solid #CCCCCC; 
+      border-radius: 8px;
+      margin-top: 5px;
+      padding: 10px;
+    }
+
+    .checkbox {
+      appearance: none;
+      width: 25px;
+      height: 25px;
+      border: 2px solid #8c8c8c;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .checkbox:checked::after {
+      content: '\2714';
+      position: absolute;
+      color: #fff;
+    }
+
+    .checkbox:hover {
+      border-color: #616161; 
+    }
+
+    .checkbox:checked {
+      background-color: #000;
+      border-color: #000; 
+    }
+
+    .boton_enviar{
+      border: 2px solid #CCCCCC; 
+      border-radius: 8px;
+      background-color: #000;
+      color: #fff;
+      font-weight: 600;
+      width: 380px;
+      height: 50px;
+      margin-bottom: 20px;
+    }
+
+    .boton_enviar:hover {
+      background-color: #616161;
+    }
+
+  /* FIN del Estilo de la sección de "Únete a nuestra newsletter */
+
+  /* INICIO del Estilo de la sección de "¿Tienes alguna duda? */
+
+    .dudas{
+      padding-bottom: 0px;
+    }
+
+    .apartado_contacto{
+      padding-top: 5px;
+    }
+
+    .texto_contacto{
+      margin: 8px;
+      margin-left: 20px;
+    }
+
+    .enlaces_contacto {
+      text-decoration: underline;
+    }
+
+  /* FIN del Estilo de la sección de "¿Tienes alguna duda? */
+
+/* FIN del estilo de la página principal */
+
+/* INICIO del estilo de la página de productos */
+
+  /* INICIO del estilo global para cada tipo de filtro */
+
+  .titulo_filtro{
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .titulo_filtro:hover{
+    background-color: #e3e3e3;
+  }
+
+  .opcion_filtro{
+    display: block;
+    cursor: pointer;
+    font-size: 16px;
+    color: #3a3a3a;
+    font-weight: bold;
+  }
+
+  .checkbox {
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border: 2px solid #8c8c8c;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .checkbox:checked::after {
+    content: '\2714';
+    position: absolute;
+    color: #fff;
+  }
+
+  .checkbox:hover {
+    border-color: #616161; 
+  }
+
+  .checkbox:checked {
+    background-color: #000;
+    border-color: #000; 
+  }
+
+  /* FIN del estilo global para cada tipo de filtro */
+
+  /* INICIO del estilo del filtro por precio */
+
+  .boton_enviar{
+    border: 2px solid #CCCCCC; 
+    border-radius: 8px;
+    background-color: #000;
+    color: #fff;
+    font-weight: 600;
+    width: 380px;
+    height: 50px;
+    margin-bottom: 20px;
+  }
+
+  .boton_enviar:hover {
+    background-color: #616161;
+  }
+
+  /* FIN del estilo del filtro por precio */
+
+  /* INICIO del estilo del filtro por disponibilidad */
+
+  .filtro_disponible:checked {
+    background-color: #008000;
+    border-color: #008000;
+  }
+
+  .filtro_no_disponible:checked {
+    background-color: #df0000;
+    border-color: #df0000; 
+  }
+
+  .filtro_proximamente:checked {
+    background-color: #FB6A00;
+    border-color: #FB6A00; 
+  }
+
+  /* FIN del estilo del filtro por disponibilidad */
+
+  /* INICIO del estilo de cada producto */
+
+    /* Definimos los contenedores interiores para dividir la información que contiene cada producto */
+
+    .container_izquierda_producto{
+      margin-left: 30px;
+      align-content: center;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    @media (max-width: 768px) {
+      .container_izquierda_producto {
+        background-size: contain;
+      }
+    }
+
+    .container_derecha_producto{
+      margin-top: 70px;
+     
+    }
+
+    /* Definimos la información que contiene cada producto */
+
+      .contenedor_productos{
+        border-radius: 10px;
+      }
+
+      .titulo_producto {
+        font-size: 14px;
+      }
+
+      .valoracion_producto{
+        margin-top: 230px;
+      }
+
+      .titulo_apartado_producto{
+        font-size: 12px;
+        color: #000;
+        margin-bottom: 2px;
+      }
+
+      .info_apartado_producto{
+        font-size: 14px;
+        color: #3A3A3A;
+        font-weight: bold;
+      }
+
+      .disponibilidad{
+        padding-top: 10px;
+      }
+
+      .lista_ordenada{
+        margin-left: -18px;
+      }
+
+      .lista_ordenada li {
+        border-radius: 50%;
+      }
+
+      .fecha_entrega{
+        color: #3A3A3A;
+        font-size: 12px;
+      }
+
+      .precio_producto_productos{
+        font-size: 24px;
+        color: #000;
+        font-weight: bold;
+      }
+
+      .disponible_online {
+        color: #008000;
+        font-weight: bold;
+      }
+
+      .no_disponible {
+        color: #df0000;
+        font-weight: bold;
+      }
+
+      .proximamente {
+        color: #FB6A00;
+        font-weight: bold;
+      }
+
+      .recogida{
+        color:#3A3A3A;
+        font-size: 12px;
+        font-weight: bold;
+      }
+
+      .contenedor_boton{
+        margin-left: 15px;
+      }
+
+      .boton_negro {
+        border-radius: 8px;
+        border-color: transparent;
+        background-color: #000;
+        color: #fff;
+        font-weight: 600;
+        width: 288px;
+        height: 48px;
+        margin-right: 15px;
+        margin-bottom: 20px;
+      }
+
+      .boton_negro:hover {
+        background-color: #616161;
+      }
+
+      .contenedor_megusta{
+        display: flex;
+        align-items: center;
+        width: 48px;
+        height: 48px;
+        border: 2px solid #000;
+        border-radius: 6px
+      }
+
+      .contenedor_megusta:hover{
+        background-color: #E3E3E3;
+      }
+
+      @media (max-width: 1024px) {
+        .contenedor_boton {
+          justify-content: center;
+        }
+      }
+
+      @media (max-width: 1024px) {
+        .añadir_carrito {
+          margin-right: 0;
+        }
+      }
+    
+  /* FIN del estilo de cada producto */
+
+/* FIN del estilo de la página de productos */
+
+/* INICIO del estilo de la página de carrito */
+
+  /* INICIO del diseño del cuadro resumen */
+
+    /* INICIO de las medidas del contenedor del resumen */
+
+    .fondo_resumen {
+      border-radius: 8px;
+      background-color: #F7F7F7;
+    }
+
+    .margen_superior_resumen{
+      padding-top: 20px;
+    }
+
+    .margenes_laterales_resumen{
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+
+  /* FIN de las medidas del contenedor del resumen */
+
+  /* INICIO del estilo de cada apartado del cuadro resumen */
+
+    .contenedor_subtotal, .contenedor_precio_productos, .contenedor_precio_envio, .contenedor_precio_total {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .texto_resumen_total {
+      font-size: 20px;
+      color: #3A3A3A;
+      font-weight: 600;
+    }
+
+    .texto_cupones{
+      font-size: 12px;
+      color: #000;
+    }
+
+    .subtotal{
+      font-size: 16px;
+      color: #000;
+      font-weight: 600;
+    }
+
+    .precio_subtotal{
+      font-size: 16px;
+      color: #000;
+      font-weight: bold;
+    }
+
+    .contenedor_precio_envio{
+      padding-top: 20px;
+      padding-bottom: 10px;
+    }
+
+    .hr_sin_margin{
+      margin: 0px;
+    }
+
+    .contenedor_precio_total{
+      padding-top: 10px;
+    }
+
+    .precio_total {
+      font-size: 20px;
+      color: #000;
+      font-weight: bold;
+    }
+
+    .IVA{
+      font-size: 12px;
+      color: #3A3A3A;
+      margin-top: -15px;
+    }
+
+  /* FIN del estilo de cada apartado del cuadro resumen */
+
+  /* INICIO del estilo del botón para tramitar la compra */
+
+    .contenedor_tramitar_pedido {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .tramitar_pedido {
+      background-color: #df0000;
+      border-color: transparent;
+      color: #fff;
+      border-radius: 8px;
+      font-weight: 600;
+      width: 380px;
+      height: 59px;
+      margin-bottom: 20px;
+    }
+
+    .tramitar_pedido:hover{
+      background-color: #A51716;
+    }
+
+  /* FIN del estilo del botón para tramitar la compra */
+
+  /* FIN del diseño del cuadro resumen */
+
+  /* INICIO del diseño del cuadro individual por producto */
+
+  .margen_superior_producto{
+    margin-top: 20px;
+  }
+
+  .imagen_producto_carrito{
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .nombre_producto{
+    font-size: 14px;
+    color: #000;
+    font-weight: bold;
+  }
+
+  .precio_producto_carrito{
+    font-size: 24px;
+    color: #000;
+    font-weight: bold;
+  }
+
+  .domicilio{
+    font-size: 14px;
+    color: #008300;
+    font-weight: bold
+  }
+
+  .personalizar_pedido{
+    font-size: 18px;
+    color: #000;
+    font-weight: bold
+  }
+
+  .contenedor_basura{
+    display: flex;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: 2px solid #000;
+    border-radius: 4px;
+    align-items: center;
+    margin-right: 15px;
+    margin-left: 10px;
+  }
+
+  .contenedor_basura:hover{
+    background-color: #E3E3E3;
+  }
+
+  .editar_cantidad {
+    display: flex;
+    justify-content: space-evenly;
+    width: 80px;
+    height: 32px;
+    border: 2px solid #000;
+    border-radius: 8px;
+    align-items: center;
+    border-color: #3A3A3A;
+  }
+
+  .cantidad {
+    border: none;
+    background: none;
+    padding: 0 5px;
+  }
+
+  .cantidad:hover{
+    background-color: #E3E3E3;
+  }
+
+  .checkbox {
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border: 2px solid #8c8c8c;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .checkbox:checked::after {
+    content: '\2714';
+    position: absolute;
+    color: #fff;
+  }
+
+  .checkbox:hover {
+    border-color: #616161; 
+  }
+
+  .checkbox:checked {
+    background-color: #000;
+    border-color: #000; 
+  }
+
+  .boton_enviar_carrito {
+    border-radius: 8px;
+    border-color: transparent;
+    background-color: #000;
+    color: #fff;
+    font-weight: 600;
+    width: 288px;
+    height: 48px;
+    margin-right: 15px;
+  }
+
+  .boton_enviar_carrito:hover {
+    background-color: #616161;
+  }
+
+  /* FIN del diseño del cuadro individual por producto */
+
+  /* INICIO del diseño del cuadro ¿Dónde vas a comer? */
+
+  .contenedor_opcion_comer{
+    margin-left: 30px;
+    margin-bottom: 20px;
+  }
+
+  .pregunta {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 25px;
+  }
+
+  .opcion_comer{
+    padding-top: 15px;
+  }
+
+  .precio_opcion {
+    font-size: 14px;
+    float: right;
+  }
+
+  .texto_opcion {
+    font-size: 15px;
+  }
+
+  /* FIN del diseño del cuadro ¿Dónde vas a comer? */
+
+/* FIN del diseño de la página de carrito */
+
+/* INICIO del diseño del Footer */
+
+  /* Agregamos un color de fondo al Footer */
+
+  .fondo_footer{
+    background-color: #D9D9D9;
+  }
+
+  /* Le damos estilo a los iconos de las redes sociales */
+
+  .icono_redes_sociales{
+    margin-left: 30px;
+    margin-right: 30px;
+    width: 24px;
+    height: 24px;
+  }
+
+  /* Damos distancia con el borde final de la pagina*/
+
+  .copyright_autor{
+    margin-bottom: 10px;
+  }
+
+/* FIN del diseño del footer */
+
+/* INICIO del diseño del login */
+
+  .pregunta_login{
+
+    font-size: 32px;
+    color: #3A3A3A;
+    font-weight: bold;
+  }
+
+  .beneficios_login{
+    font-size: 16px;
+    color: #3A3A3A;
+  }
+
+  .enlace_registro{
+    text-decoration: underline;
+  }
+
+  .olvidar_contraseña{
+    font-weight: bold;
+    text-decoration: underline;
+  }
+
+  .iniciar_sesion{
+    border-color: transparent;
+    border-radius: 8px;
+    background-color: #000;
+    color: #fff;
+    font-weight: 600;
+    width: 352px;
+    height: 48px;
+    margin-bottom: 20px;
+  }
+
+  .iniciar_sesion:hover {
+    background-color: #616161;
+  }
+
+  .contenedor_informacion_login{
+    border: 2px solid #616161; 
+    border-radius: 8px;
+    margin-top: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 352px;
+    height: 56px;
+  }
+
+  .contenedor_informacion_login:hover{
+    border-color:#000;
+  }
+
+  .boton_rojo{
+    background-color: #df0000;
+    border-color: transparent;
+    color: #fff;
+    border-radius: 8px;
+    font-weight: 600;
+    width: 288px;
+    height: 48px;
+    margin-bottom: 20px;
+    margin-right: 15px;
+  }
+
+  .boton_rojo:hover{
+    background-color: #A51716;
+  }
+
+  .pregunta_user {
+    padding-bottom: 25px;
+    padding-top: 10px;
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+/* FIN del diseño del login */
+
+/* INICIO del diseño de los pedidos por cliente */
+
+  .medidas_container_pedidos {
+    border-radius: 10px; 
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .container_pedidos {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .pedido_individual {
+    border: 1px solid #d9534f;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+    margin-top: 20px;
+  }
+
+  .info_pedido {
+    color: #df0000;
+    margin: 0;
+  }
+
+/* FIN del diseño de los pedidos por cliente */
+
+/* INICIO del diseño de la administración de productos */
+
+  .contenedor_producto_admin{
+    align-content: center;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .card {
+    color: #fff;
+    margin-bottom: 20px;
+  }
+
+  .card-title-productos {
+    color: #df0000;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+
+  .card-text {
+    color: #3a3a3a;
+    font-size: 14px;
+  }
+
+/* FIN del diseño de la administración de productos */
+
+/* INICIO del diseño de cada pedido */
+
+  .card-title-pedidos {
+    color: #df0000;
+    margin-bottom: 20px;
+    font-size: 20px;
+  }
+
+  .pedido_individual {
+    background-color: #f8f9fa;
+    border: 1px solid #dc3545;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 8px;
+  }
+
+  .info_pedido {
+    margin: 5px 0;
+  }
+
+  .boton_rojo_pedidos{
+
+    background-color: #df0000;
+    border-color: transparent;
+    color: #fff;
+    border-radius: 8px;
+    font-weight: 600;
+    width: 250px;
+    height: 48px;
+    margin-bottom: 20px;
+    margin-right: 15px;
+  }
+
+  .boton_rojo_pedidos:hover{
+    background-color: #A51716;
+  }
+
+  .boton_negro_pedidos{
+    border-radius: 8px;
+    border-color: transparent;
+    background-color: #000;
+    color: #fff;
+    font-weight: 600;
+    width: 250px;
+    height: 48px;
+    margin-right: 15px;
+    margin-bottom: 20px;
+  }
+
+  .boton_negro_pedidos:hover{
+    background-color: #616161;
+  }
+
+/* FIN del diseño de cada pedido */
+
+/* INICIO del diseño de cada mensaje */
+
+  .mensaje_error{
+    color: #df0000;
+  }
+
+  .mensaje_acierto{
+    color: #008000;
+  }
+
+/* FIN del diseño de cada mensaje */
