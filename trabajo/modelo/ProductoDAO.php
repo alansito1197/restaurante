@@ -108,14 +108,14 @@
         }
         
         public function agregarProducto($usuario_id, $categoria_producto, $nombre, $sabor, $calorias, $precio, $disponibilidad, $stock, $ingredientes, $destacado, $imagen, $valoracion) {
-            
             // Nos conectamos a la base de datos:
             $conexion = DataBase::connect();
-    
+        
             $sql = "INSERT INTO PRODUCTO (id_administrador, id_categoria_producto, nombre, sabor, valor_energetico, precio, disponibilidad, stock, ingredientes, producto_destacado, imagen, valoracion) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        
             $stmt = $conexion->prepare($sql);
+        
             $stmt->bind_param("iisssdssssss", $usuario_id, $categoria_producto, $nombre, $sabor, $calorias, $precio, $disponibilidad, $stock, $ingredientes, $destacado, $imagen, $valoracion);
         
             $resultado = $stmt->execute();
@@ -123,9 +123,10 @@
             $stmt->close();
             
             $conexion->close();
-    
+        
             return $resultado;
         }
+        
 
         public static function actualizarProducto($idProducto, $nombre, $sabor, $valor_energetico, $precio, $disponibilidad, $stock, $ingredientes, $producto_destacado) {
             

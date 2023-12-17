@@ -46,8 +46,8 @@
         
                 // Verifica si se obtuvo un precio y almacena la cookie
                 if ($precioUltimoPedido !== null) {
-                    setcookie('CookieUltimoPedido', $precioUltimoPedido, time() + 3600);
-                    
+
+                    setcookie('CookieUltimoPedido_' . $usuario_id, $precioUltimoPedido, time() + 3600);
                 }
         
                 include 'vistas/header.php';

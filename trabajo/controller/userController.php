@@ -111,6 +111,12 @@
             // Cerraremos la sesión y redirigiremos a la función que comprobará si el usuario se encuentra con sesión activa:
             session_start();
             session_destroy();
+
+            // Elimina la cookie 'CookieUltimoPedido'
+            $usuario_id = $_SESSION['usuario_id'];
+            $precioUltimoPedido = PedidoDAO::precioUltimoPedido($usuario_id);
+            setcookie('CookieUltimoPedido', $precioUltimoPedido, time() - 3600);
+
             header('Location:'.url.'?controller=user&action=login');
             $_SESSION = array();
         }

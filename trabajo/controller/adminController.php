@@ -24,7 +24,13 @@
                 $categoria_producto = $_POST['categoria_producto'];
                 $sabor = $_POST['sabor'];
                 $calorias = $_POST['calorias'];
-                $precio = $_POST['precio'];
+                $precio_sin_editar = $_POST['precio'];
+                // Eliminaremos todos los carácteres que haya introducido el usuario menos números, comas o puntos:
+                $precio_sin_editar = preg_replace("/[^0-9.,]/", "", $precio_sin_editar);
+                // Reemplazaremos la coma por un punto:
+                $precio_sin_editar = str_replace(',', '.', $precio_sin_editar);
+                // Convertiremos el número a decimal:
+                $precio = floatval($precio_sin_editar);
                 $disponibilidad = $_POST['disponibilidad'];
                 $stock = $_POST['stock'];
                 $ingredientes = $_POST['ingredientes'];

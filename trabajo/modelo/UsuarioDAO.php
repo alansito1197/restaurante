@@ -26,6 +26,10 @@
             $stmtCliente->bind_param("s", $email);
             $stmtCliente->execute();
         
+            /* Inicializamos la variable que devolveremos más adelante para que si no encuentra usuarios en la base de datos relacionados con el correo introducido
+            por el usuario no aparezca un error por pantalla */
+            $credencial = null;
+
             // Obtener resultados para cliente
             $resultadoCliente = $stmtCliente->get_result();
         

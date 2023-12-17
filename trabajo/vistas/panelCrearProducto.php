@@ -26,7 +26,7 @@
                   <input type="number" class="contenedor_informacion_login" name="categoria_producto" placeholder="Categoria del producto" required>
                   <input type="text" class="contenedor_informacion_login" name="sabor" placeholder="Sabor" required>
                   <input type="number" class="contenedor_informacion_login" name="calorias" placeholder="Valor energético" required>
-                  <input type="number" class="contenedor_informacion_login" name="precio" placeholder="Precio" required>
+                  <input type="text" class="contenedor_informacion_login" name="precio" placeholder="Precio" required>
                   <input type="text" class="contenedor_informacion_login" name="disponibilidad" placeholder="Disponibilidad" required>
                   <input type="number" class="contenedor_informacion_login" name="stock" placeholder="Stock" required>
                   <input type="text" class="contenedor_informacion_login" name="ingredientes" placeholder="Ingredientes" required>

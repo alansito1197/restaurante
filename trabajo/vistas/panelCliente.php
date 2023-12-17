@@ -17,12 +17,12 @@
       $usuario_id = $_SESSION['usuario_id'];
       $precioUltimoPedido = null;
 
-      if (isset($_COOKIE['CookieUltimoPedido'])) {
-        $precioUltimoPedido = $_COOKIE['CookieUltimoPedido'];
+      if (isset($_COOKIE['CookieUltimoPedido_'.$usuario_id])) {
+        $precioUltimoPedido = $_COOKIE['CookieUltimoPedido_'.$usuario_id];
       }
 
       if ($precioUltimoPedido !== null) {
-        $mensajeUltimoPedido = "Tu último pedido fue de " . number_format($precioUltimoPedido, 2) . "€";
+        $mensajeUltimoPedido = "Tu último pedido fue de ".number_format($precioUltimoPedido, 2)."€";
       } else {
         $mensajeUltimoPedido = "Todavía no has realizado ningún pedido.";
       }
