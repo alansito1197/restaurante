@@ -61,7 +61,7 @@
                 $precioUltimoPedido = PedidoDAO::precioUltimoPedido($usuario_id);
 
                 // Crearemos la cookie almacenando el valor que devuelve el método anterior junto con el ID de usuario para diferenciarlo entre los distintos usuarios de la web:
-                    setcookie('CookieUltimoPedido_' . $usuario_id, $precioUltimoPedido, time() + 3600);
+                setcookie('CookieUltimoPedido_' . $usuario_id, $precioUltimoPedido, time() + 3600);
 
                 // Incluiremos las vistas necesarias:
                 include 'vistas/header.php';

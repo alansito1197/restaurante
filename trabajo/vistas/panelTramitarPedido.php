@@ -21,22 +21,22 @@
             <div class="row">
               <div class="col-sm-6 mb-2">
                 <form action="<?=url.'?controller=producto&action=index'?>" method="POST">
-                  <button class="boton_negro btn-block">Ir a la página principal</button>
+                  <button class="boton_negro">Ir a la página principal</button>
                 </form>
               </div>
               <div class="col-sm-6 mb-2">
                 <form action="<?=url.'?controller=producto&action=productos'?>" method="POST">
-                  <button class="boton_negro btn-block">Empezar otra compra</button>
+                  <button class="boton_negro">Empezar otra compra</button>
                 </form>
               </div>
               <div class="col-sm-6 mb-2">
                 <form action="<?=url.'?controller=pedido&action=mostrarPedidosUsuario'?>" method="POST">
-                  <button class="boton_rojo btn-block">Ver mis pedidos</button>
+                  <button class="boton_rojo">Ver mis pedidos</button>
                 </form>
               </div>
               <div class="col-sm-6 mb-2">
                 <form action="<?=url.'?controller=user&action=comprobarUsuario'?>" method="POST">
-                  <button class="boton_rojo btn-block">Volver a mi panel</button>
+                  <button class="boton_rojo">Volver a mi panel</button>
                 </form>
               </div>
             </div>

@@ -121,11 +121,6 @@
             session_start();
             session_destroy();
 
-            // También eliminaremos la cookie asociada al último pedido que haya realizado el usuario:
-            $usuario_id = $_SESSION['usuario_id'];
-            $precioUltimoPedido = PedidoDAO::precioUltimoPedido($usuario_id);
-            setcookie('cookieUltimoPedido', $precioUltimoPedido, time() -3600);
-
             // Redirigiremos a la función que le mostrará el panel necesario:
             header('Location:'.url.'?controller=user&action=login');
             $_SESSION = array();

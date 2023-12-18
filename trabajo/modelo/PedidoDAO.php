@@ -7,32 +7,38 @@
 
     class PedidoDAO {
 
-        // Crearemos una función para insertar el pedido del usuario:
+        // Crearemos una función para insertar el pedido del usuario en la base de datos:
         public static function insertarPedido($usuario_id, $precioTotalPedido, $fechaPedido, $estadoPedido, $tipoUsuario) {
             
             // Nos conectamos a la base de datos:
             $conexion = DataBase::connect();
 
-            $queryInsertPedido = "INSERT INTO PEDIDO (id_cliente, precio_total, fecha, estado, tipo_usuario) VALUES ($usuario_id, $precioTotalPedido, '$fechaPedido', '$estadoPedido', '$tipoUsuario')";
-            $resultadoInsertPedido = $conexion->query($queryInsertPedido);
+            // Creamos una consulta para insertar el pedido en la base de datos enviándole por parámetro las variables que nos interesa:
+            $insertarPedido = "INSERT INTO PEDIDO (id_cliente, precio_total, fecha, estado, tipo_usuario) VALUES ($usuario_id, $precioTotalPedido, '$fechaPedido', '$estadoPedido', '$tipoUsuario')";
+            
+            // Almacenaremos el resultado del pedido en una variable:
+            $resultadoInsertarPedido = $conexion->query($insertarPedido);
         
-            if ($resultadoInsertPedido) {
+            if ($resultadoInsertarPedido) {
+
+                // Si la consulta se ejecutó correctamente, devolveremos el ID del pedido:
                 return $conexion->insert_id;
-            } else {
-                return false;
             }
         }
 
+        // Crearemos una función para insertar el detalle del pedido en la base de datos:
         public static function insertarDetallePedido($idPedido, $idProducto, $cantidad, $precioUnidad) {
             
             // Nos conectamos a la base de datos:
             $conexion = DataBase::connect();
 
-            $queryInsertDetallePedido = "INSERT INTO DETALLE_PEDIDO (id_pedido, id_producto, cantidad, precio_unidad) VALUES ($idPedido, $idProducto, $cantidad, $precioUnidad)";
-            return $conexion->query($queryInsertDetallePedido);
+            // Crearemos una consulta para insertar el detalle del pedido en la base de datos:
+            $insertarDetallePedido = "INSERT INTO DETALLE_PEDIDO (id_pedido, id_producto, cantidad, precio_unidad) VALUES ($idPedido, $idProducto, $cantidad, $precioUnidad)";
+            
+            // Devolveremos el resultado de la consulta anterior:
+            return $conexion->query($insertarDetallePedido);
         }
         
-
         // Crearemos un método para obtener todos los pedidos de cada usuario:
         public static function obtenerPedidosUsuario($usuario_id) {
 

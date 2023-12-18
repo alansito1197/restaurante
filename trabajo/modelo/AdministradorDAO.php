@@ -10,7 +10,7 @@
             // Nos conectamos a la base de datos:
             $conexion = DataBase::connect();
         
-            // Crear una consulta preparada para evitar inyecciones SQL
+            // Crearemos una consulta para buscar la contraseña del administrador:
             $consulta = $conexion->prepare("SELECT credencial.password FROM credencial WHERE credencial.id_administrador = ?");
             
             // Vincularemos los parámetros:

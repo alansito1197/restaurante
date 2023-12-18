@@ -12,21 +12,26 @@
             // Nos conectamos a la base de datos:
             $conexion = DataBase::connect();
 
+            // Crearemos una consulta para mostrar todos los productos que no sean pizzas:
             $stmt = $conexion->query("SELECT id_producto, id_administrador, id_categoria_producto, nombre, sabor, valor_energetico, precio, disponibilidad, stock, imagen, ingredientes, valoracion, producto_destacado FROM producto WHERE tipo_masa IS NULL");
 
+            // Creamos una variable definiéndola como array para después agregar los productos en ella:
             $productos = [];
 
-            while ($obj = $stmt->fetch_object('Producto')) {
-                $productos[] = $obj;
+            // Utilizaremos un bucle para agregar cada objeto de tipo producto a esta array:
+            while ($objeto = $stmt->fetch_object('Producto')) {
+                $productos[] = $objeto;
             }
 
+            // Crearemos una consulta para mostrar todos los productos que sean pizzas:
             $stmt = $conexion->query("SELECT * FROM producto WHERE tipo_masa IS NOT NULL");
 
-
-            while ($obj = $stmt->fetch_object('Pizza')) {
-                $productos[] = $obj;
+            // Utilizaremos un bucle para agregar cada objeto de tipo producto a esta array:
+            while ($objeto = $stmt->fetch_object('Pizza')) {
+                $productos[] = $objeto;
             }
 
+            // Devolvemos el resultado de la operación:
             return $productos;
         }
 
@@ -49,15 +54,18 @@
             // Nos conectamos a la base de datos:
             $conexion = DataBase::connect();
 
-
+            // Crearemos una variable para guardar solamente los productos que tenemos indicados como destacados:
             $productoDestacado = $conexion->query("SELECT * FROM producto WHERE producto_destacado='Si'");
 
+            // Creamos una variable definiéndola como array para después agregar los productos en ella:
             $productos_destacados = [];
 
+            // Utilizaremos un bucle para agregar cada objeto de tipo producto a esta array:
             while ($obj = $productoDestacado->fetch_object('Producto')) {
                 $productos_destacados[] = $obj;
             }
 
+            // Devolveremos 
             return $productos_destacados;
         }
 

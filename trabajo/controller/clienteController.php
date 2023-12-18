@@ -59,11 +59,13 @@
                         // Llamaremos al método que contacta con la base de datos y actualiza los datos del cliente pasándole por parámetro la información aportada por este:
                         ClienteDAO::actualizarDatosCliente($cliente_id, $nombre, $apellidos, $direccion, $email, $telefono);
 
-                        // Cargaremos nuevamente los datos del cliente por si este quisiera modificar más información:
-                        $cliente = ClienteDAO::getUsuarioById($cliente_id);
+                        
 
                         // Avisaremos al cliente de que hemos podido modificar sus datos:
                         $mensajeAcierto = "¡Los datos se han modificado correctamente!";
+
+                        // Cargaremos nuevamente los datos del cliente por si este quisiera modificar más información:
+                            $cliente = ClienteDAO::getUsuarioById($cliente_id);
 
                         // Incluiremos las vistas necesarias por si deseara modificar otro campo:
                         include 'vistas/header.php';

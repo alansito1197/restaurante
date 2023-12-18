@@ -48,9 +48,9 @@
                     </a>
                     <div class="editar_cantidad">
                       <form action="<?=url.'?controller=producto&action=modificarCantidad'?>" method='post'>
-                        <button type="submit" name='restar_cantidad' class="cantidad cantidad_restar" value=<?=$posicionPedido?>> - </button>
+                        <button type="submit" name='restarCantidad' class="cantidad cantidad_restar" value=<?=$posicionPedido?>> - </button>
                         <span><?= $pedido->getCantidad()?></span>
-                        <button type="submit" name='sumar_cantidad' class="cantidad cantidad_sumar" value=<?=$posicionPedido?>> + </button>
+                        <button type="submit" name='sumarCantidad' class="cantidad cantidad_sumar" value=<?=$posicionPedido?>> + </button>
                       </form>
                     </div>
                   </div>
@@ -59,17 +59,17 @@
                 <form action="<?=url.'?controller=producto&action=personalizarPedido'?>" method='post'>
                   <h3 class="pregunta">Personaliza tu pedido</h3>
                   <div class="opcion_comer mb-2">
-                    <input class="checkbox me-2 float-start" type="checkbox" name="opcion_comer[]" value="causa_benefica">
+                    <input class="checkbox me-2 float-start" type="checkbox" name="opcionComer[]" value="causa_benefica">
                     <label for="tienda" class="texto_opcion mb-0">Donar para una causa benéfica</label>
                     <p class="precio_opcion mb-0">1€</p>
                   </div>
                   <div class="opcion_comer mb-2">
-                    <input class="checkbox me-2 float-start" type="checkbox" name="opcion_comer[]" value="xxl">
+                    <input class="checkbox me-2 float-start" type="checkbox" name="opcionComer[]" value="xxl">
                     <label for="llevar" class="texto_opcion mb-0">Hacer mi producto XXL (50% más grande)</label>
                     <p class="precio_opcion mb-0">+ 2€</p>
                   </div>
                   <div class="opcion_comer mb-2">
-                    <input class="checkbox me-2 float-start" type="checkbox" name="opcion_comer[]" value="sin_personalizacion">
+                    <input class="checkbox me-2 float-start" type="checkbox" name="opcionComer[]" value="sin_personalizacion">
                     <label for="casa" class="texto_opcion mb-0">No deseo personalizar mi pedido</label>
                     <p class="precio_opcion mb-0">Gratis</p>
                   </div>
@@ -88,22 +88,22 @@
                 <form action="<?=url.'?controller=producto&action=lugarConsumo'?>" method='post'>
                   <h3 class="pregunta">¿Dónde vas a comer?</h3>
                   <div class="opcion_comer mb-2">
-                    <input type="radio" class="checkbox float-start me-2" type="checkbox" name="opcion_comer" value="Gratis">
+                    <input type="radio" class="checkbox float-start me-2" type="checkbox" name="opcionComer" value="Gratis">
                     <label for="tienda" class="texto_opcion mb-0">Consumir en la tienda</label>
                     <p class="precio_opcion mb-0">Gratis</p>
                   </div>
                   <div class="opcion_comer mb-2">
-                    <input type="radio" class="checkbox float-start me-2" type="checkbox" name="opcion_comer" value="0,25€">
+                    <input type="radio" class="checkbox float-start me-2" type="checkbox" name="opcionComer" value="0,25€">
                     <label for="llevar" class="texto_opcion mb-0">El pedido es para llevar</label>
                     <p class="precio_opcion mb-0">+0,25€</p>
                   </div>
                   <div class="opcion_comer mb-2">
-                    <input type="radio" class="checkbox float-start me-2" type="checkbox" name="opcion_comer" value="5,25€">
+                    <input type="radio" class="checkbox float-start me-2" type="checkbox" name="opcionComer" value="5,25€">
                     <label for="casa" class="texto_opcion mb-0">Tráemelo a casa</label>
                     <p class="precio_opcion mb-0">+5,25€</p>
                   </div>
                   <div class="text-center mt-3">
-                    <button type='submit' class="boton_enviar_carrito" name='seleccionar_donde_consumir'> Enviar </button>
+                    <button type='submit' class="boton_enviar_carrito" name='seleccionarDondeConsumir'> Enviar </button>
                   </div>
                 </form>
               </div>

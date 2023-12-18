@@ -35,9 +35,9 @@
         // Crearemos una función para obtener la opción de dónde desea consumir el pedido el cliente:
         public static function obtenerOpcionComer() {
 
-            if (isset($_POST['seleccionar_donde_consumir'], $_POST['opcion_comer'])) {
+            if (isset($_POST['seleccionarDondeConsumir'], $_POST['opcionComer'])) {
 
-                return $_POST['opcion_comer'];
+                return $_POST['opcionComer'];
             }
         
             return "Por definir";

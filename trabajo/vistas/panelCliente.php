@@ -38,36 +38,36 @@
             <div class="row">
               <div class="col-sm-6 mb-2">
                 <form action="<?=url.'?controller=producto&action=index'?>" method="POST">
-                  <button class="boton_negro btn-block">Ir a la página principal</button>
+                  <button class="boton_negro">Ir a la página principal</button>
                 </form>
               </div>
               <div class="col-sm-6 mb-2">
                 <form action="<?=url.'?controller=producto&action=productos'?>" method="POST">
-                  <button class="boton_negro btn-block">Empezar mi compra</button>
+                  <button class="boton_negro">Empezar mi compra</button>
                 </form>
               </div>
             </div>
             <div class="row">
               <div class="col-sm-6 mb-2">
                 <form action="<?=url.'?controller=cliente&action=solicitudModificacionCuenta'?>" method="POST">
-                  <button class="boton_rojo btn-block">Modificar mi cuenta</button>
+                  <button class="boton_rojo">Modificar mi cuenta</button>
                 </form>
               </div>
               <div class="col-sm-6 mb-2">
                 <form action="<?=url.'?controller=pedido&action=mostrarPedidosUsuario'?>" method="POST">
-                  <button class="boton_rojo btn-block">Ver mis pedidos</button>
+                  <button class="boton_rojo">Ver mis pedidos</button>
                 </form>
               </div>
             </div>
             <div class="row">
               <div class="col-sm-6 mb-2">
                 <form action="<?=url.'?controller=user&action=logout'?>" method="POST">
-                  <button class="boton_rojo btn-block">Cerrar sesión</button>
+                  <button class="boton_rojo">Cerrar sesión</button>
                 </form>
               </div>
               <div class="col-sm-6 mb-2">
                 <form action="<?=url.'?controller=cliente&action=solicitudEliminacionCuenta'?>" method="POST">
-                  <button class="boton_rojo btn-block">Eliminar mi cuenta</button>
+                  <button class="boton_rojo">Eliminar mi cuenta</button>
                 </form>
               </div>
             </div>
