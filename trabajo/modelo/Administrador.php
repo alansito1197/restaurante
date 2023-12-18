@@ -15,7 +15,7 @@
                         return $this->id_administrador;
                 }
 
-                public function setIdCliente($id_administrador): self{
+                public function setIdCliente($id_administrador){
                         $this->id_administrador = $id_administrador;
                         return $this;
                 }
@@ -24,7 +24,7 @@
                         return $this->nombre;
                 }
 
-                public function setNombre($nombre): self{
+                public function setNombre($nombre){
                         $this->nombre = $nombre;
                         return $this;
                 }
@@ -33,7 +33,7 @@
                         return $this->apellidos;
                 }
 
-                public function setApellidos($apellidos): self{
+                public function setApellidos($apellidos){
                         $this->apellidos = $apellidos;
                         return $this;
                 }
@@ -42,7 +42,7 @@
                         return $this->email;
                 }
 
-                public function setEmail($email): self{
+                public function setEmail($email){
                         $this->email = $email;
                         return $this;
                 }
@@ -51,7 +51,7 @@
                         return $this->salario;
                 }
 
-                public function setSalario($salario): self{
+                public function setSalario($salario){
                         $this->salario = $salario;
                         return $this;
                 }

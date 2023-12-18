@@ -32,12 +32,12 @@
           <div class="row">
             <div class="col-sm-6">
               <form action="<?=url.'?controller=producto&action=productos'?>" method="POST">
-                <button class="boton_negro btn-block">Realizar otra compra</button>
+                <button class="boton_negro">Realizar otra compra</button>
               </form>
             </div>
             <div class="col-sm-6">
               <form action="<?=url.'?controller=user&action=comprobarUsuario'?>" method="POST">
-                <button class="boton_rojo btn-block">Volver a mi panel</button>
+                <button class="boton_rojo">Volver a mi panel</button>
               </form>
             </div>
           </div>

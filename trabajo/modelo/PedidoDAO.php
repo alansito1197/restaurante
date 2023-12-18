@@ -7,6 +7,7 @@
 
     class PedidoDAO {
 
+        // Crearemos una función para insertar el pedido del usuario:
         public static function insertarPedido($usuario_id, $precioTotalPedido, $fechaPedido, $estadoPedido, $tipoUsuario) {
             
             // Nos conectamos a la base de datos:
@@ -30,6 +31,7 @@
             $queryInsertDetallePedido = "INSERT INTO DETALLE_PEDIDO (id_pedido, id_producto, cantidad, precio_unidad) VALUES ($idPedido, $idProducto, $cantidad, $precioUnidad)";
             return $conexion->query($queryInsertDetallePedido);
         }
+        
 
         // Crearemos un método para obtener todos los pedidos de cada usuario:
         public static function obtenerPedidosUsuario($usuario_id) {
@@ -37,34 +39,43 @@
             // Nos conectamos a la base de datos:
             $conexion = DataBase::connect();
         
+            // Crearemos una query para obtener todos los datos del pedido:
             $busqueda_pedidos = "SELECT * FROM PEDIDO WHERE id_cliente = ? AND tipo_usuario = ?";
             
+            // Preparamos la consulta:
             $stmt = $conexion->prepare($busqueda_pedidos);
+
+            // Vinculamos los parámetros:
             $stmt->bind_param("is", $usuario_id, $_SESSION['tipo_usuario']);
+
+            // Ejecutaremos la consulta:
             $stmt->execute();
         
-            $result = $stmt->get_result();
+            // Guardaremos en una variable el resultado de la consulta:
+            $resultado = $stmt->get_result();
         
+            // Definiremos como array la variable donde almacenaremos cada pedido del usuario:
             $pedidos = array();
         
-            while ($obj = $result->fetch_object('PedidoUsuario')) {
-                $pedidos[] = $obj;
+            while ($objeto = $resultado->fetch_object('PedidoUsuario')) {
+                $pedidos[] = $objeto;
             }
         
+            // Cerraremos la conexión a la base de datos y la consulta:
             $stmt->close();
             $conexion->close();
         
+            // Devolveremos el resultado de la consulta:
             return $pedidos;
         }
         
-
         public static function getAllPedidos() {
 
             // Nos conectamos a la base de datos:
             $conexion = DataBase::connect();
 
-            $sql = "SELECT * FROM PEDIDO";
-            $resultado = $conexion->query($sql);
+            $seleccionarTodosPedidos = "SELECT * FROM PEDIDO";
+            $resultado = $conexion->query($seleccionarTodosPedidos);
 
             $pedidos = array();
 
@@ -72,11 +83,14 @@
                 $pedidos[] = $fila;
             }
 
-            // Almacena los productos en una variable de sesión
+            // Almacenaremos los productos en una variable de sesión:
             $_SESSION['pedidos'] = $pedidos;
 
+            // Cerraremos la conexión a la base de datos y la consulta:
             $conexion->close();
+            $resultado->close();
 
+            // Devolveremos el resultado de la consulta:
             return $pedidos;
         }
 
@@ -85,21 +99,21 @@
             // Nos conectamos a la base de datos:
             $conexion = DataBase::connect();
 
-            $query = "SELECT precio_total FROM PEDIDO WHERE id_cliente = ? AND tipo_usuario = ? ORDER BY id_pedido DESC LIMIT 1";
+            $busqueda_UltimoPedido = "SELECT precio_total FROM PEDIDO WHERE id_cliente = ? AND tipo_usuario = ? ORDER BY id_pedido DESC LIMIT 1";
             
-            $stmt = $conexion->prepare($query);
+            $stmt = $conexion->prepare($busqueda_UltimoPedido);
             $stmt->bind_param("is", $usuario_id, $_SESSION['tipo_usuario']);
             $stmt->execute();
         
-            $result = $stmt->get_result();
+            // Guardaremos en una variable el resultado de la consulta:
+            $resultado = $stmt->get_result();
         
-            if ($result->num_rows > 0) {
-                $row = $result->fetch_object();
+            if ($resultado->num_rows > 0) {
+
+                $row = $resultado->fetch_object();
                 $precio_total = $row->precio_total;
+                // Devolveremos el resultado de la consulta:
                 return $precio_total;
-            } else {
-                echo "No se encontraron pedidos.";
-                return null;
             }  
         }
 
@@ -108,17 +122,19 @@
             // Nos conectamos a la base de datos:
             $conexion = DataBase::connect();
         
-            // Eliminar detalles del pedido y luego el pedido
+            // Eliminaremos los detalles del pedido:
             $consultaDetalles = $conexion->prepare("DELETE FROM DETALLE_PEDIDO WHERE id_pedido = ?");
             $consultaDetalles->bind_param("i", $idPedido);
             $consultaDetalles->execute();
             $consultaDetalles->close();
         
+            // Eliminaremos la entrada del pedido:
             $consultaPedido = $conexion->prepare("DELETE FROM PEDIDO WHERE id_pedido = ?");
             $consultaPedido->bind_param("i", $idPedido);
             $consultaPedido->execute();
             $consultaPedido->close();
         
+            // Cerraremos la conexión a la base de datos:
             $conexion->close();
         }
     }

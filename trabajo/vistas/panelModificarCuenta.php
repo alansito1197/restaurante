@@ -29,14 +29,14 @@
                   <input type="email" class="contenedor_informacion_login" name="email" value="<?=$cliente->getEmail() ?>">
                   <input type="number" class="contenedor_informacion_login" name="telefono" value="<?=$cliente->getTelefono() ?>">
                   <input type="password" class="contenedor_informacion_login" required placeholder="Contraseña para confirmar cambios" name="password">              
-                  <button type="submit" class="iniciar_sesion mb-4" name="modificar_cliente">¡Modifícame!</button>
+                  <button type="submit" class="iniciar_sesion mb-4" name="modificarCliente">¡Modifícame!</button>
                 </form>
               </div>
-              <?php if (isset($mensaje_acierto) && !empty($mensaje_acierto)): ?>
-                <p class="mensaje_acierto"><?php echo $mensaje_acierto; ?></p>
+              <?php if (isset($mensajeAcierto) && !empty($mensajeAcierto)): ?>
+                <p class="mensaje_acierto"><?php echo $mensajeAcierto; ?></p>
               <?php endif; ?>
-              <?php if (isset($mensaje_error) && !empty($mensaje_error)): ?>
-                <p class="mensaje_error"><?php echo $mensaje_error; ?></p>
+              <?php if (isset($mensajeError) && !empty($mensajeError)): ?>
+                <p class="mensaje_error"><?php echo $mensajeError; ?></p>
               <?php endif; ?>
             </div>
           </div>

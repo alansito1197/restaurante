@@ -12,7 +12,7 @@
     <link href="assets/css/style_css.css" rel="stylesheet">
   </head>
   <body>
-    <?php
+  <?php
       include_once 'modelo/PedidoDAO.php';
       $usuario_id = $_SESSION['usuario_id'];
       $precioUltimoPedido = null;

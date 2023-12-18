@@ -15,7 +15,7 @@
                         return $this->producto;
                 }
 
-                public function setProducto($producto): self{
+                public function setProducto($producto){
                         $this->producto = $producto;
                         return $this;
                 }
@@ -23,7 +23,7 @@
                         return $this->id_pedido;
                 }
 
-                public function setIdPedido($id_pedido): self{
+                public function setIdPedido($id_pedido){
                         $this->id_pedido = $id_pedido;
                         return $this;
                 }
@@ -32,7 +32,7 @@
                         return $this->cantidad;
                 }
 
-                public function setCantidad($cantidad): self{
+                public function setCantidad($cantidad){
                         $this->cantidad = $cantidad;
                         return $this;
                 }
@@ -41,7 +41,7 @@
                         return $this->opciones;
                 }
 
-                public function setOpciones($opciones): self{
+                public function setOpciones($opciones){
                         $this->opciones = $opciones;
                         return $this;
                 }

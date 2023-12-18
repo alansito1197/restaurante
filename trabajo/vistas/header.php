@@ -24,11 +24,11 @@
                             <?php
                             
                                 // Verificamos si la variable existe, es un array y su valor es 0 antes de contar los productos en el carrito:
-                                $cantidad_productos = isset($_SESSION['productosSeleccionados']) ? count($_SESSION['productosSeleccionados']) : 0;
+                                $cantidadProductos = isset($_SESSION['productosSeleccionados']) ? count($_SESSION['productosSeleccionados']) : 0;
 
                                 // Si hay productos en el carrito, mostramos la cantidad en el ícono del carrito:
-                                if ($cantidad_productos > 0) {
-                                    echo "<span>$cantidad_productos</span>";
+                                if ($cantidadProductos > 0) {
+                                    echo "<span>$cantidadProductos</span>";
                                 }
                             ?>
                         </a>

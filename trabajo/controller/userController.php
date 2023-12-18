@@ -5,118 +5,128 @@
     include_once 'config/dataBase.php';
     include_once 'modelo/usuarioDAO.php';
 
-    class userController{
-        
-        // Crearemos una función que se encargue de comprobar si el usuario ha iniciado sesión, con el objetivo de redirigirlo a un panel u a otro:
+    class userController {
+
+        // Crearemos una función que se encargue de controlar el inicio de sesión del usuario, con el objetivo de redirigirlo a un panel u otro:
         public function login(){
-            
-            // Verificamos si existen las variables de inicio de sesión
-            if (!isset($_SESSION['usuario_id']) || !isset($_SESSION['usuario_nombre']) || !isset($_SESSION['password'])) {
-                
-                // Redirigimos al usuario a la página de iniciar sesión si no existen las variables de inicio de sesión
+
+            // Verificamos si no existen las variables de inicio de sesión que se crean al iniciar sesión:
+            if (!isset($_SESSION['usuario_id']) || !isset($_SESSION['password']) || !isset($_SESSION['usuario_nombre']) || !isset($_SESSION['tipo_usuario'])) {
+
+                // Redirigiremos al usuario a la página de inicio de sesión en el caso de que estas no existan:
                 include 'vistas/header.php';
                 include 'vistas/panelInicioSesion.php';
                 include 'vistas/footer.php';
                 exit();
-
+            
             } else {
 
-                // Verificamos el tipo de usuario
-                if ($_SESSION['tipo_usuario'] == 'administrador') {
+                // En el caso de que las variables de inicio de sesión existan, comprobaremos el tipo de usuario que es:
+                if ($_SESSION['tipo_usuario'] == 'administrador'){
 
-                    // Si el usuario es un administrador, lo redirigimos al panel de administrador
+                    // Si el usuario es un administrador, le mostraremos los paneles de administrador:
                     include 'vistas/header.php';
                     include 'vistas/panelAdministrador.php';
                     include 'vistas/footer.php';
 
-                } elseif ($_SESSION['tipo_usuario'] == 'cliente') {
-                    // Si el usuario es un cliente, lo redirigimos al panel de cliente
+                } elseif ($_SESSION['tipo_usuario'] == 'cliente'){
+
+                    // Si el usuario es un cliente, le mostaremos los paneles de cliente:
                     include 'vistas/header.php';
                     include 'vistas/panelCliente.php';
                     include 'vistas/footer.php';
-                } 
+                }
             }
         }
 
-        // Crearemos una función que se encargue de gestionar el inicio de sesión de un usuario a nuestra web:
-        public function comprobarUsuario() {
+        // Crearemos una función que se encargue de gestionar cuando un usuario rellena el formulario de inicio de sesión:
+        public function comprobarUsuario(){
 
-            if (isset($_SESSION['usuario_id']) && isset($_SESSION['usuario_nombre']) && isset($_SESSION['password']) && isset($_SESSION['tipo_usuario'])) {
-                
-                // El usuario ya ha iniciado sesión, redirigimos al panel correspondiente
+            if(isset($_SESSION['usuario_id']) && ($_SESSION['usuario_nombre']) && ($_SESSION['password']) && ($_SESSION['tipo_usuario'])){
+
+                // Si el usuario ha iniciado sesión previamente, redirigimos al panel correspondiente:
                 include 'vistas/header.php';
-                
-                if ($_SESSION['tipo_usuario'] == 'administrador') {
-                    
+
+                if ($_SESSION['tipo_usuario'] == 'administrador'){
+
                     include 'vistas/panelAdministrador.php';
                 
-                } elseif ($_SESSION['tipo_usuario'] == 'cliente') {
-            
+                } elseif ($_SESSION['tipo_usuario'] == 'cliente'){
+
                     include 'vistas/panelCliente.php';
                 }
-        
+
                 include 'vistas/footer.php';
             
             } else {
 
-                if (!empty($_POST['usuario']) && !empty($_POST['password'])) {
-        
+                if (!empty($_POST['usuario']) && !empty($_POST['password'])){
+
+                    // Si el usuario no ha iniciado sesión previamente y ha rellenado el formulario de inicio de sesión, guardaremos su información en variables:
                     $email = $_POST['usuario'];
                     $password = $_POST['password'];
-        
+
+                    // Crearemos una nueva instancia:
                     $usuarioDAO = new UsuarioDAO();
+
+                    // Guardaremos en una variable la llamada al método que busca si el email introducido ya se encuentra en la base de datos:
                     $credencial = $usuarioDAO->getBuscarUsuario($email);
-        
-                    if ($credencial !== null) {
-        
+
+                    if ($credencial !== null){
+
+                        // Si se encuentra a un usuario con el email introducido en la base de datos, continuamos:
+                        
                         if ($password == $credencial->password) {
-        
+
+                            /* Si la contraseña introducida es igual al campo llamado password de nuestro usuario encontrado:
+                            Iniciamos la sesión, guardamos en variables de sesión la información que nos interesa y lo redirigimos a la función
+                            que le mostrará su panel */
                             session_start();
                             $_SESSION['usuario_id'] = $credencial->ID;
-                            $_SESSION['tipo_usuario'] = $credencial->tipo_usuario;
                             $_SESSION['usuario_nombre'] = $email;
+                            $_SESSION['tipo_usuario'] = $credencial->tipo_usuario;
                             $_SESSION['password'] = $password;
                             header('Location:'.url.'?controller=user&action=login');
                             exit();
-                            
+                        
                         } else {
-        
-                            // Mostrar mensaje de contraseña incorrecta
-                            $mensaje_error = "Contraseña incorrecta.";
+
+                            // Si la contraseña es incorrecta, mostraremos un mensaje de error:
+                            $mensajeError = "Contraseña incorrecta.";
                         }
-        
+
                     } else {
-        
-                        // Mostrar mensaje de usuario no encontrado
-                        $mensaje_error = "Usuario no encontrado.";
+
+                        // Si no encontramos un usuario, mostraremos un mensaje de error:
+                        $mensajeError = "Usuario no encontrado.";
                     }
-        
+
                 } else {
-        
-                    // Mostrar mensaje de formulario incompleto
-                    $mensaje_error = "Por favor, completa todos los campos.";
+
+                    // Si el usuario no ha rellenado todo el formulario, mostraremos un mensaje de error:
+                    $mensajeError = "Por favor, completa todos los campos.";
                 }
-        
-               // Mostrar el formulario con el mensaje de error
+
+                // Incluiremos las vistas con el mensaje de error:
                 include 'vistas/header.php';
                 include 'vistas/panelInicioSesion.php';
                 include 'vistas/footer.php';
             }
         }
-        
 
         // Crearemos una función cuyo objetivo sea cerrar la sesión actual del usuario:
         public function logout(){
 
-            // Cerraremos la sesión y redirigiremos a la función que comprobará si el usuario se encuentra con sesión activa:
+            // Borraremos las variables de sesión:
             session_start();
             session_destroy();
 
-            // Elimina la cookie 'CookieUltimoPedido'
+            // También eliminaremos la cookie asociada al último pedido que haya realizado el usuario:
             $usuario_id = $_SESSION['usuario_id'];
             $precioUltimoPedido = PedidoDAO::precioUltimoPedido($usuario_id);
-            setcookie('CookieUltimoPedido', $precioUltimoPedido, time() - 3600);
+            setcookie('cookieUltimoPedido', $precioUltimoPedido, time() -3600);
 
+            // Redirigiremos a la función que le mostrará el panel necesario:
             header('Location:'.url.'?controller=user&action=login');
             $_SESSION = array();
         }

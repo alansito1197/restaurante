@@ -2,7 +2,6 @@
 
     include_once 'config/parameters.php';
     include_once 'controller/productoController.php';
-    include_once 'controller/categoriaController.php';
     include_once 'controller/userController.php';
     include_once 'controller/adminController.php';
     include_once 'controller/clienteController.php';

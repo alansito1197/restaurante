@@ -26,8 +26,8 @@
                 <p class="olvidar_contraseña pb-2 pt-1">¿Olvidaste tu contraseña?</p>
                 <button type="submit" class="iniciar_sesion">Iniciar sesión</button>
               </form>
-              <?php if (isset($mensaje_error) && !empty($mensaje_error)): ?>
-                <p class="mensaje_error"><?php echo $mensaje_error; ?></p>
+              <?php if (isset($mensajeError) && !empty($mensajeError)): ?>
+                <p class="mensaje_error"><?php echo $mensajeError; ?></p>
               <?php endif; ?>
             </div>
           </div>

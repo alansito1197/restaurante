@@ -24,21 +24,21 @@
                 <form action="<?= url.'?controller=admin&action=actualizarProductoSeleccionado'?>" method="POST">
                   <input type="text" class="contenedor_informacion_login" name="nombre" value="<?=$productoActual->getNombre() ?>">
                   <input type="text" class="contenedor_informacion_login" name="sabor" value="<?=$productoActual->getSabor() ?>">
-                  <input type="number" class="contenedor_informacion_login"  name="valor_energetico" value="<?=$productoActual->getValorEnergetico() ?>">
+                  <input type="number" class="contenedor_informacion_login"  name="valorEnergetico" value="<?=$productoActual->getValorEnergetico() ?>">
                   <input type="number" class="contenedor_informacion_login" name="precio" value="<?=$productoActual->getPrecio() ?>">
                   <input type="text" class="contenedor_informacion_login" name="disponibilidad" value="<?=$productoActual->getDisponibilidad() ?>">
                   <input type="number" class="contenedor_informacion_login" name="stock" value="<?=$productoActual->getStock() ?>">
                   <input type="text" class="contenedor_informacion_login" name="ingredientes" value="<?=$productoActual->getIngredientes() ?>">
-                  <input type="text" class="contenedor_informacion_login" name="producto_destacado" value="<?=$productoActual->getProductoDestacado() ?>">
+                  <input type="text" class="contenedor_informacion_login" name="productoDestacado" value="<?=$productoActual->getProductoDestacado() ?>">
                   <input type="password" class="contenedor_informacion_login" required placeholder="Contraseña para confirmar cambios" name="password">              
-                  <button type="submit" class="iniciar_sesion mb-4" name="modificar_producto">Modificar producto</button>
+                  <button type="submit" class="iniciar_sesion mb-4" name="modificarProducto">Modificar producto</button>
                 </form>
               </div>
-              <?php if (isset($mensaje_acierto) && !empty($mensaje_acierto)): ?>
-                <p class="mensaje_acierto"><?php echo $mensaje_acierto; ?></p>
+              <?php if (isset($mensajeAcierto) && !empty($mensajeAcierto)): ?>
+                <p class="mensaje_acierto"><?php echo $mensajeAcierto; ?></p>
               <?php endif; ?>
-              <?php if (isset($mensaje_error) && !empty($mensaje_error)): ?>
-                <p class="mensaje_error"><?php echo $mensaje_error; ?></p>
+              <?php if (isset($mensajeError) && !empty($mensajeError)): ?>
+                <p class="mensaje_error"><?php echo $mensajeError; ?></p>
               <?php endif; ?>
             </div>
           </div>

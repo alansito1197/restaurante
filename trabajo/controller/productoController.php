@@ -2,6 +2,7 @@
 
     include_once 'config/dataBase.php';
     include_once 'modelo/ProductoDAO.php';
+    include_once 'modelo/CategoriaDAO.php';
     include_once 'utils/calculadoraPrecios.php';
 
     class productoController {
@@ -41,7 +42,7 @@
             $producto_id = $_POST['id_producto'];
         
             // Crearemos una variable que nos ayudará a verificar si el producto ya se encontraba en el carrito
-            $en_carrito = false;
+            $enCarrito = false;
         
             // Mediante un bucle, buscaremos si el producto que intentamos añadir ya se encontraba previamente en él:
             foreach ($_SESSION['productosSeleccionados'] as $pedidoSerialized) {
@@ -50,12 +51,12 @@
                 if ($pedido->getProducto()->getIdProducto() == $producto_id) {
 
                     // En el caso de que el producto ya se encontrase previamente en el carrito, la variable pasaría a ser cierta:
-                    $en_carrito = true;
+                    $enCarrito = true;
                     break;
                 }
             }
         
-            if ($en_carrito) {
+            if ($enCarrito) {
 
                 // Si el producto ya está en el carrito, no se agregará a él, sino que redirigiremos a la página de productos:
                 header('Location:'.url.'?controller=producto&action=productos');
@@ -158,29 +159,25 @@
                     // Deserializamos el pedido
                     $pedido = unserialize($_SESSION['productosSeleccionados'][$posicionPedido]);
         
-                    // Verificamos si el objeto es válido;
-                    if ($pedido instanceof Pedido) {
+                    // Si la cantidad es 1, eliminamos el producto del carrito
+                    if ($pedido->getCantidad() == 1) {
         
-                        // Si la cantidad es 1, eliminamos el producto del carrito
-                        if ($pedido->getCantidad() == 1) {
+                        unset($_SESSION['productosSeleccionados'][$posicionPedido]);
         
-                            unset($_SESSION['productosSeleccionados'][$posicionPedido]);
+                        // Verificamos si el carrito está vacío y redirigimos a la vista correspondiente:
+                        if (empty($_SESSION['productosSeleccionados'])) {
         
-                            // Verificamos si el carrito está vacío y redirigimos a la vista correspondiente:
-                            if (empty($_SESSION['productosSeleccionados'])) {
-        
-                                header('Location:'.url.'?controller=producto&action=carrito');
-                                exit();
-                            }
-        
-                        } else {
-        
-                            // Actualizamos la cantidad restándole 1:
-                            $pedido->setCantidad($pedido->getCantidad() - 1);
-        
-                            // Volvemos a serializar y guardamos en la sesión
-                            $_SESSION['productosSeleccionados'][$posicionPedido] = serialize($pedido);
+                            header('Location:'.url.'?controller=producto&action=carrito');
+                            exit();
                         }
+        
+                    } else {
+        
+                        // Actualizamos la cantidad restándole 1:
+                        $pedido->setCantidad($pedido->getCantidad() - 1);
+        
+                        // Volvemos a serializar y guardamos en la sesión
+                        $_SESSION['productosSeleccionados'][$posicionPedido] = serialize($pedido);
                     }
                 }
             }
