@@ -336,20 +336,20 @@
 
   /* INICIO del estilo del filtro por disponibilidad */
 
-  .filtro_disponible:checked {
-    background-color: #008000;
-    border-color: #008000;
-  }
+    .filtro_disponible:checked {
+      background-color: #008000;
+      border-color: #008000;
+    }
 
-  .filtro_no_disponible:checked {
-    background-color: #df0000;
-    border-color: #df0000; 
-  }
+    .filtro_no_disponible:checked {
+      background-color: #df0000;
+      border-color: #df0000; 
+    }
 
-  .filtro_proximamente:checked {
-    background-color: #FB6A00;
-    border-color: #FB6A00; 
-  }
+    .filtro_proximamente:checked {
+      background-color: #FB6A00;
+      border-color: #FB6A00; 
+    }
 
   /* FIN del estilo del filtro por disponibilidad */
 
@@ -372,7 +372,6 @@
 
     .container_derecha_producto{
       margin-top: 70px;
-     
     }
 
     /* Definimos la información que contiene cada producto */
@@ -385,8 +384,12 @@
         font-size: 14px;
       }
 
-      .valoracion_producto{
+      .valoracion_producto {
         margin-top: 230px;
+      } 
+
+      .valoracion_producto_pizza{
+        margin-top: 285px;
       }
 
       .titulo_apartado_producto{
@@ -884,6 +887,10 @@
     background-position: center;
   }
 
+  .contenedor_botones_panel_productos {
+    margin-left: 30px;
+  }
+
   .card {
     color: #fff;
     margin-bottom: 20px;
@@ -899,7 +906,7 @@
     color: #3a3a3a;
     font-size: 14px;
   }
-
+  
 /* FIN del diseño de la administración de productos */
 
 /* INICIO del diseño de cada pedido */
@@ -923,7 +930,6 @@
   }
 
   .boton_rojo_pedidos{
-
     background-color: #df0000;
     border-color: transparent;
     color: #fff;

@@ -70,21 +70,21 @@
                     $usuarioDAO = new UsuarioDAO();
 
                     // Guardaremos en una variable la llamada al método que busca si el email introducido ya se encuentra en la base de datos:
-                    $credencial = $usuarioDAO->getBuscarUsuario($email);
+                    $usuario = $usuarioDAO->getBuscarUsuario($email);
 
-                    if ($credencial !== null){
+                    if ($usuario !== null){
 
                         // Si se encuentra a un usuario con el email introducido en la base de datos, continuamos:
                         
-                        if ($password == $credencial->password) {
+                        if ($password == $usuario->password) {
 
                             /* Si la contraseña introducida es igual al campo llamado password de nuestro usuario encontrado:
                             Iniciamos la sesión, guardamos en variables de sesión la información que nos interesa y lo redirigimos a la función
                             que le mostrará su panel */
                             session_start();
-                            $_SESSION['usuario_id'] = $credencial->ID;
+                            $_SESSION['usuario_id'] = $usuario->ID;
                             $_SESSION['usuario_nombre'] = $email;
-                            $_SESSION['tipo_usuario'] = $credencial->tipo_usuario;
+                            $_SESSION['tipo_usuario'] = $usuario->tipo_usuario;
                             $_SESSION['password'] = $password;
                             header('Location:'.url.'?controller=user&action=login');
                             exit();

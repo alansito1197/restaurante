@@ -12,7 +12,7 @@
             $conexion = DataBase::connect();
         
             // Crearemos una consulta para obtener la contraseña del administrador:
-            $consulta = $conexion->prepare("SELECT credencial.password FROM credencial WHERE credencial.id_cliente = ?");
+            $consulta = $conexion->prepare("SELECT credencial.password FROM CREDENCIAL WHERE credencial.id_cliente = ?");
 
             // Vincularemos los parámetros:
             $consulta->bind_param("i", $usuario_id);
@@ -61,11 +61,11 @@
                 // Ejecutaremos la consulta:
                 $stmtCliente->execute();
 
-
-                $result = $stmtCliente->get_result();
+                // Obtendremos el resultado de la consulta:
+                $resultado = $stmtCliente->get_result();
         
-                if ($result->num_rows > 0) {
-                    $usuario = $result->fetch_object('Cliente');
+                if ($resultado->num_rows > 0) {
+                    $usuario = $resultado->fetch_object('Cliente');
                 }
         
                 // Cerraremos la consulta y la conexión a la base de datos:
@@ -105,7 +105,7 @@
             $conexion = DataBase::connect();
         
             // Creamos la consulta para actualizar los datos del cliente:
-            $consultaActualizar = "UPDATE cliente SET nombre = ?, apellidos = ?, direccion = ?, email = ?, telefono = ? WHERE id_cliente = ?";
+            $consultaActualizar = "UPDATE CLIENTE SET nombre = ?, apellidos = ?, direccion = ?, email = ?, telefono = ? WHERE id_cliente = ?";
         
             // Prepararemos la consulta:
             $stmt = $conexion->prepare($consultaActualizar);
@@ -123,7 +123,6 @@
             // Devolver el resultado de la operación de actualización:
             return $resultado;
         }
-        
         
         // Crearemos una función para eliminar la cuenta del cliente que desea darse de baja de nuestra web:
         public function eliminarCuenta($idCliente) {
@@ -198,6 +197,7 @@
             return $datosUsuario;
         }
             
+        // Crearemos una función para registrar los nuevos clientes a la web:
         public function registrarCliente($nombre, $apellidos, $direccion, $email, $telefono, $password) {
             
             // Nos conectamos a la base de datos:
@@ -257,6 +257,7 @@
             }
         }
         
+        // Crearemos una función para comprobar si el intento de suscripción a la Newsletter es válido:
         public function comprobarSuscripcionNewsletter($nombre, $email) {
 
             // Nos conectamos a la base de datos:

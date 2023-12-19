@@ -37,7 +37,7 @@
             <h1 class="pregunta_user">¿Qué quieres hacer?</h2> 
             <div class="row">
               <div class="col-sm-6 mb-2">
-                <form action="<?=url.'?controller=producto&action=index'?>" method="POST">
+                <form action="<?=url.'?controller=index&action=index'?>" method="POST">
                   <button class="boton_negro">Ir a la página principal</button>
                 </form>
               </div>

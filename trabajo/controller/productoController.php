@@ -5,20 +5,7 @@
     include_once 'modelo/CategoriaDAO.php';
     include_once 'utils/calculadoraPrecios.php';
 
-    class productoController {
-    
-        // Crearemos una función que muestre la página principal:
-        public function index(){
-            
-            // Llamaremos a las funciones necesarias para mostrar los productos que deseamos en la página principal:
-            $AllCategorias = CategoriaDAO::getAllCategorias();
-            $AllProductosDestacados = ProductoDAO::getAllProductosDestacados();
-
-            // Incluiremos las vistas necesarias:
-            include_once 'vistas/header.php';
-            include_once 'vistas/panelPrincipal.php'; 
-            include_once 'vistas/footer.php';
-        }
+    class productoController {   
 
         // Crearemos una función para la página de productos:
         public function productos(){

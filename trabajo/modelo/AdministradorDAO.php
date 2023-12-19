@@ -25,7 +25,7 @@
             if ($resultado->num_rows > 0) {
 
                 // Si encontramos algún registro relacionado, guardamos la fila relacionada a la contraseña:
-                $fila = $resultado->fetch_object();
+                $fila = $resultado->fetch_object('Administrador');
                 
                 // Devolveremos el resultado de la consulta:
                 return $fila->password;

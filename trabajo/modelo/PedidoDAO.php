@@ -63,6 +63,7 @@
             // Definiremos como array la variable donde almacenaremos cada pedido del usuario:
             $pedidos = array();
         
+            // Mediante un bucle, iremos guardando cada pedido en la variable anterior:
             while ($objeto = $resultado->fetch_object('PedidoUsuario')) {
                 $pedidos[] = $objeto;
             }
@@ -75,16 +76,22 @@
             return $pedidos;
         }
         
+        // Crearemos una función que nos devuelva todos los pedidos de la web:
         public static function getAllPedidos() {
 
             // Nos conectamos a la base de datos:
             $conexion = DataBase::connect();
 
+            // Crearemos la consulta que nos devuelva toda la información de cada pedido:
             $seleccionarTodosPedidos = "SELECT * FROM PEDIDO";
+
+            // Ejecutaremos la consulta:
             $resultado = $conexion->query($seleccionarTodosPedidos);
 
+            // Crearemos una variable definiéndola como array para después almacenar cada objeto en ella:
             $pedidos = array();
 
+            // Mediante un bucle, iremos guardando cada pedido en la variable anterior:
             while ($fila = $resultado->fetch_object('AllPedidos')) {
                 $pedidos[] = $fila;
             }
@@ -100,15 +107,53 @@
             return $pedidos;
         }
 
+        // Crearemos una función para obtener el pedido en cuestión mediante su ID:
+        public static function getPedidoByID($id_pedido) {
+
+            // Nos conectamos a la base de datos:
+            $conexion = DataBase::connect();
+        
+            // Preparamos la consulta para obtener el producto por ID:
+            $stmt = $conexion->prepare("SELECT * FROM PEDIDO WHERE id_pedido=?");
+
+            // Vinculamos los parámetros:
+            $stmt->bind_param("i", $id_pedido);
+        
+            // Ejecutamos la consulta:
+            $stmt->execute();
+
+            // Guardaremos en una variable el resultado de la consulta:
+            $resultado = $stmt->get_result();
+        
+            // Obtenemos el objeto Producto utilizando fetch_object:
+            $pedido = $resultado->fetch_object('AllPedidos');
+        
+            // Cerramos la conexión a la base de datos:
+            $conexion->close();
+        
+            // Almacenamos el objeto Producto en una variable de sesión:
+            $_SESSION['pedidoActual'] = $pedido;
+            
+            // Devolvemos el objeto Pedido:
+            return $pedido;
+        }
+
+        // Crearemos una función que nos ayudará a obtener el precio del último pedido realizado por usuario:
         public static function precioUltimoPedido($usuario_id) {
             
             // Nos conectamos a la base de datos:
             $conexion = DataBase::connect();
 
+            // Iremos a buscar el último registro de cada usuario:
             $busqueda_UltimoPedido = "SELECT precio_total FROM PEDIDO WHERE id_cliente = ? AND tipo_usuario = ? ORDER BY id_pedido DESC LIMIT 1";
             
+            // Preparamos la consulta:
             $stmt = $conexion->prepare($busqueda_UltimoPedido);
+            
+            // Vinculamos los parámetros:
             $stmt->bind_param("is", $usuario_id, $_SESSION['tipo_usuario']);
+
+            // Ejecutamos la consulta:
             $stmt->execute();
         
             // Guardaremos en una variable el resultado de la consulta:
@@ -123,6 +168,36 @@
             }  
         }
 
+        // Crearemos una función para modificar un pedido existente en nuestra base de datos:
+        public static function actualizarPedido($id_pedido, $id_cliente, $tipoUsuario, $precioTotal, $fecha, $estado) {
+            
+            // Nos conectamos a la base de datos:
+            $conexion = DataBase::connect();
+    
+            // Creamos una consulta para actualizar los datos del producto:
+            $pedido = "UPDATE PEDIDO SET id_pedido = ?, id_cliente = ?, tipo_usuario = ?, precio_total = ?, fecha = ?, estado = ? WHERE id_pedido=?";
+    
+            // Preparamos la consulta:
+            $stmt = $conexion->prepare($pedido);
+    
+            // Vinculamos los parámetros:
+            $stmt->bind_param("isdssi", $id_cliente, $tipoUsuario, $precioTotal, $fecha, $estado, $id_pedido);
+                
+            // Ejecutamos la consulta
+            $stmt->execute();
+    
+            // Guardamos el resultado en una variable:
+            $resultado = $stmt->get_result();
+            
+            // Cerramos la conexión a la base de datos y la consulta:
+            $stmt->close();
+            $conexion->close();
+                
+            // Devolvemos el resultado de la actualización producto:
+            return $resultado;
+        }
+
+        // Crearemos una función para eliminar un pedido en concreto:
         public function eliminarPedido($idPedido) {
             
             // Nos conectamos a la base de datos:
@@ -130,14 +205,26 @@
         
             // Eliminaremos los detalles del pedido:
             $consultaDetalles = $conexion->prepare("DELETE FROM DETALLE_PEDIDO WHERE id_pedido = ?");
+            
+            // Preparamos la consulta:
             $consultaDetalles->bind_param("i", $idPedido);
+
+            // Ejecutamos la consulta:
             $consultaDetalles->execute();
+
+            // Cerramos la consulta:
             $consultaDetalles->close();
         
             // Eliminaremos la entrada del pedido:
             $consultaPedido = $conexion->prepare("DELETE FROM PEDIDO WHERE id_pedido = ?");
+
+            // Preparamos la consulta:
             $consultaPedido->bind_param("i", $idPedido);
+
+            // Ejecutamos la consulta:
             $consultaPedido->execute();
+
+            // Cerramos la consulta:
             $consultaPedido->close();
         
             // Cerraremos la conexión a la base de datos:

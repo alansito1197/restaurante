@@ -1,6 +1,7 @@
 <?php
 
     include_once 'config/parameters.php';
+    include_once 'controller/indexController.php';
     include_once 'controller/productoController.php';
     include_once 'controller/userController.php';
     include_once 'controller/adminController.php';
@@ -9,7 +10,7 @@
 
     if (!ISSET ($_GET['controller'])){
         //si no se pasa nada, se mostrara pagina principal de la web:
-        header("Location:".url.'?controller=producto');
+        header("Location:".url.'?controller=index');
        
     }else{
 
@@ -33,7 +34,7 @@
 
         }else{
 
-            header("Location:".url.'?controller=producto');
+            header("Location:".url.'?controller=index');
         }
     }    
 ?>

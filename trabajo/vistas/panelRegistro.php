@@ -12,7 +12,7 @@
     <link href="assets/css/style_css.css" rel="stylesheet">
   </head>
   <body>
-  <main class="d-flex justify-content-center">
+    <main class="d-flex justify-content-center">
       <section class="container mt-4">
         <div class="container col-12 col-md-5">
           <div class="row">

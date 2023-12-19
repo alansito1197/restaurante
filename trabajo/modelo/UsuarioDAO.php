@@ -23,7 +23,11 @@
         
             // Preparar y ejecutar consulta para cliente
             $stmtCliente = $conexion->prepare($busquedaCredencialCliente);
+
+            // Vincularemos los parámetros:
             $stmtCliente->bind_param("s", $email);
+
+            // Ejecutaremos la consulta:
             $stmtCliente->execute();
         
             /* Inicializamos la variable que devolveremos más adelante para que si no encuentra usuarios en la base de datos relacionados con el correo introducido
@@ -37,14 +41,19 @@
 
                 // Si encontramos algún registro que coincida con el cliente, guardamos dicho objeto en una variable:
                 $usuario = $resultadoCliente->fetch_object('Cliente');
+                
+                // Cerraremos la consulta del cliente:
                 $stmtCliente->close();
+            
             } else {
-                // Cerrar la consulta para cliente
-                $stmtCliente->close();
         
                 // Preparararemos y ejecutaremos la consulta para el administrador:
                 $stmtAdministrador = $conexion->prepare($busquedaCredencialAdministrador);
+
+                // Vincularemos los parámetros:
                 $stmtAdministrador->bind_param("s", $email);
+
+                // Ejecutaremos la consulta:
                 $stmtAdministrador->execute();
         
                 // Guardaremos los resultados obtenidos para el administrador:

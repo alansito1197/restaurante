@@ -3,7 +3,7 @@
     <header>
         <nav class="navbar navbar-expand-lg">
             <div class="container">
-                <a class="navbar-brand" href="<?=url.'?controller=producto&action=index'?>">
+                <a class="navbar-brand" href="<?=url.'?controller=index&action=index'?>">
                     <img src="assets/imagenes/logos/logo_header.png" class="logo_header">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
