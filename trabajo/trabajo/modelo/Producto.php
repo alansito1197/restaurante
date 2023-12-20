@@ -21,7 +21,7 @@
                 return $this->id_producto;
         }
 
-        public function setIdProducto($id_producto): self{
+        public function setIdProducto($id_producto){
                 $this->id_producto = $id_producto;
                 return $this;
         }
@@ -30,7 +30,7 @@
                 return $this->id_empleado;
         }
 
-        public function setIdEmpleado($id_empleado): self{
+        public function setIdEmpleado($id_empleado){
                 $this->id_empleado = $id_empleado;
                 return $this;
         }
@@ -39,7 +39,7 @@
                 return $this->nombre;
         }
 
-        public function setNombre($nombre): self{
+        public function setNombre($nombre){
                 $this->nombre = $nombre;
                 return $this;
         }
@@ -48,7 +48,7 @@
                 return $this->sabor;
         }
 
-        public function setSabor($sabor): self{
+        public function setSabor($sabor){
                 $this->sabor = $sabor;
                 return $this;
         }
@@ -57,7 +57,7 @@
                 return $this->valor_energetico;
         }
 
-        public function setValorEnergetico($valor_energetico): self{
+        public function setValorEnergetico($valor_energetico){
                 $this->valor_energetico = $valor_energetico;
                 return $this;
         }
@@ -66,7 +66,7 @@
                 return $this->precio;
         }
 
-        public function setPrecio($precio): self{
+        public function setPrecio($precio){
                 $this->precio = $precio;
                 return $this;
         }
@@ -75,7 +75,7 @@
                 return $this->disponibilidad;
         }
 
-        public function setDisponibilidad($disponibilidad): self{
+        public function setDisponibilidad($disponibilidad){
                 $this->disponibilidad = $disponibilidad;
                 return $this;
         }
@@ -84,7 +84,7 @@
                 return $this->stock;
         }
 
-        public function setStock($stock): self{
+        public function setStock($stock){
                 $this->stock = $stock;
                 return $this;
         }
@@ -93,7 +93,7 @@
                 return $this->imagen;
         }
 
-        public function setImagen($imagen): self{
+        public function setImagen($imagen){
                 $this->imagen = $imagen;
                 return $this;
         }
@@ -102,7 +102,7 @@
                 return $this->ingredientes;
         }
 
-        public function setIngredientes($ingredientes): self{
+        public function setIngredientes($ingredientes){
                 $this->ingredientes = $ingredientes;
                 return $this;
         }
@@ -111,7 +111,7 @@
                 return $this->valoracion;
         }
 
-        public function setValoracion($valoracion): self{
+        public function setValoracion($valoracion){
                 $this->valoracion = $valoracion;
                 return $this;
         }
@@ -120,7 +120,7 @@
                 return $this->producto_destacado;
         }
 
-        public function setProductoDestacado($producto_destacado): self{
+        public function setProductoDestacado($producto_destacado){
                 $this->producto_destacado = $producto_destacado;
                 return $this;
         }

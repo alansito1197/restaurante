@@ -15,7 +15,7 @@
                         return $this->id_cliente;
                 }
 
-                public function setIdCliente($id_cliente): self{
+                public function setIdCliente($id_cliente){
                         $this->id_cliente = $id_cliente;
                         return $this;
                 }
@@ -24,7 +24,7 @@
                         return $this->nombre;
                 }
 
-                public function setNombre($nombre): self{
+                public function setNombre($nombre){
                         $this->nombre = $nombre;
                         return $this;
                 }
@@ -33,7 +33,7 @@
                         return $this->apellidos;
                 }
 
-                public function setApellidos($apellidos): self{
+                public function setApellidos($apellidos){
                         $this->apellidos = $apellidos;
                         return $this;
                 }
@@ -42,7 +42,7 @@
                         return $this->direccion;
                 }
 
-                public function setDireccion($direccion): self{
+                public function setDireccion($direccion){
                         $this->direccion = $direccion;
                         return $this;
                 }
@@ -51,7 +51,7 @@
                         return $this->email;
                 }
 
-                public function setEmail($email): self{
+                public function setEmail($email){
                         $this->email = $email;
                         return $this;
                 }
@@ -60,7 +60,7 @@
                         return $this->telefono;
                 }
 
-                public function setTelefono($telefono): self{
+                public function setTelefono($telefono){
                         $this->telefono = $telefono;
                         return $this;
                 }

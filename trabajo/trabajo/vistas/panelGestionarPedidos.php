@@ -20,7 +20,7 @@
             foreach ($AllPedidos as $pedidos) {
           ?>
             <div class="col-md-6">
-              <div class="card border border-2">
+              <div class="card border border-2 p-2">
                 <div class="card-body">
                   <h3 class="card-title-pedidos">Información del pedido con ID: <?=$pedidos->getIdPedido()?></h3>
                   <p class="card-text info_apartado_producto">ID del cliente: <?=$pedidos->getIdCliente()?></p>
@@ -28,7 +28,7 @@
                   <p class="card-text info_apartado_producto">Precio total del pedido: <?=$pedidos->getPrecioTotal()?>€</p>
                   <p class="card-text info_apartado_producto">Fecha: <?=$pedidos->getFecha()?></p>
                   <p class="card-text info_apartado_producto">Estado: <?=$pedidos->getEstado()?></p>
-                  <form action="<?=url.'?controller=admin&action=gestionarPedido'?>" method='post'>
+                  <form class="mt-4" action="<?=url.'?controller=admin&action=gestionarPedido'?>" method='post'>
                     <div class="text-center">
                       <button type="submit" class="boton_negro_pedidos mb-2" name="modificar" value="<?=$pedidos->getIdPedido()?>">Modificar pedido</button>
                       <button type="submit" class="boton_rojo_pedidos mb-2" name="eliminar" value="<?=$pedidos->getIdPedido()?>">Eliminar pedido</button>

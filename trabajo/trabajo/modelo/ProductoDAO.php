@@ -12,21 +12,26 @@
             // Nos conectamos a la base de datos:
             $conexion = DataBase::connect();
 
+            // Crearemos una consulta para mostrar todos los productos que no sean pizzas:
             $stmt = $conexion->query("SELECT id_producto, id_administrador, id_categoria_producto, nombre, sabor, valor_energetico, precio, disponibilidad, stock, imagen, ingredientes, valoracion, producto_destacado FROM producto WHERE tipo_masa IS NULL");
 
+            // Creamos una variable definiéndola como array para después agregar los productos en ella:
             $productos = [];
 
-            while ($obj = $stmt->fetch_object('Producto')) {
-                $productos[] = $obj;
+            // Utilizaremos un bucle para agregar cada objeto de tipo producto a esta array:
+            while ($objeto = $stmt->fetch_object('Producto')) {
+                $productos[] = $objeto;
             }
 
-            $stmt = $conexion->query("SELECT * FROM producto WHERE tipo_masa IS NOT NULL");
+            // Crearemos una consulta para mostrar todos los productos que sean pizzas:
+            $stmt = $conexion->query("SELECT * FROM PRODUCTO WHERE tipo_masa IS NOT NULL");
 
-
-            while ($obj = $stmt->fetch_object('Pizza')) {
-                $productos[] = $obj;
+            // Utilizaremos un bucle para agregar cada objeto de tipo producto a esta array:
+            while ($objeto = $stmt->fetch_object('Pizza')) {
+                $productos[] = $objeto;
             }
 
+            // Devolvemos el resultado de la operación:
             return $productos;
         }
 
@@ -49,14 +54,18 @@
             // Nos conectamos a la base de datos:
             $conexion = DataBase::connect();
 
-            $stmt = $conexion->query("SELECT * FROM producto WHERE producto_destacado='Si'");
+            // Crearemos una variable para guardar solamente los productos que tenemos indicados como destacados:
+            $productoDestacado = $conexion->query("SELECT * FROM PRODUCTO WHERE producto_destacado='Si'");
 
+            // Creamos una variable definiéndola como array para después agregar los productos en ella:
             $productos_destacados = [];
 
-            while ($obj = $stmt->fetch_object('Producto')) {
+            // Utilizaremos un bucle para agregar cada objeto de tipo producto a esta array:
+            while ($obj = $productoDestacado->fetch_object('Producto')) {
                 $productos_destacados[] = $obj;
             }
 
+            // Devolveremos 
             return $productos_destacados;
         }
 
@@ -67,28 +76,37 @@
             $conexion = DataBase::connect();
             
             // Preparamos la consulta para obtener el producto por ID:
-            $stmt = $conexion->prepare("SELECT * FROM producto WHERE id_producto=?");
+            $stmt = $conexion->prepare("SELECT * FROM PRODUCTO WHERE id_producto=?");
+
+            // Vinculamos los parámetros:
             $stmt->bind_param("i", $id_producto);
         
             // Ejecutamos la consulta:
             $stmt->execute();
+
+            // Guardamos el resultado en una variable:
             $resultado = $stmt->get_result();
 
             // Cerramos la conexión a la base de datos:
             $conexion->close();
         
             // Almacenamos el resultado en una lista:
-            $añadir_carrito = $resultado->fetch_object('Producto');
-            return $añadir_carrito;
+            $añadirCarrito = $resultado->fetch_object('Producto');
+
+            // Devolveremos cada
+            return $añadirCarrito;
         }
 
+        // Crearemos una función para obtener los datos del producto que estemos mostrando en una vista:
         public static function obtenerProductoByID($id_producto) {
 
             // Nos conectamos a la base de datos:
             $conexion = DataBase::connect();
         
             // Preparamos la consulta para obtener el producto por ID:
-            $stmt = $conexion->prepare("SELECT * FROM producto WHERE id_producto=?");
+            $stmt = $conexion->prepare("SELECT * FROM PRODUCTO WHERE id_producto=?");
+
+            // Vinculamos los parámetros:
             $stmt->bind_param("i", $id_producto);
         
             // Ejecutamos la consulta:
@@ -103,70 +121,86 @@
         
             // Almacenamos el objeto Producto en una variable de sesión:
             $_SESSION['productoActual'] = $producto;
+            
             // Devolvemos el objeto Producto:
             return $producto;
         }
         
-        public function agregarProducto($usuario_id, $categoria_producto, $nombre, $sabor, $calorias, $precio, $disponibilidad, $stock, $ingredientes, $destacado, $imagen, $valoracion) {
+        // Crearemos una función para agregar un producto en nuestra base de datos:
+        public function agregarProducto($usuario_id, $categoriaProducto, $nombre, $sabor, $calorias, $precio, $disponibilidad, $stock, $ingredientes, $destacado, $imagen, $valoracion) {
+            
             // Nos conectamos a la base de datos:
             $conexion = DataBase::connect();
         
-            $sql = "INSERT INTO PRODUCTO (id_administrador, id_categoria_producto, nombre, sabor, valor_energetico, precio, disponibilidad, stock, ingredientes, producto_destacado, imagen, valoracion) 
+            // Crearemos una consulta para agregar los parámetros enviados a este método en el producto que estamos agregando a la base de datos:
+            $agregarProducto = "INSERT INTO PRODUCTO (id_administrador, id_categoria_producto, nombre, sabor, valor_energetico, precio, disponibilidad, stock, ingredientes, producto_destacado, imagen, valoracion) 
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
-            $stmt = $conexion->prepare($sql);
+            $stmt = $conexion->prepare($agregarProducto);
         
-            $stmt->bind_param("iisssdssssss", $usuario_id, $categoria_producto, $nombre, $sabor, $calorias, $precio, $disponibilidad, $stock, $ingredientes, $destacado, $imagen, $valoracion);
+            $stmt->bind_param("iisssdssssss", $usuario_id, $categoriaProducto, $nombre, $sabor, $calorias, $precio, $disponibilidad, $stock, $ingredientes, $destacado, $imagen, $valoracion);
         
-            $resultado = $stmt->execute();
+            // Ejecutamos la consulta:
+            $stmt->execute();
         
+            // Guardamos el resultado en una variable:
+            $resultado = $stmt->get_result();
+
+            // Cerramos la conexión a la base de datos y la consulta:
             $stmt->close();
-            
             $conexion->close();
         
+            // Devolveremos el resultado de la inserción del producto:
             return $resultado;
         }
         
-
+        // Crearemos una función para modificar un producto existente en nuestra base de datos:
         public static function actualizarProducto($idProducto, $nombre, $sabor, $valor_energetico, $precio, $disponibilidad, $stock, $ingredientes, $producto_destacado) {
             
             // Nos conectamos a la base de datos:
             $conexion = DataBase::connect();
 
-            $producto = "UPDATE PRODUCTO SET nombre=?, sabor=?, valor_energetico=?, precio=?, disponibilidad=?, stock=?, ingredientes=?, producto_destacado=? WHERE id_producto=?";
+            // Creamos una consulta para actualizar los datos del producto:
+            $producto = "UPDATE PRODUCTO SET nombre = ?, sabor = ?, valor_energetico = ?, precio = ?, disponibilidad = ?, stock = ?, ingredientes = ?, producto_destacado = ? WHERE id_producto=?";
 
-            // Preparamos la consulta
-            $consulta = $conexion->prepare($producto);
+            // Preparamos la consulta:
+            $stmt = $conexion->prepare($producto);
 
-            // Vinculamos los parámetros
-            $consulta->bind_param("ssidsissi", $nombre, $sabor, $valor_energetico, $precio, $disponibilidad, $stock, $ingredientes, $producto_destacado, $idProducto);
-            $resultado = $consulta->execute();
-
+            // Vinculamos los parámetros:
+            $stmt->bind_param("ssidsissi", $nombre, $sabor, $valor_energetico, $precio, $disponibilidad, $stock, $ingredientes, $producto_destacado, $idProducto);
             
             // Ejecutamos la consulta
-            $consulta->execute();
+            $stmt->execute();
+
+            // Guardamos el resultado en una variable:
+            $resultado = $stmt->get_result();
         
-            $consulta->close();
+            // Cerramos la conexión a la base de datos y la consulta:
+            $stmt->close();
             $conexion->close();
             
-            return $consulta;
+            // Devolvemos el resultado de la actualización producto:
+            return $resultado;
         }
         
-        
+        // Crearemos una función para eliminar un producto en concreto de nuestra base de datos:
         public static function eliminarProducto($id_producto){
 
             // Nos conectamos a la base de datos:
             $conexion = DataBase::connect();
         
             // Preparamos la consulta para eliminar el producto por ID:
-            $stmt = $conexion->prepare("DELETE FROM producto WHERE id_producto=?");
+            $stmt = $conexion->prepare("DELETE FROM PRODUCTO WHERE id_producto=?");
+
+            // Vinculamos los parámetros:
             $stmt->bind_param("i", $id_producto);
             
             // Ejecutamos la consulta:
             $stmt->execute();
             
-            // Cerramos la conexión a la base de datos:
+            // Cerramos la conexión a la base de datos y la consulta:
             $conexion->close();
+            $stmt->close();
         }
     }
 ?>

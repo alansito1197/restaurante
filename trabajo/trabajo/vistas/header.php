@@ -3,7 +3,7 @@
     <header>
         <nav class="navbar navbar-expand-lg">
             <div class="container">
-                <a class="navbar-brand" href="<?=url.'?controller=producto&action=index'?>">
+                <a class="navbar-brand" href="<?=url.'?controller=index&action=index'?>">
                     <img src="assets/imagenes/logos/logo_header.png" class="logo_header">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,11 +24,11 @@
                             <?php
                             
                                 // Verificamos si la variable existe, es un array y su valor es 0 antes de contar los productos en el carrito:
-                                $cantidad_productos = isset($_SESSION['productosSeleccionados']) ? count($_SESSION['productosSeleccionados']) : 0;
+                                $cantidadProductos = isset($_SESSION['productosSeleccionados']) ? count($_SESSION['productosSeleccionados']) : 0;
 
                                 // Si hay productos en el carrito, mostramos la cantidad en el ícono del carrito:
-                                if ($cantidad_productos > 0) {
-                                    echo "<span>$cantidad_productos</span>";
+                                if ($cantidadProductos > 0) {
+                                    echo "<span>$cantidadProductos</span>";
                                 }
                             ?>
                         </a>

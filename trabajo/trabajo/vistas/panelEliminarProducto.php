@@ -23,7 +23,7 @@
                 <div class="col-md-3 contenedor_producto_admin" style="background-image: url('<?=$productoActual->getImagen()?>');"></div>
                 <div class="col-md-9">
                   <div class="card-body p-0">
-                    <h5 class="card-title">Ficha técnica del producto</h5>
+                    <h3 class="card-title-pedidos mt-4">Ficha técnica del producto</h3>
                     <p class="card-text info_apartado_producto">Sabor: <?=$productoActual->getSabor()?></p>
                     <p class="card-text info_apartado_producto">Valor Energético: <?=$productoActual->getValorEnergetico()?> kcal</p>
                     <p class="card-text info_apartado_producto">Precio: <?=$productoActual->getPrecio()?>€</p>

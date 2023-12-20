@@ -27,7 +27,7 @@
                     <div class="card-body">
                       <h5 class="card-title-productos"><?=$producto->getNombre()?></h5>
                       <p class="card-text info_apartado_producto">Sabor: <?=$producto->getSabor()?></p>
-                      <p class="card-text info_apartado_producto">Valor Energético: <?=$producto->getValorEnergetico()?></p>
+                      <p class="card-text info_apartado_producto">Valor Energético: <?=$producto->getValorEnergetico()?> kcal</p>
                       <p class="card-text info_apartado_producto">Precio: <?=$producto->getPrecio()?>€</p>
                       <p class="card-text info_apartado_producto">Disponibilidad: <?=$producto->getDisponibilidad()?></p>
                       <p class="card-text info_apartado_producto">Stock: <?=$producto->getStock()?></p>
@@ -41,7 +41,7 @@
                         }
                       ?>
                       <form action=<?=url.'?controller=admin&action=gestionarProducto'?> method='post'>
-                        <div class="text-center">
+                        <div class="mt-4 contenedor_botones_panel_productos">
                           <button type="submit" class="boton_negro mb-2" name="modificar" value="<?=$producto->getIdProducto()?>">Modificar producto</button>
                           <button type="submit" class="boton_rojo mb-2" name="eliminar" value="<?=$producto->getIdProducto()?>">Eliminar producto</button>
                         </div>

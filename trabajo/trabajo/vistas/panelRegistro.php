@@ -12,7 +12,7 @@
     <link href="assets/css/style_css.css" rel="stylesheet">
   </head>
   <body>
-  <main class="d-flex justify-content-center">
+    <main class="d-flex justify-content-center">
       <section class="container mt-4">
         <div class="container col-12 col-md-5">
           <div class="row">
@@ -28,12 +28,12 @@
                   <input type="email" class="contenedor_informacion_login" required placeholder="Correo electrónico" name="email">
                   <input type="number" class="contenedor_informacion_login" required placeholder="Teléfono" name="telefono">
                   <input type="password" class="contenedor_informacion_login" required placeholder="Contraseña" name="password">
-                  <input type="password" class="contenedor_informacion_login" required placeholder="Confirma la contraseña" name="confirmacion_password">
+                  <input type="password" class="contenedor_informacion_login" required placeholder="Confirma la contraseña" name="confirmacionPassword">
                   <button type="submit" class="iniciar_sesion mb-4">¡Allá vamos!</button>
                 </form>  
               </div>
-              <?php if (isset($mensaje_error) && !empty($mensaje_error)): ?>
-                <p class="mensaje_error"><?php echo $mensaje_error; ?></p>
+              <?php if (isset($mensajeError) && !empty($mensajeError)): ?>
+                <p class="mensaje_error"><?php echo $mensajeError; ?></p>
               <?php endif; ?>
             </div>
           </div>

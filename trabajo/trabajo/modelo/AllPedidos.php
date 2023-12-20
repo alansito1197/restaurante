@@ -16,7 +16,7 @@
                         return $this->id_pedido;
                 }
 
-                public function setIdPedido($id_pedido): self{
+                public function setIdPedido($id_pedido){
                         $this->id_pedido = $id_pedido;
                         return $this;
                 }
@@ -24,7 +24,7 @@
                         return $this->id_cliente;
                 }
 
-                public function setIdCliente($id_cliente): self{
+                public function setIdCliente($id_cliente){
                         $this->id_cliente = $id_cliente;
                         return $this;
                 }
@@ -33,7 +33,7 @@
                         return $this->tipo_usuario;
                 }
 
-                public function setTipoUsuario($tipo_usuario): self{
+                public function setTipoUsuario($tipo_usuario){
                         $this->tipo_usuario = $tipo_usuario;
                         return $this;
                 }
@@ -42,7 +42,7 @@
                         return $this->precio_total;
                 }
 
-                public function setPrecioTotal($precio_total): self{
+                public function setPrecioTotal($precio_total){
                         $this->precio_total = $precio_total;
                         return $this;
                 }
@@ -51,7 +51,7 @@
                         return $this->fecha;
                 }
 
-                public function setFecha($fecha): self{
+                public function setFecha($fecha){
                         $this->fecha = $fecha;
                         return $this;
                 }
@@ -60,7 +60,7 @@
                         return $this->estado;
                 }
 
-                public function setEstado($estado): self{
+                public function setEstado($estado){
                         $this->estado = $estado;
                         return $this;
                 }

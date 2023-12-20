@@ -12,13 +12,14 @@
     <link href="assets/css/style_css.css" rel="stylesheet">
   </head>
   <body>
-    <?php
+  <?php
       include_once 'modelo/PedidoDAO.php';
       $usuario_id = $_SESSION['usuario_id'];
+      $tipo_usuario = $_SESSION['tipo_usuario'];
       $precioUltimoPedido = null;
 
-      if (isset($_COOKIE['CookieUltimoPedido'])) {
-        $precioUltimoPedido = $_COOKIE['CookieUltimoPedido'];
+      if (isset($_COOKIE['CookieUltimoPedido_' . $usuario_id . '_' . $tipo_usuario])) {
+        $precioUltimoPedido = $_COOKIE['CookieUltimoPedido_' . $usuario_id . '_' . $tipo_usuario];
       }
 
       if ($precioUltimoPedido !== null) {
@@ -37,37 +38,37 @@
             <h1 class="pregunta_user">¿Qué quieres hacer?</h2> 
             <div class="row">
               <div class="col-sm-6 mb-2">
-              <form action="<?=url.'?controller=index&action=productos'?>" method="POST">
-                <button class="boton_negro btn-block">Ir a la página principal</button>
+                <form action="<?=url.'?controller=index&action=index'?>" method="POST">
+                  <button class="boton_negro">Ir a la página principal</button>
                 </form>
               </div>
               <div class="col-sm-6 mb-2">
-              <form action="<?=url.'?controller=producto&action=productos'?>" method="POST">
-                <button class="boton_negro btn-block">Empezar una compra</button>
+                <form action="<?=url.'?controller=producto&action=productos'?>" method="POST">
+                  <button class="boton_negro">Empezar una compra</button>
                 </form>
               </div>
             </div>
             <div class="row">
               <div class="col-sm-6 mb-2">
                 <form action="<?=url.'?controller=admin&action=solicitudGestionarPedidos'?>" method="POST">
-                  <button class="boton_rojo btn-block">Gestionar pedidos</button>
+                  <button class="boton_rojo">Gestionar pedidos</button>
                 </form>
               </div>
               <div class="col-sm-6 mb-2">
                 <form action="<?=url.'?controller=admin&action=solicitudGestionarProductos'?>" method="POST">
-                  <button class="boton_rojo btn-block">Gestionar productos</button>
+                  <button class="boton_rojo">Gestionar productos</button>
                 </form>
               </div>
             </div>
             <div class="row">
               <div class="col-sm-6 mb-2">
               <form action="<?=url.'?controller=admin&action=solicitudCrearProducto'?>" method="POST">
-                  <button class="boton_rojo btn-block">Añadir un producto</button>
+                  <button class="boton_rojo">Añadir un producto</button>
                 </form>
               </div>
               <div class="col-sm-6 mb-2">
                 <form action="<?=url.'?controller=user&action=logout'?>" method="POST">
-                  <button class="boton_rojo btn-block">Cerrar sesión</button>
+                  <button class="boton_rojo">Cerrar sesión</button>
                 </form>
               </div>
             </div>

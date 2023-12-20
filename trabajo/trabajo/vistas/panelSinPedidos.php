@@ -15,20 +15,20 @@
     <main class="d-flex justify-content-center">
       <section class="container mt-4">
         <div class="container col-12 col-sm-6">
-        <h3 class="pregunta_login">¡No has realizado ningun pedido!</h3>
-            <h1 class="pregunta_user">¿Quieres realizar un pedido ahora?</h2> 
-            <div class="row">
-              <div class="col-sm-6 mb-2">
-                <form action="<?=url.'?controller=producto&action=productos'?>" method="POST">
-                  <button class="boton_negro">Empezar mi compra</button>
-                </form>
-              </div>
-              <div class="col-sm-6 mb-2">
-                <form action="<?=url.'?controller=user&action=comprobarUsuario'?>" method="POST">
-                  <button class="boton_rojo">Volver a mi panel</button>
-                </form>
-              </div>
+          <h1 class="pregunta_login">¡No hay ningún pedido en la web!</h1>
+          <h2 class="pregunta_user">¿Qué quieres hacer?</h2> 
+          <div class="row">
+            <div class="col-sm-6 mb-2">
+              <form action="<?=url.'?controller=producto&action=productos'?>" method="POST">
+                <button class="boton_negro">Empezar una compra</button>
+              </form>
             </div>
+            <div class="col-sm-6 mb-2">
+              <form action="<?=url.'?controller=user&action=comprobarUsuario'?>" method="POST">
+                <button class="boton_rojo">Volver a mi panel</button>
+              </form>
+            </div>
+          </div>
         </div>
       </section>
     </main>

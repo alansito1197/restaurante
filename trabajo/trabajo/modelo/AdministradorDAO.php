@@ -5,29 +5,31 @@
 
     class AdministradorDAO {
 
-        public static function obtenerPasswordAdmin($usuario_id) {
+        public static function getPasswordAdmin($usuario_id) {
+
             // Nos conectamos a la base de datos:
             $conexion = DataBase::connect();
         
-            // Crear una consulta preparada para evitar inyecciones SQL
+            // Crearemos una consulta para buscar la contraseña del administrador:
             $consulta = $conexion->prepare("SELECT credencial.password FROM credencial WHERE credencial.id_administrador = ?");
+            
+            // Vincularemos los parámetros:
             $consulta->bind_param("i", $usuario_id);
         
-            // Ejecutar la consulta
+            // Ejecutaremos la consulta:
             $consulta->execute();
         
-            // Obtener el resultado de la consulta
+            // Obtendremos el resultado de la consulta:
             $resultado = $consulta->get_result();
         
             if ($resultado->num_rows > 0) {
+
                 // Si encontramos algún registro relacionado, guardamos la fila relacionada a la contraseña:
-                $fila = $resultado->fetch_object();
+                $fila = $resultado->fetch_object('Administrador');
+                
+                // Devolveremos el resultado de la consulta:
                 return $fila->password;
-            } else {
-                // Si no encontramos ningún registro, devolveremos nulo:
-                return null;
-            }   
+            }
         }
-        
     }
 ?>

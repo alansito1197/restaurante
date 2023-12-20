@@ -13,7 +13,7 @@
                 return $this->id_categoria_producto;
         }
 
-        public function setIdCategoriaProducto($id_categoria_producto): self{
+        public function setIdCategoriaProducto($id_categoria_producto){
                 $this->id_categoria_producto = $id_categoria_producto;
                 return $this;
         }
@@ -22,7 +22,7 @@
                 return $this->nombre_categoria;
         }
 
-        public function setNombreCategoria($nombre_categoria): self{
+        public function setNombreCategoria($nombre_categoria){
                 $this->nombre_categoria = $nombre_categoria;
                 return $this;
         }
@@ -31,7 +31,7 @@
                 return $this->imagen_categoria_producto;
         }
 
-        public function setImagenCategoriaProducto($imagen_categoria_producto): self{
+        public function setImagenCategoriaProducto($imagen_categoria_producto){
                 $this->imagen_categoria_producto = $imagen_categoria_producto;
                 return $this;
         }

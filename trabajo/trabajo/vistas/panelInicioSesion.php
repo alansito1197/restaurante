@@ -21,13 +21,13 @@
           <div class="row">
             <div class="col-md-8">
               <form action=<?=url.'?controller=user&action=comprobarUsuario'?> method="POST">
-                <input type="email" class="contenedor_informacion_login" required placeholder="Correo electrónico" name="usuario">
-                <input type="password" class="contenedor_informacion_login" required placeholder="Contraseña" name="password">
+                <input type="email" class="contenedor_informacion_login" placeholder="Correo electrónico" name="usuario" required>
+                <input type="password" class="contenedor_informacion_login" placeholder="Contraseña" name="password" required >
                 <p class="olvidar_contraseña pb-2 pt-1">¿Olvidaste tu contraseña?</p>
                 <button type="submit" class="iniciar_sesion">Iniciar sesión</button>
               </form>
-              <?php if (isset($mensaje_error) && !empty($mensaje_error)): ?>
-                <p class="mensaje_error"><?php echo $mensaje_error; ?></p>
+              <?php if (isset($mensajeError) && !empty($mensajeError)): ?>
+                <p class="mensaje_error"><?php echo $mensajeError; ?></p>
               <?php endif; ?>
             </div>
           </div>

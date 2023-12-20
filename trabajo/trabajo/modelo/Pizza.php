@@ -6,17 +6,14 @@
                 
         }
 
-        public function getTipoMasa()
-        {
+        public function getTipoMasa(){
                 return $this->tipo_masa;
         }
 
 
-        public function setTipoMasa($tipo_masa): self
-        {
+        public function setTipoMasa($tipo_masa){
                 $this->tipo_masa = $tipo_masa;
-
                 return $this;
         }
-        }
+}
 ?>

@@ -23,25 +23,25 @@
               <div class="col-md-6 text-center">
                 <form action="<?= url.'?controller=admin&action=crearProducto'?>" method="POST" enctype="multipart/form-data">
                   <input type="text" class="contenedor_informacion_login" name="nombre" placeholder="Nombre del producto" required>
-                  <input type="number" class="contenedor_informacion_login" name="categoria_producto" placeholder="Categoria del producto" required>
+                  <input type="number" class="contenedor_informacion_login" name="categoriaProducto" placeholder="Categoria del producto" required>
                   <input type="text" class="contenedor_informacion_login" name="sabor" placeholder="Sabor" required>
                   <input type="number" class="contenedor_informacion_login" name="calorias" placeholder="Valor energético" required>
                   <input type="text" class="contenedor_informacion_login" name="precio" placeholder="Precio" required>
                   <input type="text" class="contenedor_informacion_login" name="disponibilidad" placeholder="Disponibilidad" required>
                   <input type="number" class="contenedor_informacion_login" name="stock" placeholder="Stock" required>
                   <input type="text" class="contenedor_informacion_login" name="ingredientes" placeholder="Ingredientes" required>
-                  <input type="text" class="contenedor_informacion_login" name="destacado" placeholder="Producto destacado" required>
+                  <input type="text" class="contenedor_informacion_login" name="productoDestacado" placeholder="Producto destacado" required>
                   <input type="file" class="contenedor_informacion_login" name="valoracion" accept="image/*" required>
                   <input type="file" class="contenedor_informacion_login" name="imagen" accept="image/*" required>
                   <input type="password" class="contenedor_informacion_login" required placeholder="Contraseña" name="password">
-                  <button type="submit" class="iniciar_sesion mb-4" name="agregar_producto">¡Agrega el producto!</button>
+                  <button type="submit" class="iniciar_sesion mb-4" name="agregarProducto">¡Agrega el producto!</button>
                 </form>
               </div>
-              <?php if (isset($mensaje_acierto) && !empty($mensaje_acierto)): ?>
-                <p class="mensaje_acierto"><?php echo $mensaje_acierto; ?></p>
+              <?php if (isset($mensajeAcierto) && !empty($mensajeAcierto)): ?>
+                <p class="mensaje_acierto"><?php echo $mensajeAcierto; ?></p>
               <?php endif; ?>
-              <?php if (isset($mensaje_error) && !empty($mensaje_error)): ?>
-                <p class="mensaje_error"><?php echo $mensaje_error; ?></p>
+              <?php if (isset($mensajeError) && !empty($mensajeError)): ?>
+                <p class="mensaje_error"><?php echo $mensajeError; ?></p>
               <?php endif; ?>
             </div>
           </div>
