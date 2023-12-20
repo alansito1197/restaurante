@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -16,7 +15,7 @@
     <main class="d-flex justify-content-center">
       <section class="container mt-4">
         <div class="container col-12 col-sm-4">
-          <div class="row">
+          <div class="row d-flex justify-content-center align-items-center">
             <h3 class="pregunta_login">¡Modifica tu cuenta!</h3>
             <p class="beneficios_login mt-3">Siéntete libre de modificar tus datos a tu gusto.</p>
             <a class="enlace_registro pb-3" href=<?=url.'?controller=user&action=comprobarUsuario'?>> Volver al panel principal</a>

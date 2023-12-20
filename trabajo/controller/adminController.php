@@ -4,6 +4,7 @@
     include_once 'modelo/AdministradorDAO.php';
     include_once 'modelo/ProductoDAO.php';
     include_once 'modelo/PedidoDAO.php';
+    include_once 'modelo/AllPedidos.php';
 
     class adminController{
 
@@ -146,8 +147,8 @@
         // Crearemos una función cuyo objetivo sea actualizar el producto deseado por el administrador:
         public function actualizarProductoSeleccionado(){
 
-            // Almacenaremos en una variable únicamente el ID del producto, extraído de la variable de sesión que guarda toda la información del producto:
-            $id_producto = $_SESSION['productoActual']->getIdProducto();
+            // Almacenaremos en una variable únicamente el ID del producto extraído del input hidden del formulario:
+            $id_producto =  $_POST['idProducto'];
 
             // Guardaremos en una variable el ID del administrador actual:
             $usuario_id = $_SESSION['usuario_id'];
@@ -163,7 +164,7 @@
 
                     /* Si la llamada al producto ha dado true y el administrador ha pulsado el botón de modificar el producto,
                     entonces guardaremos toda la información aportada por él en una variable */
-                    $id_producto = $_SESSION['productoActual']->getIdProducto();
+                    $id_producto =  $_POST['idProducto'];
                     $nombre = $_POST['nombre'];
                     $sabor = $_POST['sabor'];
                     $valorEnergetico = $_POST['valorEnergetico'];
@@ -224,11 +225,10 @@
         }
 
         // Crearemos una función cuyo objetivo sea eliminar el producto deseado por el administrador:
-
         public function eliminarProductoSeleccionado(){
 
-            // Almacenaremos en una variable únicamente el ID del producto, extraído de la variable de sesión que guarda toda la información del producto:
-            $id_producto = $_SESSION['productoActual']->getIdProducto();
+            // Almacenaremos en una variable únicamente el ID del producto extraído del input hidden del formulario:
+            $id_producto = $_POST['idProducto'];
 
             // Guardaremos en una variable toda la información del producto gracias al método encargado de ello:
             $productoActual = ProductoDAO::obtenerProductoByID($id_producto);
@@ -240,7 +240,7 @@
                 if ($productoActual) {
 
                     // Si la llamada al método anterior ha devuelto true, continuamos:
-                    $id_producto = $_SESSION['productoActual']->getIdProducto();
+                    $id_producto = $_POST['idProducto'];
 
                     // Llamaremos al método que elimina el producto de la base de datos enviándole por parámetro el ID del producto:
                     ProductoDAO::eliminarProducto($id_producto);
@@ -286,19 +286,76 @@
         }
 
         // Crearemos una función cuya utilidad sea obtener el pedido actual para mostrarlo en la vista encargada de modificar dicho producto:
-            public function modificarPedido($idPedido){
+        public function modificarPedido($idPedido){
 
-                // Almacenaremos en una variable la llamada al archivo que contacta con la base de datos en lo que a productos se refiere:
-                $pedidoDAO = new PedidoDAO();
+            // Almacenaremos en una variable la llamada al archivo que contacta con la base de datos en lo que a productos se refiere:
+            $pedidoDAO = new PedidoDAO();
     
-                // Guardaremos en una variable toda la información del pedido gracias al método encargado de ello:
-                $pedidoActual = $pedidoDAO::getPedidoByID($idPedido);
+            // Guardaremos en una variable toda la información del pedido gracias al método encargado de ello:
+            $pedidoActual = $pedidoDAO::getPedidoByID($idPedido);
     
-                // Incluiremos las vistas necesarias:
-                include 'vistas/header.php';
-                include 'vistas/panelModificarPedido.php';
-                include 'vistas/footer.php';
+            // Incluiremos las vistas necesarias:
+            include 'vistas/header.php';
+            include 'vistas/panelModificarPedido.php';
+            include 'vistas/footer.php';
+        }
+
+        // Crearemos una función cuyo objetivo sea actualizar el pedido deseado por el administrador:
+        public function actualizarPedidoSeleccionado() {
+            
+            // Almacenaremos en una variable únicamente el ID del pedido extraído del input hidden del formulario:
+            $id_pedido = $_POST['idPedido'];
+        
+            // Guardamos en una variable el ID del administrador actual:
+            $usuario_id = $_SESSION['usuario_id'];
+            
+            // Guardamos en una variable toda la información del pedido gracias al método encargado de ello:
+            $pedidoActual = PedidoDAO::getPedidoByID($id_pedido);
+            
+            if ($pedidoActual) {
+                // Si la llamada al método anterior ha devuelto true, continuamos:
+        
+                if (isset($_POST['modificarPedido'])) {
+                    // Si el administrador ha pulsado el botón de modificar el pedido, guardamos toda la información aportada por él en una variable
+                    $id_cliente = $_POST['idCliente'];
+                    $tipoUsuario = $_POST['tipoUsuario'];
+                    $precioTotal = $_POST['precioTotal'];
+                    $fecha = $_POST['fecha'];
+                    $estado = $_POST['estado'];
+                    $password = $_POST['password'];
+            
+                    // Recuperamos la contraseña del administrador mediante la llamada del método que se encarga de ello:
+                    $contraseñaAlmacenada = AdministradorDAO::getPasswordAdmin($usuario_id);
+            
+                    if ($contraseñaAlmacenada == $password) {
+
+                        // Si la contraseña proporcionada por el administrador coincide, continuamos:
+                        
+                        // Llamamos a la función que se encarga de actualizar el pedido
+                        PedidoDAO::actualizarPedido($id_pedido, $id_cliente, $tipoUsuario, $precioTotal, $fecha, $estado);
+                        
+                        // Volvemos a cargar el producto modificado
+                        $pedidoActual = PedidoDAO::getPedidoByID($id_pedido);
+
+                        // Informamos que hemos podido modificar el pedido
+                        $mensajeAcierto = "¡El pedido se ha modificado correctamente!";
+            
+                        // Incluimos las vistas necesarias
+                        include 'vistas/header.php';
+                        include 'vistas/panelModificarPedido.php';
+                        include 'vistas/footer.php';
+                    } else {
+                        // Informamos que la contraseña proporcionada es incorrecta
+                        $mensajeError = "Contraseña incorrecta.";
+            
+                        // Incluimos las vistas necesarias
+                        include 'vistas/header.php';
+                        include 'vistas/panelModificarPedido.php';
+                        include 'vistas/footer.php';
+                    }
+                }
             }
+        }
 
         // Crearemos una función cuya utilidad sea obtener el pedido actual para mostrarlo en la vista encargada de eliminar dicho producto:
         public function eliminarPedido($idPedido){
@@ -315,65 +372,35 @@
             include 'vistas/footer.php';
         }
 
-        // Crearemos una función cuyo objetivo sea actualizar el pedido deseado por el administrador:
-        public function actualizarPedidoSeleccionado(){
+        // Crearemos una función para eliminar el pedido que desee el administrador:
+        public function eliminarPedidoSeleccionado(){
 
-            // Almacenaremos en una variable únicamente el ID del pedido, extraído de la variable de sesión que guarda toda la información del producto:
-            $id_pedido = $_SESSION['pedidoActual']->getIdPedido();
-
-            // Guardaremos en una variable el ID del administrador actual:
-            $usuario_id = $_SESSION['usuario_id'];
+            // Almacenaremos en una variable únicamente el ID del pedido extraído del input hidden del formulario:
+            $id_pedido = $_POST['idPedido'];
 
             // Guardaremos en una variable toda la información del pedido gracias al método encargado de ello:
             $pedidoActual = PedidoDAO::getPedidoByID($id_pedido);
-
-            if ($pedidoActual){
-
-                // Si la llamada al método anterior ha devuelto true, continuamos:
-
-                if (isset($_POST['modificarPedido'])){
-
-                    /* Si la llamada al pedido ha dado true y el administrador ha pulsado el botón de modificar el pedido,
-                    entonces guardaremos toda la información aportada por él en una variable */
-                    $id_pedido = $_SESSION['$pedidoActual']->getIdPedido();
-                    $id_cliente = $_POST['idCliente'];
-                    $tipoUsuario = $_POST['tipoUsuario'];
-                    $precioTotal = $_POST['precioTotal'];
-                    $fecha = $_POST['fecha'];
-                    $estado = $_POST['estado'];
-                    $password = $_POST['password'];
-
-                    // Recuperaremos la contraseña del administrador mediante la llamada del método que se encarga de ello:
-                    $contraseñaAlmacenada = AdministradorDAO::getPasswordAdmin($usuario_id);
-
-                    if ($contraseñaAlmacenada == $password) {
-
-                        /* Si la contraseña proporcionada por el administrador coincide con la que tenemos depositada en la base de datos, continuamos:
-                        Llamaremos a la función que se encarga de actualizar el pedido enviándole por parámetro la información que ha proporcionado: */
-                        PedidoDAO::actualizarPedido($id_pedido, $id_cliente, $tipoUsuario, $precioTotal, $fecha, $estado);
-                        
-                        // Volvemos a cargar el producto modificado, por si el administrador desea modificar otro campo antes de salir de la vista:
-                        $pedidoActual = PedidoDAO::getPedidoByID($id_pedido);
-
-                        // Informaremos de que hemos podido modificar el pedido:
-                        $mensajeAcierto = "¡El pedido se ha modificado correctamente!";
-
-                        // Incluiremos las vistas necesarias para que el administrador pueda modificar otra vez el pedido sin salir de la vista:
-                        include 'vistas/header.php';
-                        include 'vistas/panelModificarPedido.php';
-                        include 'vistas/footer.php';
+    
+            if (isset($_POST['eliminar'])) {
+    
+                // Si el administrador ha pulsado el boton de eliminar, continuamos:
+    
+                if ($pedidoActual) {
+    
+                    // Si la llamada al método anterior ha devuelto true, continuamos:
+                    $id_pedido = $_POST['idPedido'];
+    
+                    // Llamaremos al método que elimina el pedido de la base de datos enviándole por parámetro el ID del producto:
+                    PedidoDAO::eliminarPedido($id_pedido);
+    
+                    // Una vez eliminado, redirigiremos al panel donde se nos muestra toda la lista de pedidos:
+                    header("Location:".url."?controller=admin&action=solicitudGestionarPedidos");
+                } 
                     
-                    } else {
-
-                        // Informaremos de que la contraseña aportada es incorrecta:
-                        $mensajeError = "Contraseña incorrecta.";
-
-                        // Incluiremos las vistas necesarias para que el administrador pueda volver a intentarlo sin salir de la vista:
-                        include 'vistas/header.php';
-                        include 'vistas/panelModificarPedido.php';
-                        include 'vistas/footer.php';
-                    } 
-                }
+            } else {
+    
+                // Si ha pulsado el botón de cancelar, lo redirigiremos al panel que muestra todos los pedidos:
+                header("Location:".url."?controller=admin&action=solicitudGestionarPedidos");
             }
         }
     }

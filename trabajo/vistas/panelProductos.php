@@ -146,20 +146,19 @@
             ?>
             <div class="border border-2 contenedor_productos mb-4">
               <div class="row">
-
                 <div class="col-4 mb-2 container_izquierda_producto column" style="background-image: url('<?=$producto->getImagen()?>');">
                   <h2 class="mt-2 titulo_producto"><?=$producto->getNombre()?></h2>
                   <?php
-                        if (method_exists($producto, 'getTipoMasa')){
-                          ?>
-                          <img src="<?=$producto->getValoracion()?>" class="valoracion_producto_pizza" alt="Valoración del producto">
-                          <?php
-                        }else{
-                          ?>
-                          <img src="<?=$producto->getValoracion()?>" class="valoracion_producto" alt="Valoración del producto">
-                        <?php
-                        }
+                    if (method_exists($producto, 'getTipoMasa')){
+                  ?>
+                    <img src="<?=$producto->getValoracion()?>" class="valoracion_producto_pizza" alt="Valoración del producto">
+                  <?php
+                    }else{
                       ?>
+                        <img src="<?=$producto->getValoracion()?>" class="valoracion_producto" alt="Valoración del producto">
+                      <?php
+                    }
+                  ?>
                 </div>
                 <div class="row col-7 flex-fill container_derecha_producto">
                   <div class="col-6">
@@ -196,7 +195,6 @@
                       </div>
                     </div>
                   </form>
-
                 </div>
               </div>
             </div>

@@ -232,7 +232,7 @@
                 // Ejecutaremos la consulta:
                 $stmtInsertarCliente->execute();
         
-                // Obtendremos el ID del nuevo cliente:
+                // Recogeremos el último ID insertado:
                 $idCliente = $conexion->insert_id;
         
                 // Insertaremos las credenciales del cliente en la tabla credencial:

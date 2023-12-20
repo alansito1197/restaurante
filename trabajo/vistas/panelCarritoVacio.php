@@ -12,9 +12,9 @@
     <link href="assets/css/style_css.css" rel="stylesheet">
   </head>
   <body>
-    <main class="d-flex justify-content-center">
-      <section class="container mt-4">
-        <div class="container col-12 col-sm-6">
+    <main>
+      <section class="container mt-4 d-flex justify-content-center align-items-center"">
+        <div class="container col-12 col-sm-6 ">
           <h1 class="pregunta_login">¡Tu carrito se encuentra vacío!</h1>
           <h2 class="pregunta_user">¿Qué quieres hacer?</h2> 
           <div class="row">

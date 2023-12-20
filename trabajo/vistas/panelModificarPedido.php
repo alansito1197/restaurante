@@ -22,13 +22,13 @@
             <div class="row">
               <div class="col-md-6 text-center">
                 <form action="<?= url.'?controller=admin&action=actualizarPedidoSeleccionado'?>" method="POST">
-                  <input type="text" class="contenedor_informacion_login" name="idPedido" value="El ID del pedido es <?=$pedidoActual->getIdPedido()?>" readonly>
-                  <input type="text" class="contenedor_informacion_login" name="idCliente" value="<?=$pedidoActual->getIdCliente()?>">
+                  <input type="text" class="contenedor_informacion_login" name="idPedido" value="<?=$pedidoActual->getIdPedido()?>" readonly>
+                  <input type="text" class="contenedor_informacion_login" name="idCliente" value="<?=$pedidoActual->getIdCliente()?>" readonly>
                   <input type="text" class="contenedor_informacion_login" name="tipoUsuario" value="<?=$pedidoActual->getTipoUsuario()?>">
                   <input type="number" class="contenedor_informacion_login" name="precioTotal" value="<?=$pedidoActual->getPrecioTotal()?>">
                   <input type="text" class="contenedor_informacion_login" name="fecha" value="<?=$pedidoActual->getFecha()?>">
                   <input type="text" class="contenedor_informacion_login" name="estado" value="<?=$pedidoActual->getEstado()?>">
-                  <input type="password" class="contenedor_informacion_login" required placeholder="Contraseña para confirmar cambios" name="password">              
+                  <input type="password" class="contenedor_informacion_login" required placeholder="Contraseña para confirmar cambios" name="password">
                   <button type="submit" class="iniciar_sesion mb-4" name="modificarPedido">Modificar pedido</button>
                 </form>
               </div>

@@ -121,6 +121,10 @@
             session_start();
             session_destroy();
 
+            // Eliminaremos la cookie:
+            $usuario_id = $_SESSION['usuario_id'];
+            setcookie('CookieUltimoPedido_' . $usuario_id, '', time() - 3600);
+
             // Redirigiremos a la función que le mostrará el panel necesario:
             header('Location:'.url.'?controller=user&action=login');
             $_SESSION = array();

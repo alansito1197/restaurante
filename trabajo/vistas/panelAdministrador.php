@@ -15,20 +15,21 @@
   <?php
       include_once 'modelo/PedidoDAO.php';
       $usuario_id = $_SESSION['usuario_id'];
+      $tipo_usuario = $_SESSION['tipo_usuario'];
       $precioUltimoPedido = null;
 
-      if (isset($_COOKIE['CookieUltimoPedido_'.$usuario_id])) {
-        $precioUltimoPedido = $_COOKIE['CookieUltimoPedido_'.$usuario_id];
+      if (isset($_COOKIE['CookieUltimoPedido_' . $usuario_id . '_' . $tipo_usuario])) {
+        $precioUltimoPedido = $_COOKIE['CookieUltimoPedido_' . $usuario_id . '_' . $tipo_usuario];
       }
 
       if ($precioUltimoPedido !== null) {
-        $mensajeUltimoPedido = "Tu último pedido fue de ".number_format($precioUltimoPedido, 2)."€";
+        $mensajeUltimoPedido = "Tu último pedido fue de " . number_format($precioUltimoPedido, 2) . "€";
       } else {
         $mensajeUltimoPedido = "Todavía no has realizado ningún pedido.";
       }
     ?>
-    <main class="d-flex justify-content-center">
-      <section class="container mt-4">
+    <main>
+      <section class="container mt-4 d-flex justify-content-center align-items-center"">
         <div class="container col-12 col-sm-6">
           <div class="row">
             <h3 class="pregunta_login">¡Bienvenido!</h3>
@@ -37,13 +38,13 @@
             <h1 class="pregunta_user">¿Qué quieres hacer?</h2> 
             <div class="row">
               <div class="col-sm-6 mb-2">
-              <form action="<?=url.'?controller=index&action=index'?>" method="POST">
-                <button class="boton_negro">Ir a la página principal</button>
+                <form action="<?=url.'?controller=index&action=index'?>" method="POST">
+                  <button class="boton_negro">Ir a la página principal</button>
                 </form>
               </div>
               <div class="col-sm-6 mb-2">
-              <form action="<?=url.'?controller=producto&action=productos'?>" method="POST">
-                <button class="boton_negro">Empezar una compra</button>
+                <form action="<?=url.'?controller=producto&action=productos'?>" method="POST">
+                  <button class="boton_negro">Empezar una compra</button>
                 </form>
               </div>
             </div>

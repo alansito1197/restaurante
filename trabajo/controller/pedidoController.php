@@ -60,8 +60,11 @@
                 // Primero, recuperaremos el precio del último pedido gracias a la llamada del método que lo obtiene:
                 $precioUltimoPedido = PedidoDAO::precioUltimoPedido($usuario_id);
 
+                // También recuperaremos el tipo de usuario que tramita el pedido, para que no confunda el cliente con ID 1 con el administrador con ID 1:
+                $tipo_usuario = $_SESSION['tipo_usuario'];
+
                 // Crearemos la cookie almacenando el valor que devuelve el método anterior junto con el ID de usuario para diferenciarlo entre los distintos usuarios de la web:
-                setcookie('CookieUltimoPedido_' . $usuario_id, $precioUltimoPedido, time() + 3600);
+                setcookie('CookieUltimoPedido_' . $usuario_id . '_' . $tipo_usuario, $precioUltimoPedido, time() + 3600);
 
                 // Incluiremos las vistas necesarias:
                 include 'vistas/header.php';

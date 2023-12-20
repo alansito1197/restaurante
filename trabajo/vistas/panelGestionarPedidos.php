@@ -12,14 +12,14 @@
     <link href="assets/css/style_css.css" rel="stylesheet">
   </head>
   <body>
-    <main class="d-flex justify-content-center">
+    <main class="d-flex justify-content-center align-items-center">
       <section class="container mt-4">
-        <a class="enlace_registro mt-4" href="<?=url.'?controller=user&action=comprobarUsuario'?>">Volver al panel principal</a>
+        <a class="enlace_registro mt-4 " href="<?=url.'?controller=user&action=comprobarUsuario'?>">Volver al panel principal</a>
         <div class="row mt-4">
           <?php
             foreach ($AllPedidos as $pedidos) {
           ?>
-            <div class="col-md-6">
+            <div class="col-md-6 d-flex justify-content-center align-items-center"">
               <div class="card border border-2 p-2">
                 <div class="card-body">
                   <h3 class="card-title-pedidos">Información del pedido con ID: <?=$pedidos->getIdPedido()?></h3>

@@ -12,25 +12,26 @@
     <link href="assets/css/style_css.css" rel="stylesheet">
   </head>
   <body>
-    <?php
+  <?php
       include_once 'modelo/PedidoDAO.php';
       $usuario_id = $_SESSION['usuario_id'];
+      $tipo_usuario = $_SESSION['tipo_usuario'];
       $precioUltimoPedido = null;
 
-      if (isset($_COOKIE['CookieUltimoPedido_'.$usuario_id])) {
-        $precioUltimoPedido = $_COOKIE['CookieUltimoPedido_'.$usuario_id];
+      if (isset($_COOKIE['CookieUltimoPedido_' . $usuario_id . '_' . $tipo_usuario])) {
+        $precioUltimoPedido = $_COOKIE['CookieUltimoPedido_' . $usuario_id . '_' . $tipo_usuario];
       }
 
       if ($precioUltimoPedido !== null) {
-        $mensajeUltimoPedido = "Tu último pedido fue de ".number_format($precioUltimoPedido, 2)."€";
+        $mensajeUltimoPedido = "Tu último pedido fue de " . number_format($precioUltimoPedido, 2) . "€";
       } else {
         $mensajeUltimoPedido = "Todavía no has realizado ningún pedido.";
       }
     ?>
-    <main class="d-flex justify-content-center">
-      <section class="container mt-4">
+    <main>
+      <section class="container mt-4 d-flex justify-content-center align-items-center">
         <div class="container col-12 col-sm-6">
-          <div class="row">
+          <div class="row d-flex justify-content-center align-items-center">
             <h3 class="pregunta_login">¡Bienvenido!</h3>
             <p class="beneficios_login mt-3">Has iniciado sesión como <?= $_SESSION['usuario_nombre'] ?></p>
             <p><b><?= $mensajeUltimoPedido ?></b></p>

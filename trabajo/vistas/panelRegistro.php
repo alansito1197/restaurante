@@ -15,12 +15,12 @@
     <main class="d-flex justify-content-center">
       <section class="container mt-4">
         <div class="container col-12 col-md-5">
-          <div class="row">
+          <div class="row d-flex justify-content-center align-items-center">
             <h3 class="pregunta_login">¿Aún no te has registrado?</h3>
             <p class="beneficios_login mt-3">Registrate para aprovecharte de todos los beneficios de la cuenta de cliente de MediaMarkt.</p>
             <a class="enlace_registro pb-3" href=<?=url.'?controller=user&action=login'?>> Volver a inicio de sesión</a>
             <div class="row">
-              <div class="col-md-8 text-center">
+              <div class="col-md-8">
                 <form action=<?=url.'?controller=cliente&action=registrarCliente'?> method="POST">
                   <input type="text" class="contenedor_informacion_login" required placeholder="Nombre" name="nombre">
                   <input type="text" class="contenedor_informacion_login" required placeholder="Apellidos" name="apellidos">

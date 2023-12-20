@@ -118,9 +118,6 @@
         
             // Cerramos la conexión a la base de datos:
             $conexion->close();
-        
-            // Almacenamos el objeto Producto en una variable de sesión:
-            $_SESSION['productoActual'] = $producto;
             
             // Devolvemos el objeto Producto:
             return $producto;

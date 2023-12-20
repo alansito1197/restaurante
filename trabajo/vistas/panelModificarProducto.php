@@ -22,6 +22,7 @@
             <div class="row">
               <div class="col-md-6 text-center">
                 <form action="<?= url.'?controller=admin&action=actualizarProductoSeleccionado'?>" method="POST">
+                  <input type="hidden" name="idProducto" value="<?=$productoActual->getIdProducto()?>">  
                   <input type="text" class="contenedor_informacion_login" name="nombre" value="<?=$productoActual->getNombre() ?>">
                   <input type="text" class="contenedor_informacion_login" name="sabor" value="<?=$productoActual->getSabor() ?>">
                   <input type="number" class="contenedor_informacion_login"  name="valorEnergetico" value="<?=$productoActual->getValorEnergetico() ?>">

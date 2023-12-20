@@ -21,7 +21,7 @@
           ?>
             <div class="pedido_individual">
               <p class="info_pedido">ID Pedido: <?=$pedido->getIdPedido()?></p>
-              <p class="info_pedido">Precio Total: <?=$pedido->getPrecioTotal()?>€</p>
+              <p class="info_pedido">Precio Total: <?=number_format($pedido->getPrecioTotal(), 2)?>€</p>
               <p class="info_pedido">Fecha: <?=$pedido->getFecha()?></p>
               <p class="info_pedido">Estado: <?=$pedido->getEstado()?></p>
             </div>
@@ -42,7 +42,6 @@
             </div>
           </div>
         </div>
-        
       </section>
     </main>
   </body>

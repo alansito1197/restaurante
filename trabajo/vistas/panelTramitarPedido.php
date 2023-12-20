@@ -15,7 +15,7 @@
     <main class="d-flex justify-content-center">
       <section class="container mt-4">
         <div class="container col-12 col-sm-6">
-          <div class="row">
+          <div class="row d-flex justify-content-center align-items-center">
             <h3 class="pregunta_login">¡Tu pedido se ha tramitado con éxito!</h3>
             <h2>¿Qué quieres hacer?</h2> 
             <div class="row">

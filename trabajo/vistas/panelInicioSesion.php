@@ -12,10 +12,10 @@
     <link href="assets/css/style_css.css" rel="stylesheet">
   </head>
   <body>
-    <main class="d-flex justify-content-center">
-      <section class="container mt-4">
+    <main>
+      <section class="container mt-4 d-flex justify-content-center align-items-center">
         <div class="container col-12 col-sm-4">
-          <div class="row">
+          <div class="row d-flex justify-content-center align-items-center">
             <h3 class="pregunta_login">¿Ya has iniciado sesión?</h3>
           <p class="beneficios_login mt-3 pb-3">Inicia sesión para aprovecharte de todos los beneficios de la cuenta de cliente de MediaMarkt. ¿Nuevo cliente? <a class="enlace_registro" href=<?=url.'?controller=cliente&action=solicitudRegistro'?>> Al registro</a></p>
           <div class="row">
