@@ -262,10 +262,20 @@
             // Llamaremos al método que nos devuelve todos los pedidos de la web:
             $AllPedidos = PedidoDAO::getAllPedidos();
 
-            // Incluiremos las vistas necesarias:
-            include 'vistas/header.php';
-            include 'vistas/panelGestionarPedidos.php';
-            include 'vistas/footer.php';
+            if (empty($AllPedidos)){
+
+                // Si no tenemos pedidos en nuestra web, mostraremos la vista necesaria:
+                include 'vistas/header.php';
+                include 'vistas/panelSinPedidos.php';
+                include 'vistas/footer.php';
+
+            } else {
+
+                // Si tenemos pedidos en nuestra web, mostraremos la vista necesaria:
+                include 'vistas/header.php';
+                include 'vistas/panelGestionarPedidos.php';
+                include 'vistas/footer.php';
+            }
         }
 
         // Crearemos una función que nos sirva para gestionar los pedidos, es decir, según que botón pulse el administrador, redirigirlo a la función correspondiente:
