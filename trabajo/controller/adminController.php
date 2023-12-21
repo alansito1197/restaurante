@@ -4,7 +4,6 @@
     include_once 'modelo/AdministradorDAO.php';
     include_once 'modelo/ProductoDAO.php';
     include_once 'modelo/PedidoDAO.php';
-    include_once 'modelo/AllPedidos.php';
 
     class adminController{
 

@@ -82,7 +82,7 @@
             $usuario_id = $_SESSION['usuario_id'];
 
             // Llamaremos al método que obtiene los pedidos por usuario enviándole por parámetro el ID del usuario que lo solicita:
-            $pedidos = PedidoDAO::obtenerPedidosUsuario($usuario_id);
+            $pedidos = PedidoDAO::obtenerPedidoUsuario($usuario_id);
 
             if ($pedidos) {
 

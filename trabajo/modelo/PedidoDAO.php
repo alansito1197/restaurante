@@ -2,8 +2,7 @@
 
     include_once 'config/dataBase.php';
     include_once 'modelo/Pedido.php';
-    include_once 'modelo/AllPedidos.php';
-    include_once 'modelo/PedidoUsuario.php';
+    include_once 'modelo/Pedidos.php';
 
     class PedidoDAO {
 
@@ -40,7 +39,7 @@
         }
         
         // Crearemos un método para obtener todos los pedidos de cada usuario:
-        public static function obtenerPedidosUsuario($usuario_id) {
+        public static function obtenerPedidoUsuario($usuario_id) {
 
             // Nos conectamos a la base de datos:
             $conexion = DataBase::connect();
@@ -64,7 +63,7 @@
             $pedidos = array();
         
             // Mediante un bucle, iremos guardando cada pedido en la variable anterior:
-            while ($objeto = $resultado->fetch_object('PedidoUsuario')) {
+            while ($objeto = $resultado->fetch_object('Pedidos')) {
                 $pedidos[] = $objeto;
             }
         
@@ -92,12 +91,9 @@
             $pedidos = array();
 
             // Mediante un bucle, iremos guardando cada pedido en la variable anterior:
-            while ($fila = $resultado->fetch_object('AllPedidos')) {
+            while ($fila = $resultado->fetch_object('Pedidos')) {
                 $pedidos[] = $fila;
             }
-
-            // Almacenaremos los productos en una variable de sesión:
-            $_SESSION['pedidos'] = $pedidos;
 
             // Cerraremos la conexión a la base de datos y la consulta:
             $conexion->close();
@@ -126,7 +122,7 @@
             $resultado = $stmt->get_result();
         
             // Obtenemos el objeto Pedido utilizando fetch_object:
-            $pedidoActual = $resultado->fetch_object('AllPedidos');
+            $pedidoActual = $resultado->fetch_object('Pedidos');
         
             // Cerramos la conexión a la base de datos:
             $conexion->close();

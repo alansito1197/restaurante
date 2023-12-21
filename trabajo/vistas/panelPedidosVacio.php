@@ -15,7 +15,7 @@
     <main class="d-flex justify-content-center">
       <section class="container mt-4">
         <div class="container col-12 col-sm-6">
-        <h3 class="pregunta_login">¡No has realizado ningun pedido!</h3>
+        <h3 class="pregunta_login">¡No has realizado ningún pedido!</h3>
             <h1 class="pregunta_user">¿Quieres realizar un pedido ahora?</h2> 
             <div class="row">
               <div class="col-sm-6 mb-2">
