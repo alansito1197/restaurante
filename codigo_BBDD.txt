@@ -103,6 +103,8 @@ ALTER TABLE `CREDENCIAL` ADD CONSTRAINT `ID_usuario_ID_empleado_empleado` FOREIG
 
 ALTER TABLE `PEDIDO` ADD CONSTRAINT `ID_cliente_pedido_ID_cliente_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `CLIENTE`(`id_cliente`) ON DELETE CASCADE ON UPDATE RESTRICT;
 
+ALTER TABLE `PEDIDO` ADD CONSTRAINT `ID_cliente_pedido_ID_cliente_administrador` FOREIGN KEY (`id_cliente`) REFERENCES `ADMINISTRADOR`(`id_administrador`) ON DELETE CASCADE ON UPDATE RESTRICT;
+
 ALTER TABLE `NEWSLETTER` ADD CONSTRAINT `ID_cliente_newsletter_ID_cliente_cliente` FOREIGN KEY (`id_cliente_newsletter`) REFERENCES `CLIENTE`(`id_cliente`) ON DELETE CASCADE ON UPDATE RESTRICT;
 
 ALTER TABLE `DETALLE_PEDIDO` ADD CONSTRAINT `ID_pedido_detalle_ID_pedido_pedido` FOREIGN KEY (`id_pedido`) REFERENCES `PEDIDO`(`id_pedido`) ON DELETE CASCADE ON UPDATE RESTRICT;
@@ -202,7 +204,7 @@ INSERT INTO `producto`(`id_administrador`, `id_categoria_producto`, `nombre`, `s
 VALUES ('2', '4', 'El buñuelo', 'Dulce', 600, 0.99, 'Proximamente', 0, 'assets/imagenes/productos/complementos/buñuelo.png', '250 g de harina de trigo, 25 g de cacao en polvo, 1 cucharada de levadura en polvo, 1 huevo, 100 ml de leche y 50 g de azúcar.', 'assets/imagenes/iconos/valoraciones/dos_estrellas.svg','No');
 
 INSERT INTO `producto`(`id_administrador`, `id_categoria_producto`, `nombre`, `sabor`, `valor_energetico`, `precio`, `disponibilidad`, `stock`, `imagen`, `ingredientes`, `valoracion`,`producto_destacado`)
-VALUES ('1e', '5', 'Malteado de café', 'Dulce', 3838, 4.99, 'Disponible online', 10, 'assets/imagenes/productos/bebidas/malteado_cafe.png', 'Leche entera, leche descremada deslactosada, chocolate malteado, chantilly y azúcar blanca.', 'assets/imagenes/iconos/valoraciones/dos_estrellas.svg','No');
+VALUES ('1', '5', 'Malteado de café', 'Dulce', 3838, 4.99, 'Disponible online', 10, 'assets/imagenes/productos/bebidas/malteado_cafe.png', 'Leche entera, leche descremada deslactosada, chocolate malteado, chantilly y azúcar blanca.', 'assets/imagenes/iconos/valoraciones/dos_estrellas.svg','No');
 
 INSERT INTO `producto`(`id_administrador`, `id_categoria_producto`, `nombre`, `sabor`, `valor_energetico`, `precio`, `disponibilidad`, `stock`, `imagen`, `ingredientes`, `valoracion`,`producto_destacado`)
 VALUES ('2', '5', 'Mountain New', 'Dulce', 180, 1.99, 'No disponible', 0,  'assets/imagenes/productos/bebidas/mountain_new.png', 'Agua carbonatada, jarabe de maíz, acidulante, azúcar, ácido cítrico, cafeína y zumo de uva blanca.', 'assets/imagenes/iconos/valoraciones/cero_estrellas.svg','No');
