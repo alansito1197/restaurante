@@ -318,7 +318,7 @@
   /* INICIO del estilo del filtro por precio */
 
   .boton_enviar{
-    border: 2px solid #CCCCCC; 
+    border-color: transparent; 
     border-radius: 8px;
     background-color: #000;
     color: #fff;

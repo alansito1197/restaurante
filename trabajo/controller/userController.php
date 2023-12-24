@@ -104,7 +104,7 @@
                 } else {
 
                     // Si el usuario no ha rellenado todo el formulario, mostraremos un mensaje de error:
-                    $mensajeError = "Por favor, completa todos los campos.";
+                    $mensajeError = "Por favor, inicia sesión.";
                 }
 
                 // Incluiremos las vistas con el mensaje de error:
