@@ -7,38 +7,6 @@
 
     class userController {
 
-        // Crearemos una función que se encargue de controlar el inicio de sesión del usuario, con el objetivo de redirigirlo a un panel u otro:
-        public function login(){
-
-            // Verificamos si no existen las variables de inicio de sesión que se crean al iniciar sesión:
-            if (!isset($_SESSION['usuario_id']) || !isset($_SESSION['password']) || !isset($_SESSION['usuario_nombre']) || !isset($_SESSION['tipo_usuario'])) {
-
-                // Redirigiremos al usuario a la página de inicio de sesión en el caso de que estas no existan:
-                include 'vistas/header.php';
-                include 'vistas/panelInicioSesion.php';
-                include 'vistas/footer.php';
-                exit();
-            
-            } else {
-
-                // En el caso de que las variables de inicio de sesión existan, comprobaremos el tipo de usuario que es:
-                if ($_SESSION['tipo_usuario'] == 'administrador'){
-
-                    // Si el usuario es un administrador, le mostraremos los paneles de administrador:
-                    include 'vistas/header.php';
-                    include 'vistas/panelAdministrador.php';
-                    include 'vistas/footer.php';
-
-                } elseif ($_SESSION['tipo_usuario'] == 'cliente'){
-
-                    // Si el usuario es un cliente, le mostaremos los paneles de cliente:
-                    include 'vistas/header.php';
-                    include 'vistas/panelCliente.php';
-                    include 'vistas/footer.php';
-                }
-            }
-        }
-
         // Crearemos una función que se encargue de gestionar cuando un usuario rellena el formulario de inicio de sesión:
         public function comprobarUsuario(){
 
@@ -111,6 +79,38 @@
                 include 'vistas/header.php';
                 include 'vistas/panelInicioSesion.php';
                 include 'vistas/footer.php';
+            }
+        }
+
+        // Crearemos una función que se encargue de controlar el inicio de sesión del usuario, con el objetivo de redirigirlo a un panel u otro:
+        public function login(){
+
+            // Verificamos si no existen las variables de inicio de sesión que se crean al iniciar sesión:
+            if (!isset($_SESSION['usuario_id']) || !isset($_SESSION['password']) || !isset($_SESSION['usuario_nombre']) || !isset($_SESSION['tipo_usuario'])) {
+
+                // Redirigiremos al usuario a la página de inicio de sesión en el caso de que estas no existan:
+                include 'vistas/header.php';
+                include 'vistas/panelInicioSesion.php';
+                include 'vistas/footer.php';
+                exit();
+            
+            } else {
+
+                // En el caso de que las variables de inicio de sesión existan, comprobaremos el tipo de usuario que es:
+                if ($_SESSION['tipo_usuario'] == 'administrador'){
+
+                    // Si el usuario es un administrador, le mostraremos los paneles de administrador:
+                    include 'vistas/header.php';
+                    include 'vistas/panelAdministrador.php';
+                    include 'vistas/footer.php';
+
+                } elseif ($_SESSION['tipo_usuario'] == 'cliente'){
+
+                    // Si el usuario es un cliente, le mostaremos los paneles de cliente:
+                    include 'vistas/header.php';
+                    include 'vistas/panelCliente.php';
+                    include 'vistas/footer.php';
+                }
             }
         }
 
